@@ -1,0 +1,12 @@
+Config changes
+    - Add setting for enable/disable demolishers
+    - Add setting for vulcano size
+    - Add setting for vulcano frequenzy
+
+Cosmetic changes
+    - Remove grass from vulcanus tiles volcanic-folds and volcanic-folds-flat
+    - Restore big patches of trees. See: "also removes big patches of trees on map, but i would like to keep the forests"
+
+Low Prio:
+    - Make that calcite patch behaves like nauvis ore
+    - Make that tungsten ore patch behaves like nauvis ore

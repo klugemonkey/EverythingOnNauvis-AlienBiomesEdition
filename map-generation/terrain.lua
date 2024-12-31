@@ -72,6 +72,7 @@ data.raw["noise-expression"]["vulcanus_mountains_start"].expression = "2 * start
 -- Removes starter spot from vulcanus
 data.raw["noise-expression"]["mountain_volcano_spots"].expression = "raw_spots - starting_protector"
 -- Make volcano spots much rarer, see region_size -- TODO: Use this property as frecuency slider in map generator
+data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.density_multiplier = "5"
 data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spots = "spot_noise{x = x + vulcanus_wobble_x/2 + vulcanus_wobble_large_x/12 + vulcanus_wobble_huge_x/80,\z
                                                                                                  y = y + vulcanus_wobble_y/2 + vulcanus_wobble_large_y/12 + vulcanus_wobble_huge_y/80,\z
                                                                                                  seed0 = map_seed,\z
@@ -80,7 +81,7 @@ data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spo
                                                                                                  suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
                                                                                                  skip_span = 1,\z
                                                                                                  skip_offset = 0,\z
-                                                                                                 region_size = 256*5,\z
+                                                                                                 region_size = 256*density_multiplier,\z
                                                                                                  density_expression = volcano_area / volcanism_sq,\z
                                                                                                  spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
                                                                                                  spot_radius_expression = volcano_spot_radius,\z

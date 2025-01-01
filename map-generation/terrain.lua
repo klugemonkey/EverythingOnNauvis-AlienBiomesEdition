@@ -1,6 +1,15 @@
 --------------------------------------------------------------------------------
 -- Fixes map generation for terrain
 --------------------------------------------------------------------------------
+-- require("map-generation.decorative-noise-expressions")
+
+local function mask_vulcano_coverage(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_vulcano_coverage(" .. string.gsub(decorative, '-', '_') .. ")"
+end
+
+local function mask_vulcanus_terrain(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_vulcanus_terrain(" .. string.gsub(decorative, '-', '_') .. ")"
+end
 
 --------------------------------------------------------------------------------
 -- MARK: Fix Nauvis related map gen settings
@@ -15,8 +24,47 @@ data.raw.tile["deepwater"].autoplace = {
 }
 
 -- Remove nauvis trees from vulcanus_terrain. TODO: also removes big patches of trees on map, but i would like to keep the forests
-data.raw["noise-expression"]["trees_forest_path_cutout"].expression = "min(nauvis_bridge_paths, nauvis_hills_paths, forest_paths, if(vulcanus_terrain, -inf, 0))"
-data.raw["noise-expression"]["trees_forest_path_cutout_faded"].expression = "trees_forest_path_cutout * 0.3 + tree_small_noise * 0.1 + if(vulcanus_terrain, -inf, 0)"
+data.raw["noise-expression"]["trees_forest_path_cutout"].expression = "mask_vulcanus_terrain(min(nauvis_bridge_paths, nauvis_hills_paths, forest_paths))"
+data.raw["noise-expression"]["trees_forest_path_cutout_faded"].expression = "mask_vulcanus_terrain(trees_forest_path_cutout * 0.3 + tree_small_noise * 0.1)"
+
+-- Remove nauvis decoratives from vulcano_coverage
+mask_vulcano_coverage("cracked-mud-decal", "optimized-decorative")
+mask_vulcano_coverage("dark-mud-decal", "optimized-decorative")
+mask_vulcano_coverage("lichen-decal", "optimized-decorative")
+mask_vulcano_coverage("light-mud-decal", "optimized-decorative")
+mask_vulcano_coverage("small-rock", "optimized-decorative")
+mask_vulcano_coverage("tiny-rock", "optimized-decorative")
+
+-- Remove nauvis decoratives from vulcanus_terrain
+mask_vulcanus_terrain("big-rock", "simple-entity")
+mask_vulcanus_terrain("brown-asterisk", "optimized-decorative")
+mask_vulcanus_terrain("brown-asterisk-mini", "optimized-decorative")
+mask_vulcanus_terrain("brown-carpet-grass", "optimized-decorative")
+mask_vulcanus_terrain("brown-fluff", "optimized-decorative")
+mask_vulcanus_terrain("brown-fluff-dry", "optimized-decorative")
+mask_vulcanus_terrain("brown-hairy-grass", "optimized-decorative")
+mask_vulcanus_terrain("garballo", "optimized-decorative")
+mask_vulcanus_terrain("garballo-mini-dry", "optimized-decorative")
+mask_vulcanus_terrain("green-asterisk", "optimized-decorative")
+mask_vulcanus_terrain("green-asterisk-mini", "optimized-decorative")
+mask_vulcanus_terrain("green-bush-mini", "optimized-decorative")
+mask_vulcanus_terrain("green-carpet-grass", "optimized-decorative")
+mask_vulcanus_terrain("green-croton", "optimized-decorative")
+mask_vulcanus_terrain("green-desert-bush", "optimized-decorative")
+mask_vulcanus_terrain("green-hairy-grass", "optimized-decorative")
+mask_vulcanus_terrain("green-pita", "optimized-decorative")
+mask_vulcanus_terrain("green-pita-mini", "optimized-decorative")
+mask_vulcanus_terrain("green-small-grass", "optimized-decorative")
+mask_vulcanus_terrain("huge-rock", "simple-entity")
+mask_vulcanus_terrain("medium-rock", "optimized-decorative")
+mask_vulcanus_terrain("red-asterisk", "optimized-decorative")
+mask_vulcanus_terrain("red-croton", "optimized-decorative")
+mask_vulcanus_terrain("red-desert-bush", "optimized-decorative")
+mask_vulcanus_terrain("red-desert-decal", "optimized-decorative")
+mask_vulcanus_terrain("red-pita", "optimized-decorative")
+mask_vulcanus_terrain("sand-decal", "optimized-decorative")
+mask_vulcanus_terrain("sand-dune-decal", "optimized-decorative")
+mask_vulcanus_terrain("white-desert-bush", "optimized-decorative")
 
 -- Remove nauvis cliffs from vulcanus_terrain
 data.raw["noise-expression"]["cliffiness_nauvis"].expression = "(main_cliffiness >= cliff_cutoff) * 10 + if(vulcanus_terrain, -inf, 0)"
@@ -71,8 +119,7 @@ data.raw["noise-expression"]["vulcanus_mountains_start"].expression = "2 * start
                                                                                                    y_distortion = 0.05 * vulcanus_starting_area_radius * (vulcanus_wobble_y + vulcanus_wobble_large_y + vulcanus_wobble_huge_y)}"
 -- Removes starter spot from vulcanus
 data.raw["noise-expression"]["mountain_volcano_spots"].expression = "raw_spots - starting_protector"
--- Make volcano spots much rarer, see region_size -- TODO: Use this property as frecuency slider in map generator
-data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.density_multiplier = "5"
+data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.density_multiplier = "5 / control:vulcanus_volcanism:frequency"
 data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spots = "spot_noise{x = x + vulcanus_wobble_x/2 + vulcanus_wobble_large_x/12 + vulcanus_wobble_huge_x/80,\z
                                                                                                  y = y + vulcanus_wobble_y/2 + vulcanus_wobble_large_y/12 + vulcanus_wobble_huge_y/80,\z
                                                                                                  seed0 = map_seed,\z
@@ -89,20 +136,22 @@ data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spo
                                                                                                  spot_favorability_expression = volcano_area,\z
                                                                                                  basement_value = 0,\z
                                                                                                  maximum_spot_basement_radius = volcano_spot_radius}"
--- Make volcano spots much rarer, see region_size  -- TODO: Use this property as size slider in map generator
-data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.volcano_spot_radius = "2 * 200 * volcanism"
+-- Make volcano spots much rarer, see region_size
+data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.volcano_spot_radius = "2 * 200 * volcanism * sqrt(control:vulcanus_volcanism:size)"
 -- Removes all lava spots except vulkane
 data.raw["noise-expression"]["lava_mountains_range"].expression = "1100 * range_select_base(mountain_lava_spots, 0.3, 1, 1, 0, 1) - offset_vulcano"
 -- Removes all lava spots except vulkane
 data.raw["noise-expression"]["lava_hot_mountains_range"].expression = "1000 * range_select_base(mountain_lava_spots, 0.15, 0.35, 1, 0, 1) - offset_vulcano"
 
--- New noise expressions
+-- New noise expressions and noise functions
 data:extend
 {
+  -- Noise expressions
   {
+    -- To remove the small random lava puddles
     type = "noise-expression",
     name = "offset_vulcano",
-    expression = "1"  -- To remove the small random lava puddles
+    expression = "1"
   },
   {
     -- Noise expression for ring around lava spots
@@ -127,6 +176,22 @@ data:extend
     type = "noise-expression",
     name = "vulcanus_terrain",
     expression = "if(max(vulcano_coverage, updated_volcanic_folds_flat) > 0, 1, 0)"
+  },
+
+  -- Noise functions
+  {
+    -- Mask off close surroundings of vulcano
+    type = "noise-function",
+    name = "mask_vulcano_coverage",
+    parameters = {"expression"},
+    expression = "if(vulcano_coverage, -inf, expression)"
+  },
+  {
+    -- Mask off all vulcanus terrain
+    type = "noise-function",
+    name = "mask_vulcanus_terrain",
+    parameters = {"expression"},
+    expression = "if(vulcanus_terrain, -inf, expression)"
   },
 }
 -- END: Update noise expressions

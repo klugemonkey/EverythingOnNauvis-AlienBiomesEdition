@@ -6,5 +6,8 @@
     "author": "Spaghetti",
     "contact": "https://github.com/Spaghenutti/only-nauvis/issues",
     "factorio_version": "2.0",
-    "dependencies": []
+    "dependencies": [
+        "base >= 2.0.28",
+        "space-age >= 2.0.28"
+    ]
 }

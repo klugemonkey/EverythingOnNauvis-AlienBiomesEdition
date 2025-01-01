@@ -19,6 +19,16 @@ local function mask_off_vulcano_terrain(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_vulcano_terrain(" .. string.gsub(decorative, '-', '_') .. ")"
 end
 
+data:extend
+({
+  {
+    -- Define starting radius
+    type = "noise-expression",
+    name = "new_starting_radius",
+    expression = "0.7 * 0.75"
+  }
+})
+
 --------------------------------------------------------------------------------
 -- MARK: Fix Nauvis related map gen settings
 --------------------------------------------------------------------------------
@@ -139,14 +149,13 @@ data.raw.tile["lava"].autoplace.probability_expression = "lava_mountains_range"
 data.raw.tile["lava-hot"].autoplace.probability_expression = "lava_hot_mountains_range"
 
 -- Fix autoplace controls
-data.raw["autoplace-control"]["vulcanus_coal"] = nil
 data.raw["autoplace-control"]["vulcanus_volcanism"].can_be_disabled = true
 data.raw["autoplace-control"]["vulcanus_volcanism"].order = nil
 data.raw["autoplace-control"]["vulcanus_volcanism"].category = "resource"
 
 -- START: Update noise expressions
 -- Increase radius for vulcane to start spawning
-data.raw["noise-expression"]["vulcanus_starting_area_radius"].expression = "0.7 * 0.75" -- "0.7 * 0.75"
+data.raw["noise-expression"]["vulcanus_starting_area_radius"].expression = "new_starting_radius"
 -- Influences volcanic-folds-flat tile - distance and radius are increased to match mountain_volcano_spots, also removes remains of starter spot
 data.raw["noise-expression"]["vulcanus_ashlands_start"].expression = "4 * starting_spot_at_angle{ angle = vulcanus_ashlands_angle,\z
                                                                                                   distance = 170 * vulcanus_starting_area_radius,\z
@@ -167,7 +176,7 @@ data.raw["noise-expression"]["vulcanus_mountains_start"].expression = "2 * start
                                                                                                    y_distortion = 0.05 * vulcanus_starting_area_radius * (vulcanus_wobble_y + vulcanus_wobble_large_y + vulcanus_wobble_huge_y)}"
 -- Removes starter spot from vulcanus
 data.raw["noise-expression"]["mountain_volcano_spots"].expression = "raw_spots - starting_protector"
-data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.density_multiplier = "5 / control:vulcanus_volcanism:frequency"
+data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.density_multiplier = "5 / sqrt(control:vulcanus_volcanism:frequency)"
 data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spots = "spot_noise{x = x + vulcanus_wobble_x/2 + vulcanus_wobble_large_x/12 + vulcanus_wobble_huge_x/80,\z
                                                                                                  y = y + vulcanus_wobble_y/2 + vulcanus_wobble_large_y/12 + vulcanus_wobble_huge_y/80,\z
                                                                                                  seed0 = map_seed,\z
@@ -185,7 +194,7 @@ data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spo
                                                                                                  basement_value = 0,\z
                                                                                                  maximum_spot_basement_radius = volcano_spot_radius}"
 -- Make volcano spots much rarer, see region_size
-data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.volcano_spot_radius = "2 * 200 * volcanism * sqrt(control:vulcanus_volcanism:size)"
+data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.volcano_spot_radius = "300 * volcanism * sqrt(control:vulcanus_volcanism:size + 1)"
 -- Removes all lava spots except vulkane
 data.raw["noise-expression"]["lava_mountains_range"].expression = "1100 * range_select_base(mountain_lava_spots, 0.3, 1, 1, 0, 1) - offset_vulcano"
 -- Removes all lava spots except vulkane
@@ -254,7 +263,7 @@ data.raw["optimized-decorative"]["vulcanus-lava-fire"].autoplace.probability_exp
 
 -- New noise expressions and noise functions
 data:extend
-{
+({
   -- Noise expressions
   {
     -- To remove the small random lava puddles
@@ -316,5 +325,65 @@ data:extend
     parameters = {"expression"},
     expression = "if(vulcanus_terrain, -inf, expression)"
   },
-}
+})
 -- END: Update noise expressions
+
+--------------------------------------------------------------------------------
+-- MARK: Fix Gleba related map gen settings
+--------------------------------------------------------------------------------
+
+
+-- New noise expressions and noise functions
+data:extend
+({
+  {
+    -- Create mask for gleba territory
+    type = "noise-expression",
+    name = "gleba_mask",
+    expression = "if(min(wlc_elevation, -starting_island) > 1, inf, 0)",
+    local_expressions = {
+      elevation_magnitude = 20,
+      wlc_amplitude = 2,
+      wlc_elevation = "max(nauvis_main - water_level * wlc_amplitude, starting_island)",
+      nauvis_main = "elevation_magnitude * (0.25 * nauvis_detail + 3 * nauvis_macro * starting_macro_multiplier)",
+      -- if most of the world is flooded make sure starting areas still have land
+      starting_island = "nauvis_main + elevation_magnitude * (2.5 - distance / 300)",
+      starting_macro_multiplier = "clamp(distance * segmentation_multiplier / 2000, 0, 1)",
+      starting_lake = "elevation_magnitude * (-3 + (starting_lake_distance + starting_lake_noise) / 8) / 8",
+      starting_lake_distance = "distance_from_nearest_point{x = x, y = y, points = starting_lake_positions, maximum_distance = 1024}",
+      starting_lake_noise = "quick_multioctave_noise_persistence{x = x,\z
+                                                                 y = y,\z
+                                                                 seed0 = map_seed,\z
+                                                                 seed1 = 14,\z
+                                                                 input_scale = 1/8,\z
+                                                                 output_scale = 0.8,\z
+                                                                 octaves = 4,\z
+                                                                 octave_input_scale_multiplier = 0.5,\z
+                                                                 persistence = 0.68}",
+      nauvis_macro = "multioctave_noise{x = x,\z
+                                        y = y,\z
+                                        persistence = 0.6,\z
+                                        seed0 = map_seed + 1,\z
+                                        seed1 = 1000,\z
+                                        octaves = 2,\z
+                                        input_scale = segmentation_multiplier / 5000}\z
+                     * max(0, multioctave_noise{x = x,\z
+                                        y = y,\z
+                                        persistence = 0.6,\z
+                                        seed0 = map_seed + 1,\z
+                                        seed1 = 1100,\z
+                                        octaves = 1,\z
+                                        input_scale = segmentation_multiplier / 5000})",
+      nauvis_detail = "variable_persistence_multioctave_noise{x = x,\z
+                                                              y = y,\z
+                                                              seed0 = map_seed + 1,\z
+                                                              seed1 = 600,\z
+                                                              input_scale = segmentation_multiplier / 14,\z
+                                                              output_scale = 0.03,\z
+                                                              offset_x = 10000 / segmentation_multiplier,\z
+                                                              octaves = 5,\z
+                                                              persistence = nauvis_persistance}",
+      segmentation_multiplier = "1.5 * control:water:frequency"
+    }
+  },
+})

@@ -4,7 +4,7 @@
 require("map-generation.terrain")
 
 --------------------------------------------------------------------------------
--- MARK: Fix Vulcanus resources
+-- MARK: Add Vulcanus resources to Nauvis
 --------------------------------------------------------------------------------
 
 -- property_expression_names
@@ -54,3 +54,13 @@ data.raw.resource["tungsten-ore"].autoplace.starting_rq_factor_multiplier = 1.5
 data.raw.resource["tungsten-ore"].autoplace.candidate_spot_count = 22
 -- data.raw["noise-expression"]["vulcanus_tungsten_ore_probability"].expression = "(control:tungsten_ore:size > 0) * (1000 * ((0.7 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1))"
 -- END: Update noise expressions
+
+-- remove vulcanus coal from map generator setting
+data.raw["autoplace-control"]["vulcanus_coal"] = nil
+
+--------------------------------------------------------------------------------
+-- MARK: Add Gleba resources to Nauvis
+--------------------------------------------------------------------------------
+
+-- remove gleba stone from map generator setting
+-- data.raw["autoplace-control"]["gleba_stone"] = nil

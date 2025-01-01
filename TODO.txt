@@ -6,6 +6,7 @@ Config changes
 Cosmetic changes
     + Remove grass from vulcanus tiles volcanic-folds and volcanic-folds-flat
     + Restore big patches of trees. See: "also removes big patches of trees on map, but i would like to keep the forests"
+    - Add vulcanus cliffs. I think this is not easy to do...
 
 Low Prio:
     - Make that calcite patch behaves like nauvis ore

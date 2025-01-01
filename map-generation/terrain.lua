@@ -7,8 +7,16 @@ local function mask_vulcano_coverage(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_vulcano_coverage(" .. string.gsub(decorative, '-', '_') .. ")"
 end
 
-local function mask_vulcanus_terrain(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_vulcanus_terrain(" .. string.gsub(decorative, '-', '_') .. ")"
+local function mask_vulcano_terrain(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_vulcano_terrain(" .. string.gsub(decorative, '-', '_') .. ")"
+end
+
+local function mask_off_vulcano_coverage(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_vulcano_coverage(" .. string.gsub(decorative, '-', '_') .. ")"
+end
+
+local function mask_off_vulcano_terrain(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_vulcano_terrain(" .. string.gsub(decorative, '-', '_') .. ")"
 end
 
 --------------------------------------------------------------------------------
@@ -24,47 +32,50 @@ data.raw.tile["deepwater"].autoplace = {
 }
 
 -- Remove nauvis trees from vulcanus_terrain. TODO: also removes big patches of trees on map, but i would like to keep the forests
-data.raw["noise-expression"]["trees_forest_path_cutout"].expression = "mask_vulcanus_terrain(min(nauvis_bridge_paths, nauvis_hills_paths, forest_paths))"
-data.raw["noise-expression"]["trees_forest_path_cutout_faded"].expression = "mask_vulcanus_terrain(trees_forest_path_cutout * 0.3 + tree_small_noise * 0.1)"
+data.raw["noise-expression"]["trees_forest_path_cutout"].expression = "mask_off_vulcano_terrain(min(nauvis_bridge_paths, nauvis_hills_paths, forest_paths))"
+data.raw["noise-expression"]["trees_forest_path_cutout_faded"].expression = "mask_off_vulcano_terrain(trees_forest_path_cutout * 0.3 + tree_small_noise * 0.1)"
 
 -- Remove nauvis decoratives from vulcano_coverage
-mask_vulcano_coverage("cracked-mud-decal", "optimized-decorative")
-mask_vulcano_coverage("dark-mud-decal", "optimized-decorative")
-mask_vulcano_coverage("lichen-decal", "optimized-decorative")
-mask_vulcano_coverage("light-mud-decal", "optimized-decorative")
-mask_vulcano_coverage("small-rock", "optimized-decorative")
-mask_vulcano_coverage("tiny-rock", "optimized-decorative")
+mask_off_vulcano_coverage("cracked-mud-decal", "optimized-decorative")
+mask_off_vulcano_coverage("dark-mud-decal", "optimized-decorative")
+mask_off_vulcano_coverage("lichen-decal", "optimized-decorative")
+mask_off_vulcano_coverage("light-mud-decal", "optimized-decorative")
+mask_off_vulcano_coverage("small-rock", "optimized-decorative")
+mask_off_vulcano_coverage("small-sand-rock", "optimized-decorative")
+mask_off_vulcano_coverage("tiny-rock", "optimized-decorative")
 
 -- Remove nauvis decoratives from vulcanus_terrain
-mask_vulcanus_terrain("big-rock", "simple-entity")
-mask_vulcanus_terrain("brown-asterisk", "optimized-decorative")
-mask_vulcanus_terrain("brown-asterisk-mini", "optimized-decorative")
-mask_vulcanus_terrain("brown-carpet-grass", "optimized-decorative")
-mask_vulcanus_terrain("brown-fluff", "optimized-decorative")
-mask_vulcanus_terrain("brown-fluff-dry", "optimized-decorative")
-mask_vulcanus_terrain("brown-hairy-grass", "optimized-decorative")
-mask_vulcanus_terrain("garballo", "optimized-decorative")
-mask_vulcanus_terrain("garballo-mini-dry", "optimized-decorative")
-mask_vulcanus_terrain("green-asterisk", "optimized-decorative")
-mask_vulcanus_terrain("green-asterisk-mini", "optimized-decorative")
-mask_vulcanus_terrain("green-bush-mini", "optimized-decorative")
-mask_vulcanus_terrain("green-carpet-grass", "optimized-decorative")
-mask_vulcanus_terrain("green-croton", "optimized-decorative")
-mask_vulcanus_terrain("green-desert-bush", "optimized-decorative")
-mask_vulcanus_terrain("green-hairy-grass", "optimized-decorative")
-mask_vulcanus_terrain("green-pita", "optimized-decorative")
-mask_vulcanus_terrain("green-pita-mini", "optimized-decorative")
-mask_vulcanus_terrain("green-small-grass", "optimized-decorative")
-mask_vulcanus_terrain("huge-rock", "simple-entity")
-mask_vulcanus_terrain("medium-rock", "optimized-decorative")
-mask_vulcanus_terrain("red-asterisk", "optimized-decorative")
-mask_vulcanus_terrain("red-croton", "optimized-decorative")
-mask_vulcanus_terrain("red-desert-bush", "optimized-decorative")
-mask_vulcanus_terrain("red-desert-decal", "optimized-decorative")
-mask_vulcanus_terrain("red-pita", "optimized-decorative")
-mask_vulcanus_terrain("sand-decal", "optimized-decorative")
-mask_vulcanus_terrain("sand-dune-decal", "optimized-decorative")
-mask_vulcanus_terrain("white-desert-bush", "optimized-decorative")
+mask_off_vulcano_terrain("big-rock", "simple-entity")
+mask_off_vulcano_terrain("big-sand-rock", "simple-entity")
+mask_off_vulcano_terrain("brown-asterisk", "optimized-decorative")
+mask_off_vulcano_terrain("brown-asterisk-mini", "optimized-decorative")
+mask_off_vulcano_terrain("brown-carpet-grass", "optimized-decorative")
+mask_off_vulcano_terrain("brown-fluff", "optimized-decorative")
+mask_off_vulcano_terrain("brown-fluff-dry", "optimized-decorative")
+mask_off_vulcano_terrain("brown-hairy-grass", "optimized-decorative")
+mask_off_vulcano_terrain("garballo", "optimized-decorative")
+mask_off_vulcano_terrain("garballo-mini-dry", "optimized-decorative")
+mask_off_vulcano_terrain("green-asterisk", "optimized-decorative")
+mask_off_vulcano_terrain("green-asterisk-mini", "optimized-decorative")
+mask_off_vulcano_terrain("green-bush-mini", "optimized-decorative")
+mask_off_vulcano_terrain("green-carpet-grass", "optimized-decorative")
+mask_off_vulcano_terrain("green-croton", "optimized-decorative")
+mask_off_vulcano_terrain("green-desert-bush", "optimized-decorative")
+mask_off_vulcano_terrain("green-hairy-grass", "optimized-decorative")
+mask_off_vulcano_terrain("green-pita", "optimized-decorative")
+mask_off_vulcano_terrain("green-pita-mini", "optimized-decorative")
+mask_off_vulcano_terrain("green-small-grass", "optimized-decorative")
+mask_off_vulcano_terrain("huge-rock", "simple-entity")
+mask_off_vulcano_terrain("medium-rock", "optimized-decorative")
+mask_off_vulcano_terrain("medium-sand-rock", "optimized-decorative")
+mask_off_vulcano_terrain("red-asterisk", "optimized-decorative")
+mask_off_vulcano_terrain("red-croton", "optimized-decorative")
+mask_off_vulcano_terrain("red-desert-bush", "optimized-decorative")
+mask_off_vulcano_terrain("red-desert-decal", "optimized-decorative")
+mask_off_vulcano_terrain("red-pita", "optimized-decorative")
+mask_off_vulcano_terrain("sand-decal", "optimized-decorative")
+mask_off_vulcano_terrain("sand-dune-decal", "optimized-decorative")
+mask_off_vulcano_terrain("white-desert-bush", "optimized-decorative")
 
 -- Remove nauvis cliffs from vulcanus_terrain
 data.raw["noise-expression"]["cliffiness_nauvis"].expression = "(main_cliffiness >= cliff_cutoff) * 10 + if(vulcanus_terrain, -inf, 0)"
@@ -82,6 +93,43 @@ data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["vol
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["volcanic-folds-flat"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lava"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lava-hot"] = {}
+
+-- decorative settings
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["vulcanus-rock-decal-large"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["vulcanus-crack-decal"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["vulcanus-crack-decal-large"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["vulcanus-crack-decal-huge-warm"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["vulcanus-crack-decal-warm"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["calcite-stain"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["calcite-stain-small"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["sulfur-stain"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["sulfur-stain-small"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["sulfuric-acid-puddle"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["sulfuric-acid-puddle-small"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["crater-small"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["crater-large"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["pumice-relief-decal"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["vulcanus-sand-decal"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["vulcanus-dune-decal"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["waves-decal"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["medium-volcanic-rock"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["small-volcanic-rock"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["tiny-volcanic-rock"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["tiny-rock-cluster"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["small-sulfur-rock"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["tiny-sulfur-rock"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["sulfur-rock-cluster"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["vulcanus-lava-fire"] = {}
+
+-- entity settings
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["crater-cliff"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["vulcanus-chimney"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["vulcanus-chimney-faded"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["vulcanus-chimney-cold"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["vulcanus-chimney-short"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["vulcanus-chimney-truncated"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["huge-volcanic-rock"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["big-volcanic-rock"] = {}
 -- END: Update map gen settings
 
 -- Fix probability expressions for tiles
@@ -143,6 +191,67 @@ data.raw["noise-expression"]["lava_mountains_range"].expression = "1100 * range_
 -- Removes all lava spots except vulkane
 data.raw["noise-expression"]["lava_hot_mountains_range"].expression = "1000 * range_select_base(mountain_lava_spots, 0.15, 0.35, 1, 0, 1) - offset_vulcano"
 
+-- Mask vulcanus decoratives
+data.raw["noise-expression"]["crater_cliff"].expression = "mask_vulcano_coverage(0.5 * (vulcanus_rock_noise + 0.5 * aux - 0.5 * moisture) * (1 - max(vulcanus_basalts_biome,vulcanus_ashlands_biome)) * place_every_n(21,21,0,0))"
+data.raw["simple-entity"]["vulcanus-chimney"].autoplace.probability_expression = "mask_vulcano_coverage(vulcanus_chimney_sulfuric)"
+data.raw["simple-entity"]["vulcanus-chimney-faded"].autoplace.probability_expression = "mask_vulcano_coverage(vulcanus_chimney_faded)"
+data.raw["simple-entity"]["vulcanus-chimney-cold"].autoplace.probability_expression = "mask_vulcano_coverage(vulcanus_chimney_cold)"
+data.raw["simple-entity"]["vulcanus-chimney-short"].autoplace.probability_expression = "mask_vulcano_coverage(vulcanus_chimney_faded / 2)"
+data.raw["simple-entity"]["vulcanus-chimney-truncated"].autoplace.probability_expression = "mask_vulcano_coverage(vulcanus_chimney_truncated)"
+data.raw["simple-entity"]["huge-volcanic-rock"].autoplace.probability_expression = "mask_vulcano_coverage(vulcanus_rock_huge)"
+data.raw["simple-entity"]["big-volcanic-rock"].autoplace.probability_expression = "mask_vulcano_coverage(vulcanus_rock_big)"
+
+-- -- TODO: verify that this code block is actually working
+data.raw["optimized-decorative"]["vulcanus-rock-decal-large"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_rock_decal_large)"
+data.raw["optimized-decorative"]["vulcanus-crack-decal"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_crack_decal)"
+data.raw["optimized-decorative"]["vulcanus-crack-decal-large"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_crack_decal_large)"
+data.raw["optimized-decorative"]["vulcanus-crack-decal-huge-warm"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_crack_decal_huge_warm)"
+data.raw["optimized-decorative"]["vulcanus-crack-decal-warm"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_crack_decal_warm)"
+data.raw["optimized-decorative"]["calcite-stain"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_calcite_stain)"
+data.raw["optimized-decorative"]["calcite-stain-small"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_calcite_stain_small)"
+data.raw["optimized-decorative"]["sulfur-stain"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_sulfuric_acid_stain)"
+data.raw["optimized-decorative"]["sulfur-stain-small"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_sulfuric_acid_stain_small)"
+data.raw["optimized-decorative"]["sulfuric-acid-puddle"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_sulfuric_acid_puddle)"
+data.raw["optimized-decorative"]["sulfuric-acid-puddle-small"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_sulfuric_acid_puddle_small)"
+data.raw["optimized-decorative"]["crater-small"].autoplace.probability_expression = "mask_vulcano_terrain(crater_small)"
+data.raw["optimized-decorative"]["crater-large"].autoplace.probability_expression = "mask_vulcano_terrain(crater_large)"
+data.raw["optimized-decorative"]["pumice-relief-decal"].autoplace.probability_expression = "mask_vulcano_terrain(pumice_relief_decal)"
+data.raw["optimized-decorative"]["vulcanus-sand-decal"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_sand_decal)"
+data.raw["optimized-decorative"]["vulcanus-dune-decal"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_dune_decal)"
+data.raw["optimized-decorative"]["waves-decal"].autoplace.probability_expression = "mask_vulcano_terrain(waves_decal)"
+data.raw["optimized-decorative"]["medium-volcanic-rock"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_rock_medium)"
+data.raw["optimized-decorative"]["small-volcanic-rock"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_rock_small)"
+data.raw["optimized-decorative"]["tiny-volcanic-rock"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_rock_tiny)"
+data.raw["optimized-decorative"]["tiny-rock-cluster"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_rock_cluster)"
+data.raw["optimized-decorative"]["small-sulfur-rock"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_small_sulfur_rock)"
+data.raw["optimized-decorative"]["tiny-sulfur-rock"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_sulfur_rock_tiny)"
+data.raw["optimized-decorative"]["sulfur-rock-cluster"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_sulfur_rock_cluster)"
+data.raw["optimized-decorative"]["vulcanus-lava-fire"].autoplace.probability_expression = "mask_vulcano_terrain(0.1 * (vulcanus_elev <= 0) * (vulcanus_elev > 2) + 0.005 * min(1, max(lava_basalts_range, lava_mountains_range, lava_hot_basalts_range, lava_hot_mountains_range)))"
+
+-- mask_vulcano_terrain("vulcanus-crack-decal-large", "optimized-decorative")
+-- mask_vulcano_terrain("vulcanus-crack-decal-huge-warm", "optimized-decorative")
+-- mask_vulcano_terrain("vulcanus-crack-decal-warm", "optimized-decorative")
+-- mask_vulcano_terrain("calcite-stain", "optimized-decorative")
+-- mask_vulcano_terrain("calcite-stain-small", "optimized-decorative")
+-- mask_vulcano_terrain("sulfur-stain", "optimized-decorative")
+-- mask_vulcano_terrain("sulfur-stain-small", "optimized-decorative")
+-- mask_vulcano_terrain("sulfuric-acid-puddle", "optimized-decorative")
+-- mask_vulcano_terrain("sulfuric-acid-puddle-small", "optimized-decorative")
+-- mask_vulcano_terrain("crater-small", "optimized-decorative")
+-- mask_vulcano_terrain("crater-large", "optimized-decorative")
+-- mask_vulcano_terrain("pumice-relief-decal", "optimized-decorative")
+-- mask_vulcano_terrain("vulcanus-sand-decal", "optimized-decorative")
+-- mask_vulcano_terrain("vulcanus-dune-decal", "optimized-decorative")
+-- mask_vulcano_terrain("waves-decal", "optimized-decorative")
+-- mask_vulcano_terrain("medium-volcanic-rock", "optimized-decorative")
+-- mask_vulcano_terrain("small-volcanic-rock", "optimized-decorative")
+-- mask_vulcano_terrain("tiny-volcanic-rock", "optimized-decorative")
+-- mask_vulcano_terrain("tiny-rock-cluster", "optimized-decorative")
+-- mask_vulcano_terrain("small-sulfur-rock", "optimized-decorative")
+-- mask_vulcano_terrain("tiny-sulfur-rock", "optimized-decorative")
+-- mask_vulcano_terrain("sulfur-rock-cluster", "optimized-decorative")
+-- mask_vulcano_terrain("vulcanus-lava-fire", "optimized-decorative")
+
 -- New noise expressions and noise functions
 data:extend
 {
@@ -157,7 +266,7 @@ data:extend
     -- Noise expression for ring around lava spots
     type = "noise-expression",
     name = "updated_volcanic_folds",
-    expression = "10 * range_select_base(mountain_volcano_spots * 1.95 - 0.9, 0.16, 1, 1, 0, 1) - offset_vulcano"  --  Creates ring around lava_hot_mountains_range
+    expression = "10 * range_select_base(mountain_volcano_spots * 1.95 - 0.9, 0.16, 10, 1, 0, 1) - offset_vulcano"  --  Creates ring around lava_hot_mountains_range
   },
   {
     -- Noise expression for surroundings of updated_volcanic_folds
@@ -180,16 +289,30 @@ data:extend
 
   -- Noise functions
   {
-    -- Mask off close surroundings of vulcano
+    -- Mask close surroundings of vulcano
     type = "noise-function",
     name = "mask_vulcano_coverage",
+    parameters = {"expression"},
+    expression = "if(vulcano_coverage, expression, -inf)"
+  },
+  {
+    -- Mask all vulcanus terrain
+    type = "noise-function",
+    name = "mask_vulcano_terrain",
+    parameters = {"expression"},
+    expression = "if(vulcanus_terrain, expression, -inf)"
+  },
+  {
+    -- Mask off close surroundings of vulcano
+    type = "noise-function",
+    name = "mask_off_vulcano_coverage",
     parameters = {"expression"},
     expression = "if(vulcano_coverage, -inf, expression)"
   },
   {
     -- Mask off all vulcanus terrain
     type = "noise-function",
-    name = "mask_vulcanus_terrain",
+    name = "mask_off_vulcano_terrain",
     parameters = {"expression"},
     expression = "if(vulcanus_terrain, -inf, expression)"
   },

@@ -1,16 +1,20 @@
 
 local function noise_expression(name, type)
-  return
-  {
+  local expression = {
     type = "noise-expression",
     name = string.gsub(name, "-", "_"),
-    expression = data.raw[type][name].autoplace.probability_expression,
-    local_expressions = data.raw[type][name].autoplace.local_expressions
+    expression = data.raw[type][name].autoplace.probability_expression
   }
+  if data.raw[type][name].autoplace.local_expressions then
+    expression.local_expressions = data.raw[type][name].autoplace.local_expressions
+  end
+  return expression
 end
 
 data:extend({
+  -- Nauvis decoratives
   noise_expression("big-rock", "simple-entity"),
+  noise_expression("big-sand-rock", "simple-entity"),
   noise_expression("brown-asterisk", "optimized-decorative"),
   noise_expression("brown-asterisk-mini", "optimized-decorative"),
   noise_expression("brown-carpet-grass", "optimized-decorative"),
@@ -36,6 +40,7 @@ data:extend({
   noise_expression("lichen-decal", "optimized-decorative"),
   noise_expression("light-mud-decal", "optimized-decorative"),
   noise_expression("medium-rock", "optimized-decorative"),
+  noise_expression("medium-sand-rock", "optimized-decorative"),
   -- noise_expression("muddy-stump", "optimized-decorative"),
   -- noise_expression("nuclear-ground-patch", "optimized-decorative"),
   noise_expression("red-asterisk", "optimized-decorative"),
@@ -45,10 +50,45 @@ data:extend({
   noise_expression("red-pita", "optimized-decorative"),
   noise_expression("sand-decal", "optimized-decorative"),
   noise_expression("sand-dune-decal", "optimized-decorative"),
-  -- noise_expression("sand-rock", "optimized-decorative"),  -- does not exist in main game
   noise_expression("shroom-decal", "optimized-decorative"),
   noise_expression("small-rock", "optimized-decorative"),
+  noise_expression("small-sand-rock", "optimized-decorative"),
   noise_expression("tiny-rock", "optimized-decorative"),
   noise_expression("white-desert-bush", "optimized-decorative"),
   -- noise_expression("worms-decal", "optimized-decorative"),
+
+  -- -- Vulcanus decoratives - Note, most already exist as noise layer under some other name
+  -- noise_expression("vulcanus-chimney", "simple-entity"),
+  -- noise_expression("vulcanus-chimney-faded", "simple-entity"),
+  -- noise_expression("vulcanus-chimney-cold", "simple-entity"),
+  -- noise_expression("vulcanus-chimney-short", "simple-entity"),
+  -- noise_expression("vulcanus-chimney-truncated", "simple-entity"),
+  -- noise_expression("huge-volcanic-rock", "simple-entity"),
+  -- noise_expression("big-volcanic-rock", "simple-entity"),
+  -- noise_expression("vulcanus-rock-decal-large", "optimized-decorative"),
+  -- noise_expression("vulcanus-crack-decal", "optimized-decorative"),
+  -- noise_expression("vulcanus-crack-decal-large", "optimized-decorative"),
+  -- noise_expression("vulcanus-crack-decal-huge-warm", "optimized-decorative"),
+  -- noise_expression("vulcanus-crack-decal-warm", "optimized-decorative"),
+  -- noise_expression("calcite-stain", "optimized-decorative"),
+  -- noise_expression("calcite-stain-small", "optimized-decorative"),
+  -- noise_expression("sulfur-stain", "optimized-decorative"),
+  -- noise_expression("sulfur-stain-small", "optimized-decorative"),
+  -- noise_expression("sulfuric-acid-puddle", "optimized-decorative"),
+  -- noise_expression("sulfuric-acid-puddle-small", "optimized-decorative"),
+  -- noise_expression("crater-small", "optimized-decorative"),
+  -- noise_expression("crater-large", "optimized-decorative"),
+  -- noise_expression("pumice-relief-decal", "optimized-decorative"),
+  -- noise_expression("vulcanus-sand-decal", "optimized-decorative"),
+  -- noise_expression("vulcanus-dune-decal", "optimized-decorative"),
+  -- noise_expression("waves-decal", "optimized-decorative"),
+  -- noise_expression("medium-volcanic-rock", "optimized-decorative"),
+  -- noise_expression("small-volcanic-rock", "optimized-decorative"),
+  -- noise_expression("tiny-volcanic-rock", "optimized-decorative"),
+  -- noise_expression("tiny-rock-cluster", "optimized-decorative"),
+  -- noise_expression("small-sulfur-rock", "optimized-decorative"),
+  -- noise_expression("tiny-sulfur-rock", "optimized-decorative"),
+  -- noise_expression("sulfur-rock-cluster", "optimized-decorative"),
+  -- noise_expression("vulcanus-lava-fire", "optimized-decorative"),
+
 })

@@ -4,6 +4,18 @@
 require("map-generation.terrain")
 
 --------------------------------------------------------------------------------
+-- MARK: Add Gleba resources to Nauvis
+--------------------------------------------------------------------------------
+
+-- Set vulcane as resource
+data.raw["autoplace-control"]["vulcanus_volcanism"].can_be_disabled = true
+data.raw["autoplace-control"]["vulcanus_volcanism"].order = nil
+data.raw["autoplace-control"]["vulcanus_volcanism"].category = "resource"
+
+-- remove gleba stone from map generator setting
+-- data.raw["autoplace-control"]["gleba_stone"] = nil
+
+--------------------------------------------------------------------------------
 -- MARK: Add Vulcanus resources to Nauvis
 --------------------------------------------------------------------------------
 
@@ -14,6 +26,11 @@ data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:sul
 data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:sulfuric-acid-geyser:richness"] = "vulcanus_sulfuric_acid_geyser_richness"
 data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:tungsten-ore:probability"] = "vulcanus_tungsten_ore_probability"
 data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:tungsten-ore:richness"] = "vulcanus_tungsten_ore_richness"
+
+-- Set vulcane as resource
+data.raw["autoplace-control"]["vulcanus_volcanism"].can_be_disabled = true
+data.raw["autoplace-control"]["vulcanus_volcanism"].order = nil
+data.raw["autoplace-control"]["vulcanus_volcanism"].category = "resource"
 
 -- Add resources to nauvis
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["calcite"] = {}
@@ -57,10 +74,3 @@ data.raw.resource["tungsten-ore"].autoplace.candidate_spot_count = 22
 
 -- remove vulcanus coal from map generator setting
 data.raw["autoplace-control"]["vulcanus_coal"] = nil
-
---------------------------------------------------------------------------------
--- MARK: Add Gleba resources to Nauvis
---------------------------------------------------------------------------------
-
--- remove gleba stone from map generator setting
--- data.raw["autoplace-control"]["gleba_stone"] = nil

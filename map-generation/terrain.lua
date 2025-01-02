@@ -19,6 +19,14 @@ local function mask_off_vulcano_terrain(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_vulcano_terrain(" .. string.gsub(decorative, '-', '_') .. ")"
 end
 
+local function mask_gleba_territory(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_gleba_territory(" .. string.gsub(decorative, '-', '_') .. ")"
+end
+
+local function mask_off_gleba_territory(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_gleba_territory(" .. string.gsub(decorative, '-', '_') .. ")"
+end
+
 data:extend
 ({
   {
@@ -35,10 +43,10 @@ data:extend
 
 -- Remove water where at vulcano spots
 data.raw.tile["water"].autoplace = {
-  probability_expression = "if(vulcano_coverage, -inf, water_base(0, 100))"
+  probability_expression = "updated_water"
 }
 data.raw.tile["deepwater"].autoplace = {
-  probability_expression = "if(vulcano_coverage, -inf, water_base(-2, 200))"
+  probability_expression = "updated_deepwater"
 }
 
 -- Remove nauvis trees from vulcanus_terrain. TODO: also removes big patches of trees on map, but i would like to keep the forests
@@ -87,8 +95,211 @@ mask_off_vulcano_terrain("sand-decal", "optimized-decorative")
 mask_off_vulcano_terrain("sand-dune-decal", "optimized-decorative")
 mask_off_vulcano_terrain("white-desert-bush", "optimized-decorative")
 
+-- Remove nauvis tiles from gleba territory
+mask_off_gleba_territory("grass-1", "tile")
+mask_off_gleba_territory("grass-2", "tile")
+mask_off_gleba_territory("grass-3", "tile")
+mask_off_gleba_territory("grass-4", "tile")
+mask_off_gleba_territory("dry-dirt", "tile")
+mask_off_gleba_territory("dirt-1", "tile")
+mask_off_gleba_territory("dirt-2", "tile")
+mask_off_gleba_territory("dirt-3", "tile")
+mask_off_gleba_territory("dirt-4", "tile")
+mask_off_gleba_territory("dirt-5", "tile")
+mask_off_gleba_territory("dirt-6", "tile")
+mask_off_gleba_territory("dirt-7", "tile")
+mask_off_gleba_territory("sand-1", "tile")
+mask_off_gleba_territory("sand-2", "tile")
+mask_off_gleba_territory("sand-3", "tile")
+mask_off_gleba_territory("red-desert-0", "tile")
+mask_off_gleba_territory("red-desert-1", "tile")
+mask_off_gleba_territory("red-desert-2", "tile")
+mask_off_gleba_territory("red-desert-3", "tile")
+-- mask_off_gleba_territory("water", "tile")
+-- mask_off_gleba_territory("deepwater", "tile")
+
 -- Remove nauvis cliffs from vulcanus_terrain
 data.raw["noise-expression"]["cliffiness_nauvis"].expression = "(main_cliffiness >= cliff_cutoff) * 10 + if(vulcanus_terrain, -inf, 0)"
+
+data:extend
+({
+  -- Noise expressions
+  {
+    -- Fix water coverage
+    type = "noise-expression",
+    name = "updated_water",
+    expression = "if(vulcano_coverage, -inf, water_base(0, 100))"
+  },
+  {
+    -- Fix deepwater coverage
+    type = "noise-expression",
+    name = "updated_deepwater",
+    expression = "if(vulcano_coverage, -inf, water_base(-2, 200))"
+  }
+})
+
+--------------------------------------------------------------------------------
+-- MARK: Fix Gleba related map gen settings
+--------------------------------------------------------------------------------
+
+-- START: Update map gen settings
+-- autoplace_controls
+data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["gleba_plants"] = {}
+-- data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["gleba_water"] = {}
+
+-- tile settings
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["natural-yumako-soil"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["natural-jellynut-soil"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["wetland-yumako"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["wetland-jellynut"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["wetland-blue-slime"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["wetland-light-green-slime"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["wetland-green-slime"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["wetland-light-dead-skin"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["wetland-dead-skin"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["wetland-pink-tentacle"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["wetland-red-tentacle"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["gleba-deep-lake"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-brown-blubber"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-olive-blubber"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-olive-blubber-2"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-olive-blubber-2"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-pale-green"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-cream-cauliflower"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-cream-cauliflower-2"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-dead-skin"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-dead-skin-2"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-cream-red"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-red-vein"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-red-vein-2"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-red-vein-3"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-red-vein-4"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-red-vein-dead"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["lowland-red-infection"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["midland-turquoise-bark"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["midland-turquoise-bark-2"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["midland-cracked-lichen"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["midland-cracked-lichen-dull"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["midland-cracked-lichen-dark"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["midland-yellow-crust"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["midland-yellow-crust-2"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["midland-yellow-crust-3"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["midland-yellow-crust-4"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["highland-dark-rock"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["highland-dark-rock-2"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["highland-yellow-rock"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["pit-rock"] = {}
+-- END: Update map gen settings
+
+-- START: Mask gleba territory on all autoplace settings
+-- mask gleba tiles
+mask_gleba_territory("natural-yumako-soil", "tile")
+mask_gleba_territory("natural-jellynut-soil", "tile")
+mask_gleba_territory("wetland-yumako", "tile")
+mask_gleba_territory("wetland-jellynut", "tile")
+mask_gleba_territory("wetland-blue-slime", "tile")
+mask_gleba_territory("wetland-light-green-slime", "tile")
+mask_gleba_territory("wetland-green-slime", "tile")
+mask_gleba_territory("wetland-light-dead-skin", "tile")
+mask_gleba_territory("wetland-dead-skin", "tile")
+mask_gleba_territory("wetland-pink-tentacle", "tile")
+mask_gleba_territory("wetland-red-tentacle", "tile")
+mask_gleba_territory("gleba-deep-lake", "tile")
+mask_gleba_territory("lowland-brown-blubber", "tile")
+mask_gleba_territory("lowland-olive-blubber", "tile")
+mask_gleba_territory("lowland-olive-blubber-2", "tile")
+mask_gleba_territory("lowland-olive-blubber-2", "tile")
+mask_gleba_territory("lowland-pale-green", "tile")
+mask_gleba_territory("lowland-cream-cauliflower", "tile")
+mask_gleba_territory("lowland-cream-cauliflower-2", "tile")
+mask_gleba_territory("lowland-dead-skin", "tile")
+mask_gleba_territory("lowland-dead-skin-2", "tile")
+mask_gleba_territory("lowland-cream-red", "tile")
+mask_gleba_territory("lowland-red-vein", "tile")
+mask_gleba_territory("lowland-red-vein-2", "tile")
+mask_gleba_territory("lowland-red-vein-3", "tile")
+mask_gleba_territory("lowland-red-vein-4", "tile")
+mask_gleba_territory("lowland-red-vein-dead", "tile")
+mask_gleba_territory("lowland-red-infection", "tile")
+mask_gleba_territory("midland-turquoise-bark", "tile")
+mask_gleba_territory("midland-turquoise-bark-2", "tile")
+mask_gleba_territory("midland-cracked-lichen", "tile")
+mask_gleba_territory("midland-cracked-lichen-dull", "tile")
+mask_gleba_territory("midland-cracked-lichen-dark", "tile")
+mask_gleba_territory("midland-yellow-crust", "tile")
+mask_gleba_territory("midland-yellow-crust-2", "tile")
+mask_gleba_territory("midland-yellow-crust-3", "tile")
+mask_gleba_territory("midland-yellow-crust-4", "tile")
+mask_gleba_territory("highland-dark-rock", "tile")
+mask_gleba_territory("highland-dark-rock-2", "tile")
+mask_gleba_territory("highland-yellow-rock", "tile")
+mask_gleba_territory("pit-rock", "tile")
+-- END: Mask gleba territory on all autoplace settings
+
+-- New noise expressions and noise functions
+data:extend
+({
+  -- Noise expressions
+  {
+    -- Create mask for gleba territory
+    type = "noise-expression",
+    name = "gleba_mask",
+    expression = "if(min(wlc_elevation, -starting_island, -updated_water) > 1, inf, 0)",
+    local_expressions = {
+      elevation_magnitude = 20,
+      wlc_amplitude = 2,
+      wlc_elevation = "max(gleba_main - water_level * wlc_amplitude, starting_island)",
+      gleba_main = "elevation_magnitude * if(moisture_basic > 0.3, 0.25 * gleba_detail + 3 * (0.8 * gleba_macro + 0.2 * moisture_basic) * starting_macro_multiplier, 0)",
+      -- if most of the world is flooded make sure starting areas still have land
+      starting_island = "gleba_main + elevation_magnitude * (2.5 - distance / 300)",
+      starting_macro_multiplier = "clamp(distance * segmentation_multiplier / 2000, 0, 1)",
+      starting_lake = "elevation_magnitude * (-3 + (starting_lake_distance + starting_lake_noise) / 8) / 8",
+      starting_lake_distance = "distance_from_nearest_point{x = x, y = y, points = starting_lake_positions, maximum_distance = 1024}",
+      starting_lake_noise = "quick_multioctave_noise_persistence{x = x,\z
+                                                                 y = y,\z
+                                                                 seed0 = map_seed,\z
+                                                                 seed1 = 14,\z
+                                                                 input_scale = 1/8,\z
+                                                                 output_scale = 0.8,\z
+                                                                 octaves = 4,\z
+                                                                 octave_input_scale_multiplier = 0.5,\z
+                                                                 persistence = 0.68}",
+      gleba_macro = "multioctave_noise{x = x,\z
+                                       y = y,\z
+                                       persistence = 0.6,\z
+                                       seed0 = map_seed,\z
+                                       seed1 = 1000,\z
+                                       octaves = 2,\z
+                                       input_scale = segmentation_multiplier / 3000}",
+      gleba_detail = "variable_persistence_multioctave_noise{x = x,\z
+                                                             y = y,\z
+                                                             seed0 = map_seed,\z
+                                                             seed1 = 600,\z
+                                                             input_scale = segmentation_multiplier / 4,\z
+                                                             output_scale = 0.03,\z
+                                                             offset_x = 10000 / segmentation_multiplier,\z
+                                                             octaves = 2,\z
+                                                             persistence = nauvis_persistance}",
+      segmentation_multiplier = "1.5 * control:water:frequency"
+    }
+  },
+
+  -- Noise functions
+  {
+    -- Mask all gleba territory
+    type = "noise-function",
+    name = "mask_gleba_territory",
+    parameters = {"expression"},
+    expression = "if(gleba_mask, expression, -inf)"
+  },
+  {
+    -- Mask off all gleba territory
+    type = "noise-function",
+    name = "mask_off_gleba_territory",
+    parameters = {"expression"},
+    expression = "if(gleba_mask, -inf, expression)"
+  },
+})
 
 --------------------------------------------------------------------------------
 -- MARK: Fix Vulcanus related map gen settings
@@ -148,11 +359,6 @@ data.raw.tile["volcanic-folds-flat"].autoplace.probability_expression = "updated
 data.raw.tile["lava"].autoplace.probability_expression = "lava_mountains_range"
 data.raw.tile["lava-hot"].autoplace.probability_expression = "lava_hot_mountains_range"
 
--- Fix autoplace controls
-data.raw["autoplace-control"]["vulcanus_volcanism"].can_be_disabled = true
-data.raw["autoplace-control"]["vulcanus_volcanism"].order = nil
-data.raw["autoplace-control"]["vulcanus_volcanism"].category = "resource"
-
 -- START: Update noise expressions
 -- Increase radius for vulcane to start spawning
 data.raw["noise-expression"]["vulcanus_starting_area_radius"].expression = "new_starting_radius"
@@ -210,7 +416,7 @@ data.raw["simple-entity"]["vulcanus-chimney-truncated"].autoplace.probability_ex
 data.raw["simple-entity"]["huge-volcanic-rock"].autoplace.probability_expression = "mask_vulcano_coverage(vulcanus_rock_huge)"
 data.raw["simple-entity"]["big-volcanic-rock"].autoplace.probability_expression = "mask_vulcano_coverage(vulcanus_rock_big)"
 
--- -- TODO: verify that this code block is actually working
+-- TODO: verify that this code block is actually working
 data.raw["optimized-decorative"]["vulcanus-rock-decal-large"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_rock_decal_large)"
 data.raw["optimized-decorative"]["vulcanus-crack-decal"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_crack_decal)"
 data.raw["optimized-decorative"]["vulcanus-crack-decal-large"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_crack_decal_large)"
@@ -236,30 +442,6 @@ data.raw["optimized-decorative"]["small-sulfur-rock"].autoplace.probability_expr
 data.raw["optimized-decorative"]["tiny-sulfur-rock"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_sulfur_rock_tiny)"
 data.raw["optimized-decorative"]["sulfur-rock-cluster"].autoplace.probability_expression = "mask_vulcano_terrain(vulcanus_sulfur_rock_cluster)"
 data.raw["optimized-decorative"]["vulcanus-lava-fire"].autoplace.probability_expression = "mask_vulcano_terrain(0.1 * (vulcanus_elev <= 0) * (vulcanus_elev > 2) + 0.005 * min(1, max(lava_basalts_range, lava_mountains_range, lava_hot_basalts_range, lava_hot_mountains_range)))"
-
--- mask_vulcano_terrain("vulcanus-crack-decal-large", "optimized-decorative")
--- mask_vulcano_terrain("vulcanus-crack-decal-huge-warm", "optimized-decorative")
--- mask_vulcano_terrain("vulcanus-crack-decal-warm", "optimized-decorative")
--- mask_vulcano_terrain("calcite-stain", "optimized-decorative")
--- mask_vulcano_terrain("calcite-stain-small", "optimized-decorative")
--- mask_vulcano_terrain("sulfur-stain", "optimized-decorative")
--- mask_vulcano_terrain("sulfur-stain-small", "optimized-decorative")
--- mask_vulcano_terrain("sulfuric-acid-puddle", "optimized-decorative")
--- mask_vulcano_terrain("sulfuric-acid-puddle-small", "optimized-decorative")
--- mask_vulcano_terrain("crater-small", "optimized-decorative")
--- mask_vulcano_terrain("crater-large", "optimized-decorative")
--- mask_vulcano_terrain("pumice-relief-decal", "optimized-decorative")
--- mask_vulcano_terrain("vulcanus-sand-decal", "optimized-decorative")
--- mask_vulcano_terrain("vulcanus-dune-decal", "optimized-decorative")
--- mask_vulcano_terrain("waves-decal", "optimized-decorative")
--- mask_vulcano_terrain("medium-volcanic-rock", "optimized-decorative")
--- mask_vulcano_terrain("small-volcanic-rock", "optimized-decorative")
--- mask_vulcano_terrain("tiny-volcanic-rock", "optimized-decorative")
--- mask_vulcano_terrain("tiny-rock-cluster", "optimized-decorative")
--- mask_vulcano_terrain("small-sulfur-rock", "optimized-decorative")
--- mask_vulcano_terrain("tiny-sulfur-rock", "optimized-decorative")
--- mask_vulcano_terrain("sulfur-rock-cluster", "optimized-decorative")
--- mask_vulcano_terrain("vulcanus-lava-fire", "optimized-decorative")
 
 -- New noise expressions and noise functions
 data:extend
@@ -327,63 +509,3 @@ data:extend
   },
 })
 -- END: Update noise expressions
-
---------------------------------------------------------------------------------
--- MARK: Fix Gleba related map gen settings
---------------------------------------------------------------------------------
-
-
--- New noise expressions and noise functions
-data:extend
-({
-  {
-    -- Create mask for gleba territory
-    type = "noise-expression",
-    name = "gleba_mask",
-    expression = "if(min(wlc_elevation, -starting_island) > 1, inf, 0)",
-    local_expressions = {
-      elevation_magnitude = 20,
-      wlc_amplitude = 2,
-      wlc_elevation = "max(nauvis_main - water_level * wlc_amplitude, starting_island)",
-      nauvis_main = "elevation_magnitude * (0.25 * nauvis_detail + 3 * nauvis_macro * starting_macro_multiplier)",
-      -- if most of the world is flooded make sure starting areas still have land
-      starting_island = "nauvis_main + elevation_magnitude * (2.5 - distance / 300)",
-      starting_macro_multiplier = "clamp(distance * segmentation_multiplier / 2000, 0, 1)",
-      starting_lake = "elevation_magnitude * (-3 + (starting_lake_distance + starting_lake_noise) / 8) / 8",
-      starting_lake_distance = "distance_from_nearest_point{x = x, y = y, points = starting_lake_positions, maximum_distance = 1024}",
-      starting_lake_noise = "quick_multioctave_noise_persistence{x = x,\z
-                                                                 y = y,\z
-                                                                 seed0 = map_seed,\z
-                                                                 seed1 = 14,\z
-                                                                 input_scale = 1/8,\z
-                                                                 output_scale = 0.8,\z
-                                                                 octaves = 4,\z
-                                                                 octave_input_scale_multiplier = 0.5,\z
-                                                                 persistence = 0.68}",
-      nauvis_macro = "multioctave_noise{x = x,\z
-                                        y = y,\z
-                                        persistence = 0.6,\z
-                                        seed0 = map_seed + 1,\z
-                                        seed1 = 1000,\z
-                                        octaves = 2,\z
-                                        input_scale = segmentation_multiplier / 5000}\z
-                     * max(0, multioctave_noise{x = x,\z
-                                        y = y,\z
-                                        persistence = 0.6,\z
-                                        seed0 = map_seed + 1,\z
-                                        seed1 = 1100,\z
-                                        octaves = 1,\z
-                                        input_scale = segmentation_multiplier / 5000})",
-      nauvis_detail = "variable_persistence_multioctave_noise{x = x,\z
-                                                              y = y,\z
-                                                              seed0 = map_seed + 1,\z
-                                                              seed1 = 600,\z
-                                                              input_scale = segmentation_multiplier / 14,\z
-                                                              output_scale = 0.03,\z
-                                                              offset_x = 10000 / segmentation_multiplier,\z
-                                                              octaves = 5,\z
-                                                              persistence = nauvis_persistance}",
-      segmentation_multiplier = "1.5 * control:water:frequency"
-    }
-  },
-})

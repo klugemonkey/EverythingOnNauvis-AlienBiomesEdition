@@ -12,6 +12,30 @@ local function noise_expression(name, type)
 end
 
 data:extend({
+  -- START: Nauvis
+  -- Nauvis tiles
+  noise_expression("grass-1", "tile"),
+  noise_expression("grass-2", "tile"),
+  noise_expression("grass-3", "tile"),
+  noise_expression("grass-4", "tile"),
+  noise_expression("dry-dirt", "tile"),
+  noise_expression("dirt-1", "tile"),
+  noise_expression("dirt-2", "tile"),
+  noise_expression("dirt-3", "tile"),
+  noise_expression("dirt-4", "tile"),
+  noise_expression("dirt-5", "tile"),
+  noise_expression("dirt-6", "tile"),
+  noise_expression("dirt-7", "tile"),
+  noise_expression("sand-1", "tile"),
+  noise_expression("sand-2", "tile"),
+  noise_expression("sand-3", "tile"),
+  noise_expression("red-desert-0", "tile"),
+  noise_expression("red-desert-1", "tile"),
+  noise_expression("red-desert-2", "tile"),
+  noise_expression("red-desert-3", "tile"),
+  noise_expression("water", "tile"),
+  noise_expression("deepwater", "tile"),
+
   -- Nauvis decoratives
   noise_expression("big-rock", "simple-entity"),
   noise_expression("big-sand-rock", "simple-entity"),
@@ -56,6 +80,7 @@ data:extend({
   noise_expression("tiny-rock", "optimized-decorative"),
   noise_expression("white-desert-bush", "optimized-decorative"),
   -- noise_expression("worms-decal", "optimized-decorative"),
+  -- END: Nauvis
 
   -- -- Vulcanus decoratives - Note, most already exist as noise layer under some other name
   -- noise_expression("vulcanus-chimney", "simple-entity"),
@@ -90,5 +115,50 @@ data:extend({
   -- noise_expression("tiny-sulfur-rock", "optimized-decorative"),
   -- noise_expression("sulfur-rock-cluster", "optimized-decorative"),
   -- noise_expression("vulcanus-lava-fire", "optimized-decorative"),
+
+  -- START: Gleba
+  -- Gleba tiles
+  noise_expression("natural-yumako-soil", "tile"),
+  noise_expression("natural-jellynut-soil", "tile"),
+  noise_expression("wetland-yumako", "tile"),
+  noise_expression("wetland-jellynut", "tile"),
+  noise_expression("wetland-blue-slime", "tile"),
+  noise_expression("wetland-light-green-slime", "tile"),
+  noise_expression("wetland-green-slime", "tile"),
+  noise_expression("wetland-light-dead-skin", "tile"),
+  noise_expression("wetland-dead-skin", "tile"),
+  noise_expression("wetland-pink-tentacle", "tile"),
+  noise_expression("wetland-red-tentacle", "tile"),
+  noise_expression("gleba-deep-lake", "tile"),
+  noise_expression("lowland-brown-blubber", "tile"),
+  noise_expression("lowland-olive-blubber", "tile"),
+  noise_expression("lowland-olive-blubber-2", "tile"),
+  noise_expression("lowland-olive-blubber-2", "tile"),
+  noise_expression("lowland-pale-green", "tile"),
+  noise_expression("lowland-cream-cauliflower", "tile"),
+  noise_expression("lowland-cream-cauliflower-2", "tile"),
+  noise_expression("lowland-dead-skin", "tile"),
+  noise_expression("lowland-dead-skin-2", "tile"),
+  noise_expression("lowland-cream-red", "tile"),
+  noise_expression("lowland-red-vein", "tile"),
+  noise_expression("lowland-red-vein-2", "tile"),
+  noise_expression("lowland-red-vein-3", "tile"),
+  noise_expression("lowland-red-vein-4", "tile"),
+  noise_expression("lowland-red-vein-dead", "tile"),
+  noise_expression("lowland-red-infection", "tile"),
+  noise_expression("midland-turquoise-bark", "tile"),
+  noise_expression("midland-turquoise-bark-2", "tile"),
+  noise_expression("midland-cracked-lichen", "tile"),
+  noise_expression("midland-cracked-lichen-dull", "tile"),
+  noise_expression("midland-cracked-lichen-dark", "tile"),
+  noise_expression("midland-yellow-crust", "tile"),
+  noise_expression("midland-yellow-crust-2", "tile"),
+  noise_expression("midland-yellow-crust-3", "tile"),
+  noise_expression("midland-yellow-crust-4", "tile"),
+  noise_expression("highland-dark-rock", "tile"),
+  noise_expression("highland-dark-rock-2", "tile"),
+  noise_expression("highland-yellow-rock", "tile"),
+  noise_expression("pit-rock", "tile"),
+  -- END: Gleba
 
 })

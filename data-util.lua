@@ -12,4 +12,8 @@ function data_util.delete_prototype(type, name)
   end
 end
 
+function data_util.generate_default_name(name)
+  return "default_" .. string.gsub(name, "-", "_")
+end
+
 return data_util

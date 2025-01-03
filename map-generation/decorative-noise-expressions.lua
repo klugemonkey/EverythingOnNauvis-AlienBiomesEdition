@@ -83,39 +83,32 @@ data:extend({
   -- noise_expression("worms-decal", "optimized-decorative"),
   -- END: Nauvis
 
-  -- Vulcanus decoratives - Note, most already exist as noise layer under some other name
-  noise_expression("vulcanus-chimney", "simple-entity"),
-  noise_expression("vulcanus-chimney-faded", "simple-entity"),
-  noise_expression("vulcanus-chimney-cold", "simple-entity"),
-  noise_expression("vulcanus-chimney-short", "simple-entity"),
-  noise_expression("vulcanus-chimney-truncated", "simple-entity"),
-  noise_expression("huge-volcanic-rock", "simple-entity"),
-  noise_expression("big-volcanic-rock", "simple-entity"),
-  noise_expression("vulcanus-rock-decal-large", "optimized-decorative"),
-  noise_expression("vulcanus-crack-decal", "optimized-decorative"),
-  noise_expression("vulcanus-crack-decal-large", "optimized-decorative"),
-  noise_expression("vulcanus-crack-decal-huge-warm", "optimized-decorative"),
-  noise_expression("vulcanus-crack-decal-warm", "optimized-decorative"),
-  noise_expression("calcite-stain", "optimized-decorative"),
-  noise_expression("calcite-stain-small", "optimized-decorative"),
-  noise_expression("sulfur-stain", "optimized-decorative"),
-  noise_expression("sulfur-stain-small", "optimized-decorative"),
-  noise_expression("sulfuric-acid-puddle", "optimized-decorative"),
-  noise_expression("sulfuric-acid-puddle-small", "optimized-decorative"),
-  noise_expression("crater-small", "optimized-decorative"),
-  noise_expression("crater-large", "optimized-decorative"),
-  noise_expression("pumice-relief-decal", "optimized-decorative"),
-  noise_expression("vulcanus-sand-decal", "optimized-decorative"),
-  noise_expression("vulcanus-dune-decal", "optimized-decorative"),
-  noise_expression("waves-decal", "optimized-decorative"),
-  noise_expression("medium-volcanic-rock", "optimized-decorative"),
-  noise_expression("small-volcanic-rock", "optimized-decorative"),
-  noise_expression("tiny-volcanic-rock", "optimized-decorative"),
-  noise_expression("tiny-rock-cluster", "optimized-decorative"),
-  noise_expression("small-sulfur-rock", "optimized-decorative"),
-  noise_expression("tiny-sulfur-rock", "optimized-decorative"),
-  noise_expression("sulfur-rock-cluster", "optimized-decorative"),
-  noise_expression("vulcanus-lava-fire", "optimized-decorative"),
+  -- START: Aquilo
+  -- Aquilo tiles
+  noise_expression("snow-flat", "tile"),
+  noise_expression("snow-crests", "tile"),
+  noise_expression("snow-lumpy", "tile"),
+  noise_expression("snow-patchy", "tile"),
+  noise_expression("ice-rough", "tile"),
+  noise_expression("ice-smooth", "tile"),
+  noise_expression("brash-ice", "tile"),
+
+    -- Aquilo decoratives
+  noise_expression("lithium-iceberg-medium", "optimized-decorative"),
+  noise_expression("lithium-iceberg-small", "optimized-decorative"),
+  noise_expression("lithium-iceberg-tiny", "optimized-decorative"),
+  noise_expression("floating-iceberg-large", "optimized-decorative"),
+  noise_expression("floating-iceberg-small", "optimized-decorative"),
+  noise_expression("aqulio-ice-decal-blue", "optimized-decorative"),
+  noise_expression("aqulio-snowy-decal", "optimized-decorative"),
+  noise_expression("snow-drift-decal", "optimized-decorative"),
+
+  -- Aquilo entities
+  noise_expression("lithium-brine", "resource"),
+  noise_expression("fluorine-vent", "resource"),
+  noise_expression("lithium-iceberg-huge", "simple-entity"),
+  noise_expression("lithium-iceberg-big", "simple-entity"),
+  -- END: Aquilo
 
   -- START: Gleba
   -- Gleba tiles
@@ -255,4 +248,39 @@ data:extend({
   noise_expression("water-cane", "tree"),
   -- END: Gleba
 
+  -- START: Vulcanus
+  -- Vulcanus decoratives - Note, most already exist as noise layer under some other name
+  noise_expression("vulcanus-chimney", "simple-entity"),
+  noise_expression("vulcanus-chimney-faded", "simple-entity"),
+  noise_expression("vulcanus-chimney-cold", "simple-entity"),
+  noise_expression("vulcanus-chimney-short", "simple-entity"),
+  noise_expression("vulcanus-chimney-truncated", "simple-entity"),
+  noise_expression("huge-volcanic-rock", "simple-entity"),
+  noise_expression("big-volcanic-rock", "simple-entity"),
+  noise_expression("vulcanus-rock-decal-large", "optimized-decorative"),
+  noise_expression("vulcanus-crack-decal", "optimized-decorative"),
+  noise_expression("vulcanus-crack-decal-large", "optimized-decorative"),
+  noise_expression("vulcanus-crack-decal-huge-warm", "optimized-decorative"),
+  noise_expression("vulcanus-crack-decal-warm", "optimized-decorative"),
+  noise_expression("calcite-stain", "optimized-decorative"),
+  noise_expression("calcite-stain-small", "optimized-decorative"),
+  noise_expression("sulfur-stain", "optimized-decorative"),
+  noise_expression("sulfur-stain-small", "optimized-decorative"),
+  noise_expression("sulfuric-acid-puddle", "optimized-decorative"),
+  noise_expression("sulfuric-acid-puddle-small", "optimized-decorative"),
+  noise_expression("crater-small", "optimized-decorative"),
+  noise_expression("crater-large", "optimized-decorative"),
+  noise_expression("pumice-relief-decal", "optimized-decorative"),
+  noise_expression("vulcanus-sand-decal", "optimized-decorative"),
+  noise_expression("vulcanus-dune-decal", "optimized-decorative"),
+  noise_expression("waves-decal", "optimized-decorative"),
+  noise_expression("medium-volcanic-rock", "optimized-decorative"),
+  noise_expression("small-volcanic-rock", "optimized-decorative"),
+  noise_expression("tiny-volcanic-rock", "optimized-decorative"),
+  noise_expression("tiny-rock-cluster", "optimized-decorative"),
+  noise_expression("small-sulfur-rock", "optimized-decorative"),
+  noise_expression("tiny-sulfur-rock", "optimized-decorative"),
+  noise_expression("sulfur-rock-cluster", "optimized-decorative"),
+  noise_expression("vulcanus-lava-fire", "optimized-decorative"),
+  -- END: Vulcanus
 })

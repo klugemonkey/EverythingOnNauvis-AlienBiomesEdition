@@ -4,35 +4,45 @@
 local util = require("data-util")
 
 
-local function mask_nauvis_territory(decorative, decorative_type)
+local terrain = {}
+
+function terrain.mask_nauvis_territory(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_nauvis_territory(" .. util.generate_default_name(decorative) .. ")"
 end
 
-local function mask_off_nauvis_territory(decorative, decorative_type)
+function terrain.mask_off_nauvis_territory(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_nauvis_territory(" .. util.generate_default_name(decorative) .. ")"
 end
 
-local function mask_gleba_territory(decorative, decorative_type)
+function terrain.mask_aquilo_territory(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_aquilo_territory(" .. util.generate_default_name(decorative) .. ")"
+end
+
+function terrain.mask_off_aquilo_territory(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_aquilo_territory(" .. util.generate_default_name(decorative) .. ")"
+end
+
+function terrain.mask_gleba_territory(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_gleba_territory(" .. util.generate_default_name(decorative) .. ")"
 end
 
-local function mask_off_gleba_territory(decorative, decorative_type)
+function terrain.mask_off_gleba_territory(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_gleba_territory(" .. util.generate_default_name(decorative) .. ")"
 end
 
-local function mask_vulcano_coverage(decorative, decorative_type)
+function terrain.mask_vulcano_coverage(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_vulcano_coverage(" .. util.generate_default_name(decorative) .. ")"
 end
 
-local function mask_off_vulcano_coverage(decorative, decorative_type)
+function terrain.mask_off_vulcano_coverage(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_vulcano_coverage(" .. util.generate_default_name(decorative) .. ")"
 end
 
-local function mask_vulcano_terrain(decorative, decorative_type)
+function terrain.mask_vulcano_terrain(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_vulcano_terrain(" .. util.generate_default_name(decorative) .. ")"
 end
 
-local function mask_off_vulcano_terrain(decorative, decorative_type)
+function terrain.mask_off_vulcano_terrain(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_vulcano_terrain(" .. util.generate_default_name(decorative) .. ")"
 end
 
@@ -64,109 +74,69 @@ data.raw.tile["deepwater"].autoplace = {
 data.raw["noise-expression"]["trees_forest_path_cutout_faded"].expression = "mask_nauvis_territory(trees_forest_path_cutout * 0.3 + tree_small_noise * 0.1)"
 
 -- Remove nauvis decoratives from vulcano_coverage
-mask_nauvis_territory("cracked-mud-decal", "optimized-decorative")
-mask_nauvis_territory("dark-mud-decal", "optimized-decorative")
-mask_nauvis_territory("lichen-decal", "optimized-decorative")
-mask_nauvis_territory("light-mud-decal", "optimized-decorative")
-mask_nauvis_territory("small-rock", "optimized-decorative")
-mask_nauvis_territory("small-sand-rock", "optimized-decorative")
-mask_nauvis_territory("tiny-rock", "optimized-decorative")
+terrain.mask_nauvis_territory("cracked-mud-decal", "optimized-decorative")
+terrain.mask_nauvis_territory("dark-mud-decal", "optimized-decorative")
+terrain.mask_nauvis_territory("lichen-decal", "optimized-decorative")
+terrain.mask_nauvis_territory("light-mud-decal", "optimized-decorative")
+terrain.mask_nauvis_territory("small-rock", "optimized-decorative")
+terrain.mask_nauvis_territory("small-sand-rock", "optimized-decorative")
+terrain.mask_nauvis_territory("tiny-rock", "optimized-decorative")
 
 -- Remove nauvis decoratives from vulcanus_terrain
-mask_nauvis_territory("big-rock", "simple-entity")
-mask_nauvis_territory("big-sand-rock", "simple-entity")
-mask_nauvis_territory("brown-asterisk", "optimized-decorative")
-mask_nauvis_territory("brown-asterisk-mini", "optimized-decorative")
-mask_nauvis_territory("brown-carpet-grass", "optimized-decorative")
-mask_nauvis_territory("brown-fluff", "optimized-decorative")
-mask_nauvis_territory("brown-fluff-dry", "optimized-decorative")
-mask_nauvis_territory("brown-hairy-grass", "optimized-decorative")
-mask_nauvis_territory("garballo", "optimized-decorative")
-mask_nauvis_territory("garballo-mini-dry", "optimized-decorative")
-mask_nauvis_territory("green-asterisk", "optimized-decorative")
-mask_nauvis_territory("green-asterisk-mini", "optimized-decorative")
-mask_nauvis_territory("green-bush-mini", "optimized-decorative")
-mask_nauvis_territory("green-carpet-grass", "optimized-decorative")
-mask_nauvis_territory("green-croton", "optimized-decorative")
-mask_nauvis_territory("green-desert-bush", "optimized-decorative")
-mask_nauvis_territory("green-hairy-grass", "optimized-decorative")
-mask_nauvis_territory("green-pita", "optimized-decorative")
-mask_nauvis_territory("green-pita-mini", "optimized-decorative")
-mask_nauvis_territory("green-small-grass", "optimized-decorative")
-mask_nauvis_territory("huge-rock", "simple-entity")
-mask_nauvis_territory("medium-rock", "optimized-decorative")
-mask_nauvis_territory("medium-sand-rock", "optimized-decorative")
-mask_nauvis_territory("red-asterisk", "optimized-decorative")
-mask_nauvis_territory("red-croton", "optimized-decorative")
-mask_nauvis_territory("red-desert-bush", "optimized-decorative")
-mask_nauvis_territory("red-desert-decal", "optimized-decorative")
-mask_nauvis_territory("red-pita", "optimized-decorative")
-mask_nauvis_territory("sand-decal", "optimized-decorative")
-mask_nauvis_territory("sand-dune-decal", "optimized-decorative")
-mask_nauvis_territory("white-desert-bush", "optimized-decorative")
+terrain.mask_nauvis_territory("big-rock", "simple-entity")
+terrain.mask_nauvis_territory("big-sand-rock", "simple-entity")
+terrain.mask_nauvis_territory("brown-asterisk", "optimized-decorative")
+terrain.mask_nauvis_territory("brown-asterisk-mini", "optimized-decorative")
+terrain.mask_nauvis_territory("brown-carpet-grass", "optimized-decorative")
+terrain.mask_nauvis_territory("brown-fluff", "optimized-decorative")
+terrain.mask_nauvis_territory("brown-fluff-dry", "optimized-decorative")
+terrain.mask_nauvis_territory("brown-hairy-grass", "optimized-decorative")
+terrain.mask_nauvis_territory("garballo", "optimized-decorative")
+terrain.mask_nauvis_territory("garballo-mini-dry", "optimized-decorative")
+terrain.mask_nauvis_territory("green-asterisk", "optimized-decorative")
+terrain.mask_nauvis_territory("green-asterisk-mini", "optimized-decorative")
+terrain.mask_nauvis_territory("green-bush-mini", "optimized-decorative")
+terrain.mask_nauvis_territory("green-carpet-grass", "optimized-decorative")
+terrain.mask_nauvis_territory("green-croton", "optimized-decorative")
+terrain.mask_nauvis_territory("green-desert-bush", "optimized-decorative")
+terrain.mask_nauvis_territory("green-hairy-grass", "optimized-decorative")
+terrain.mask_nauvis_territory("green-pita", "optimized-decorative")
+terrain.mask_nauvis_territory("green-pita-mini", "optimized-decorative")
+terrain.mask_nauvis_territory("green-small-grass", "optimized-decorative")
+terrain.mask_nauvis_territory("huge-rock", "simple-entity")
+terrain.mask_nauvis_territory("medium-rock", "optimized-decorative")
+terrain.mask_nauvis_territory("medium-sand-rock", "optimized-decorative")
+terrain.mask_nauvis_territory("red-asterisk", "optimized-decorative")
+terrain.mask_nauvis_territory("red-croton", "optimized-decorative")
+terrain.mask_nauvis_territory("red-desert-bush", "optimized-decorative")
+terrain.mask_nauvis_territory("red-desert-decal", "optimized-decorative")
+terrain.mask_nauvis_territory("red-pita", "optimized-decorative")
+terrain.mask_nauvis_territory("sand-decal", "optimized-decorative")
+terrain.mask_nauvis_territory("sand-dune-decal", "optimized-decorative")
+terrain.mask_nauvis_territory("white-desert-bush", "optimized-decorative")
 
 -- Remove nauvis tiles from gleba territory
-mask_nauvis_territory("grass-1", "tile")
-mask_nauvis_territory("grass-2", "tile")
-mask_nauvis_territory("grass-3", "tile")
-mask_nauvis_territory("grass-4", "tile")
-mask_nauvis_territory("dry-dirt", "tile")
-mask_nauvis_territory("dirt-1", "tile")
-mask_nauvis_territory("dirt-2", "tile")
-mask_nauvis_territory("dirt-3", "tile")
-mask_nauvis_territory("dirt-4", "tile")
-mask_nauvis_territory("dirt-5", "tile")
-mask_nauvis_territory("dirt-6", "tile")
-mask_nauvis_territory("dirt-7", "tile")
-mask_nauvis_territory("sand-1", "tile")
-mask_nauvis_territory("sand-2", "tile")
-mask_nauvis_territory("sand-3", "tile")
-mask_nauvis_territory("red-desert-0", "tile")
-mask_nauvis_territory("red-desert-1", "tile")
-mask_nauvis_territory("red-desert-2", "tile")
-mask_nauvis_territory("red-desert-3", "tile")
--- mask_off_gleba_territory("water", "tile")
--- mask_off_gleba_territory("deepwater", "tile")
-
--- -- Remove nauvis decoratives from gleba territory -- TODO: figure out why this is not working
--- mask_off_gleba_territory("cracked-mud-decal", "optimized-decorative")
--- mask_off_gleba_territory("dark-mud-decal", "optimized-decorative")
--- mask_off_gleba_territory("lichen-decal", "optimized-decorative")
--- mask_off_gleba_territory("light-mud-decal", "optimized-decorative")
--- mask_off_gleba_territory("small-rock", "optimized-decorative")
--- mask_off_gleba_territory("small-sand-rock", "optimized-decorative")
--- mask_off_gleba_territory("tiny-rock", "optimized-decorative")
--- mask_off_gleba_territory("big-rock", "simple-entity")
--- mask_off_gleba_territory("big-sand-rock", "simple-entity")
--- mask_off_gleba_territory("brown-asterisk", "optimized-decorative")
--- mask_off_gleba_territory("brown-asterisk-mini", "optimized-decorative")
--- mask_off_gleba_territory("brown-carpet-grass", "optimized-decorative")
--- mask_off_gleba_territory("brown-fluff", "optimized-decorative")
--- mask_off_gleba_territory("brown-fluff-dry", "optimized-decorative")
--- mask_off_gleba_territory("brown-hairy-grass", "optimized-decorative")
--- mask_off_gleba_territory("garballo", "optimized-decorative")
--- mask_off_gleba_territory("garballo-mini-dry", "optimized-decorative")
--- mask_off_gleba_territory("green-asterisk", "optimized-decorative")
--- mask_off_gleba_territory("green-asterisk-mini", "optimized-decorative")
--- mask_off_gleba_territory("green-bush-mini", "optimized-decorative")
--- mask_off_gleba_territory("green-carpet-grass", "optimized-decorative")
--- mask_off_gleba_territory("green-croton", "optimized-decorative")
--- mask_off_gleba_territory("green-desert-bush", "optimized-decorative")
--- mask_off_gleba_territory("green-hairy-grass", "optimized-decorative")
--- mask_off_gleba_territory("green-pita", "optimized-decorative")
--- mask_off_gleba_territory("green-pita-mini", "optimized-decorative")
--- mask_off_gleba_territory("green-small-grass", "optimized-decorative")
--- mask_off_gleba_territory("huge-rock", "simple-entity")
--- mask_off_gleba_territory("medium-rock", "optimized-decorative")
--- mask_off_gleba_territory("medium-sand-rock", "optimized-decorative")
--- mask_off_gleba_territory("red-asterisk", "optimized-decorative")
--- mask_off_gleba_territory("red-croton", "optimized-decorative")
--- mask_off_gleba_territory("red-desert-bush", "optimized-decorative")
--- mask_off_gleba_territory("red-desert-decal", "optimized-decorative")
--- mask_off_gleba_territory("red-pita", "optimized-decorative")
--- mask_off_gleba_territory("sand-decal", "optimized-decorative")
--- mask_off_gleba_territory("sand-dune-decal", "optimized-decorative")
--- mask_off_gleba_territory("white-desert-bush", "optimized-decorative")
+terrain.mask_nauvis_territory("grass-1", "tile")
+terrain.mask_nauvis_territory("grass-2", "tile")
+terrain.mask_nauvis_territory("grass-3", "tile")
+terrain.mask_nauvis_territory("grass-4", "tile")
+terrain.mask_nauvis_territory("dry-dirt", "tile")
+terrain.mask_nauvis_territory("dirt-1", "tile")
+terrain.mask_nauvis_territory("dirt-2", "tile")
+terrain.mask_nauvis_territory("dirt-3", "tile")
+terrain.mask_nauvis_territory("dirt-4", "tile")
+terrain.mask_nauvis_territory("dirt-5", "tile")
+terrain.mask_nauvis_territory("dirt-6", "tile")
+terrain.mask_nauvis_territory("dirt-7", "tile")
+terrain.mask_nauvis_territory("sand-1", "tile")
+terrain.mask_nauvis_territory("sand-2", "tile")
+terrain.mask_nauvis_territory("sand-3", "tile")
+terrain.mask_nauvis_territory("red-desert-0", "tile")
+terrain.mask_nauvis_territory("red-desert-1", "tile")
+terrain.mask_nauvis_territory("red-desert-2", "tile")
+terrain.mask_nauvis_territory("red-desert-3", "tile")
+-- terrain.mask_nauvis_territory("water", "tile")
+-- terrain.mask_nauvis_territory("deepwater", "tile")
 
 -- Remove nauvis cliffs from vulcanus_terrain
 data.raw["noise-expression"]["cliffiness_nauvis"].expression = "(main_cliffiness >= cliff_cutoff) * 10 + if(vulcanus_terrain, -inf, 0)"
@@ -178,13 +148,13 @@ data:extend
     -- Fix water coverage
     type = "noise-expression",
     name = "updated_water",
-    expression = "if(vulcano_coverage, -inf, water_base(0, 100))"
+    expression = "mask_nauvis_territory(water_base(0, 100))"
   },
   {
     -- Fix deepwater coverage
     type = "noise-expression",
     name = "updated_deepwater",
-    expression = "if(vulcano_coverage, -inf, water_base(-2, 200))"
+    expression = "mask_nauvis_territory(water_base(-2, 200))"
   },
 
   -- Noise functions
@@ -193,7 +163,7 @@ data:extend
     type = "noise-function",
     name = "mask_nauvis_territory",
     parameters = {"expression"},
-    expression = "mask_off_gleba_territory(mask_off_vulcano_terrain(expression))"
+    expression = "mask_off_aquilo_territory(mask_off_gleba_territory(mask_off_vulcano_terrain(expression)))"
   },
   {
     -- Mask all nauvis territory
@@ -201,9 +171,203 @@ data:extend
     name = "mask_off_nauvis_territory",
     parameters = {"expression"},
     expression = "if(mask_nauvis_territory(expression) < 0, expression, -inf)"
-  },  
+  },
 })
 
+--------------------------------------------------------------------------------
+-- MARK: Fix Aquilo related map gen settings
+--------------------------------------------------------------------------------
+
+-- START: Update map gen settings
+-- autoplace_controls
+data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["lithium_brine"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["fluorine_vent"] = {}
+
+-- tile settings
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["snow-flat"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["snow-crests"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["snow-lumpy"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["snow-patchy"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["ice-rough"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["ice-smooth"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["brash-ice"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["ammoniacal-ocean"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["ammoniacal-ocean-2"] = {}
+
+-- decorative settings
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["lithium-iceberg-medium"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["lithium-iceberg-small"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["lithium-iceberg-tiny"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["floating-iceberg-large"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["floating-iceberg-small"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["aqulio-ice-decal-blue"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["aqulio-snowy-decal"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["snow-drift-decal"] = {}
+
+-- entity settings
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["lithium-brine"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["fluorine-vent"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["lithium-iceberg-huge"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["lithium-iceberg-big"] = {}
+-- END: Update map gen settings
+
+-- START: Mask aquilo territory on all autoplace settings
+-- mask aquilo resources
+terrain.mask_aquilo_territory("lithium-brine", "resource")
+terrain.mask_aquilo_territory("fluorine-vent", "resource")
+
+-- mask aquilo tiles
+terrain.mask_aquilo_territory("snow-flat", "tile")
+terrain.mask_aquilo_territory("snow-crests", "tile")
+terrain.mask_aquilo_territory("snow-lumpy", "tile")
+terrain.mask_aquilo_territory("snow-patchy", "tile")
+terrain.mask_aquilo_territory("ice-rough", "tile")
+terrain.mask_aquilo_territory("ice-smooth", "tile")
+terrain.mask_aquilo_territory("brash-ice", "tile")
+
+-- mask aquilo decoratives
+terrain.mask_aquilo_territory("lithium-iceberg-medium", "optimized-decorative")
+terrain.mask_aquilo_territory("lithium-iceberg-small", "optimized-decorative")
+terrain.mask_aquilo_territory("lithium-iceberg-tiny", "optimized-decorative")
+terrain.mask_aquilo_territory("floating-iceberg-large", "optimized-decorative")
+terrain.mask_aquilo_territory("floating-iceberg-small", "optimized-decorative")
+terrain.mask_aquilo_territory("aqulio-ice-decal-blue", "optimized-decorative")
+terrain.mask_aquilo_territory("aqulio-snowy-decal", "optimized-decorative")
+terrain.mask_aquilo_territory("snow-drift-decal", "optimized-decorative")
+
+-- mask aquilo entities
+terrain.mask_aquilo_territory("lithium-iceberg-huge", "simple-entity")
+terrain.mask_aquilo_territory("lithium-iceberg-big", "simple-entity")
+-- END: Mask aquilo territory on all autoplace settings
+
+-- START: Update noise expressions
+-- check seed: 2292869786
+data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-10, 500) + 0.01 * (aux - 0.5))"
+data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-10, 500) - 0.01 * (aux - 0.5))"
+-- END: Update noise expressions
+
+-- New noise expressions and noise functions
+data:extend
+({
+  {
+    -- Create mask for aquilo territory
+    type = "noise-expression",
+    name = "aquilo_mask",
+    -- expression = "mask_off_vulcano_coverage(aquilo_base(0, 100))",
+    expression = "mask_off_vulcano_coverage(if(aquilo_base(0, 100) + north_offset > 0, 1, 0))",
+    -- expression = "if(aquilo_base(0, 100) + north_offset > 0, aquilo_base(0, 100), 0)",
+    -- "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
+    local_expressions = {
+      snow_border = "aquilo_base(0, 100)",
+      ice_border = "aquilo_base(-2, 200)",
+      ammonia = "aquilo_base(-10, 500)",
+      -- north_offset = "clamp((300 - y) / 30, 0, inf)"
+      north_offset = "- 300 - y"
+    }
+  },
+  {
+    type = "noise-expression",
+    name = "elevation_aquilo",
+    expression = "min(wlc_elevation, starting_lake)",
+    local_expressions =
+    {
+      elevation_magnitude = 20,
+      wlc_amplitude = 2,
+      -- TODO: add slider for ammoniacal lake size
+      amonia_level = "10 * log2(control:water:size)",
+      wlc_elevation = "max(aquilo_main - amonia_level * wlc_amplitude, starting_island)",
+      aquilo_main = "elevation_magnitude * (0.25 * aquilo_detail + 3 * aquilo_macro * starting_macro_multiplier)",
+      -- if most of the world is flooded make sure starting areas still have land
+      starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
+      starting_macro_multiplier = "clamp(distance * aquilo_segmentation_multiplier / 2000, 0, 1)",
+      starting_lake = "elevation_magnitude * (-3 + (starting_lake_distance + starting_lake_noise) / 8) / 8",
+      starting_lake_distance = "distance_from_nearest_point{x = x, y = y, points = starting_lake_positions, maximum_distance = 1024}",
+      starting_lake_noise = "quick_multioctave_noise_persistence{x = x,\z
+                                                                 y = y,\z
+                                                                 seed0 = map_seed + 1,\z
+                                                                 seed1 = 14,\z
+                                                                 input_scale = 1/8,\z
+                                                                 output_scale = 0.8,\z
+                                                                 octaves = 4,\z
+                                                                 octave_input_scale_multiplier = 0.5,\z
+                                                                 persistence = 0.68}"
+    }
+  },
+  {
+    type = "noise-expression",
+    name = "aquilo_detail", -- the small scale details with variable persistance for a mix of smooth and jagged coastline
+    expression = "variable_persistence_multioctave_noise{x = x,\z
+                                                         y = y,\z
+                                                         seed0 = map_seed + 1,\z
+                                                         seed1 = 600,\z
+                                                         input_scale = aquilo_segmentation_multiplier / 14,\z
+                                                         output_scale = 0.03,\z
+                                                         offset_x = 10000 / aquilo_segmentation_multiplier,\z
+                                                         octaves = 5,\z
+                                                         persistence = aquilo_persistance}"
+  },
+  {
+    type = "noise-expression",
+    name = "aquilo_segmentation_multiplier",
+    -- TODO: add slider for ammoniacal lake frequency
+    expression = "1.5 * control:water:frequency"
+  },
+  {
+    type = "noise-expression",
+    name = "aquilo_persistance",
+    expression = "clamp(amplitude_corrected_multioctave_noise{x = x,\z
+                                                              y = y,\z
+                                                              seed0 = map_seed + 1,\z
+                                                              seed1 = 500,\z
+                                                              octaves = 5,\z
+                                                              input_scale = aquilo_segmentation_multiplier / 2,\z
+                                                              offset_x = 10000 / aquilo_segmentation_multiplier,\z
+                                                              persistence = 0.7,\z
+                                                              amplitude = 0.5} + 0.55,\z
+                        0.5, 0.65)"
+  },
+  {
+    type = "noise-expression",
+    name = "aquilo_macro",
+    expression = "multioctave_noise{x = x,\z
+                                    y = y,\z
+                                    persistence = 0.6,\z
+                                    seed0 = map_seed + 1,\z
+                                    seed1 = 1000,\z
+                                    octaves = 2,\z
+                                    input_scale = aquilo_segmentation_multiplier / 1600}\z
+                  * max(0, multioctave_noise{x = x,\z
+                                    y = y,\z
+                                    persistence = 0.6,\z
+                                    seed0 = map_seed + 1,\z
+                                    seed1 = 1100,\z
+                                    octaves = 1,\z
+                                    input_scale = aquilo_segmentation_multiplier / 1600})",
+  },
+
+  -- Noise functions
+  {
+    -- aquilo lakes
+    type = "noise-function",
+    name = "aquilo_base",
+    parameters = {"max_elevation", "influence"},
+    expression = "if(max_elevation >= elevation_aquilo, influence * min(max_elevation - elevation_aquilo, 1), -inf)"
+  },
+  {
+    -- Mask all aquilo territory
+    type = "noise-function",
+    name = "mask_aquilo_territory",
+    parameters = {"expression"},
+    expression = "if(aquilo_mask, expression, -inf)"
+  },
+  {
+    -- Mask off all aquilo territory
+    type = "noise-function",
+    name = "mask_off_aquilo_territory",
+    parameters = {"expression"},
+    expression = "if(aquilo_mask, -inf, expression)"
+  },
+})
 --------------------------------------------------------------------------------
 -- MARK: Fix Gleba related map gen settings
 --------------------------------------------------------------------------------
@@ -340,140 +504,140 @@ data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["c
 
 -- START: Mask gleba territory on all autoplace settings
 -- mask gleba tiles
-mask_gleba_territory("natural-yumako-soil", "tile")
-mask_gleba_territory("natural-jellynut-soil", "tile")
-mask_gleba_territory("wetland-yumako", "tile")
-mask_gleba_territory("wetland-jellynut", "tile")
-mask_gleba_territory("wetland-blue-slime", "tile")
-mask_gleba_territory("wetland-light-green-slime", "tile")
-mask_gleba_territory("wetland-green-slime", "tile")
-mask_gleba_territory("wetland-light-dead-skin", "tile")
-mask_gleba_territory("wetland-dead-skin", "tile")
-mask_gleba_territory("wetland-pink-tentacle", "tile")
-mask_gleba_territory("wetland-red-tentacle", "tile")
-mask_gleba_territory("gleba-deep-lake", "tile")
-mask_gleba_territory("lowland-brown-blubber", "tile")
-mask_gleba_territory("lowland-olive-blubber", "tile")
-mask_gleba_territory("lowland-olive-blubber-2", "tile")
-mask_gleba_territory("lowland-olive-blubber-2", "tile")
-mask_gleba_territory("lowland-pale-green", "tile")
-mask_gleba_territory("lowland-cream-cauliflower", "tile")
-mask_gleba_territory("lowland-cream-cauliflower-2", "tile")
-mask_gleba_territory("lowland-dead-skin", "tile")
-mask_gleba_territory("lowland-dead-skin-2", "tile")
-mask_gleba_territory("lowland-cream-red", "tile")
-mask_gleba_territory("lowland-red-vein", "tile")
-mask_gleba_territory("lowland-red-vein-2", "tile")
-mask_gleba_territory("lowland-red-vein-3", "tile")
-mask_gleba_territory("lowland-red-vein-4", "tile")
-mask_gleba_territory("lowland-red-vein-dead", "tile")
-mask_gleba_territory("lowland-red-infection", "tile")
-mask_gleba_territory("midland-turquoise-bark", "tile")
-mask_gleba_territory("midland-turquoise-bark-2", "tile")
-mask_gleba_territory("midland-cracked-lichen", "tile")
-mask_gleba_territory("midland-cracked-lichen-dull", "tile")
-mask_gleba_territory("midland-cracked-lichen-dark", "tile")
-mask_gleba_territory("midland-yellow-crust", "tile")
-mask_gleba_territory("midland-yellow-crust-2", "tile")
-mask_gleba_territory("midland-yellow-crust-3", "tile")
-mask_gleba_territory("midland-yellow-crust-4", "tile")
-mask_gleba_territory("highland-dark-rock", "tile")
-mask_gleba_territory("highland-dark-rock-2", "tile")
-mask_gleba_territory("highland-yellow-rock", "tile")
-mask_gleba_territory("pit-rock", "tile")
+terrain.mask_gleba_territory("natural-yumako-soil", "tile")
+terrain.mask_gleba_territory("natural-jellynut-soil", "tile")
+terrain.mask_gleba_territory("wetland-yumako", "tile")
+terrain.mask_gleba_territory("wetland-jellynut", "tile")
+terrain.mask_gleba_territory("wetland-blue-slime", "tile")
+terrain.mask_gleba_territory("wetland-light-green-slime", "tile")
+terrain.mask_gleba_territory("wetland-green-slime", "tile")
+terrain.mask_gleba_territory("wetland-light-dead-skin", "tile")
+terrain.mask_gleba_territory("wetland-dead-skin", "tile")
+terrain.mask_gleba_territory("wetland-pink-tentacle", "tile")
+terrain.mask_gleba_territory("wetland-red-tentacle", "tile")
+terrain.mask_gleba_territory("gleba-deep-lake", "tile")
+terrain.mask_gleba_territory("lowland-brown-blubber", "tile")
+terrain.mask_gleba_territory("lowland-olive-blubber", "tile")
+terrain.mask_gleba_territory("lowland-olive-blubber-2", "tile")
+terrain.mask_gleba_territory("lowland-olive-blubber-2", "tile")
+terrain.mask_gleba_territory("lowland-pale-green", "tile")
+terrain.mask_gleba_territory("lowland-cream-cauliflower", "tile")
+terrain.mask_gleba_territory("lowland-cream-cauliflower-2", "tile")
+terrain.mask_gleba_territory("lowland-dead-skin", "tile")
+terrain.mask_gleba_territory("lowland-dead-skin-2", "tile")
+terrain.mask_gleba_territory("lowland-cream-red", "tile")
+terrain.mask_gleba_territory("lowland-red-vein", "tile")
+terrain.mask_gleba_territory("lowland-red-vein-2", "tile")
+terrain.mask_gleba_territory("lowland-red-vein-3", "tile")
+terrain.mask_gleba_territory("lowland-red-vein-4", "tile")
+terrain.mask_gleba_territory("lowland-red-vein-dead", "tile")
+terrain.mask_gleba_territory("lowland-red-infection", "tile")
+terrain.mask_gleba_territory("midland-turquoise-bark", "tile")
+terrain.mask_gleba_territory("midland-turquoise-bark-2", "tile")
+terrain.mask_gleba_territory("midland-cracked-lichen", "tile")
+terrain.mask_gleba_territory("midland-cracked-lichen-dull", "tile")
+terrain.mask_gleba_territory("midland-cracked-lichen-dark", "tile")
+terrain.mask_gleba_territory("midland-yellow-crust", "tile")
+terrain.mask_gleba_territory("midland-yellow-crust-2", "tile")
+terrain.mask_gleba_territory("midland-yellow-crust-3", "tile")
+terrain.mask_gleba_territory("midland-yellow-crust-4", "tile")
+terrain.mask_gleba_territory("highland-dark-rock", "tile")
+terrain.mask_gleba_territory("highland-dark-rock-2", "tile")
+terrain.mask_gleba_territory("highland-yellow-rock", "tile")
+terrain.mask_gleba_territory("pit-rock", "tile")
 
 -- mask gleba decoratives
-mask_gleba_territory("yellow-lettuce-lichen-1x1", "optimized-decorative")
-mask_gleba_territory("yellow-lettuce-lichen-3x3", "optimized-decorative")
-mask_gleba_territory("yellow-lettuce-lichen-6x6", "optimized-decorative")
-mask_gleba_territory("yellow-lettuce-lichen-cups-1x1", "optimized-decorative")
-mask_gleba_territory("yellow-lettuce-lichen-cups-3x3", "optimized-decorative")
-mask_gleba_territory("yellow-lettuce-lichen-cups-6x6", "optimized-decorative")
-mask_gleba_territory("green-lettuce-lichen-1x1", "optimized-decorative")
-mask_gleba_territory("green-lettuce-lichen-3x3", "optimized-decorative")
-mask_gleba_territory("green-lettuce-lichen-6x6", "optimized-decorative")
-mask_gleba_territory("green-lettuce-lichen-water-1x1", "optimized-decorative")
-mask_gleba_territory("green-lettuce-lichen-water-3x3", "optimized-decorative")
-mask_gleba_territory("green-lettuce-lichen-water-6x6", "optimized-decorative")
-mask_gleba_territory("honeycomb-fungus", "optimized-decorative")
-mask_gleba_territory("honeycomb-fungus-1x1", "optimized-decorative")
-mask_gleba_territory("honeycomb-fungus-decayed", "optimized-decorative")
-mask_gleba_territory("split-gill-1x1", "optimized-decorative")
-mask_gleba_territory("split-gill-2x2", "optimized-decorative")
-mask_gleba_territory("split-gill-dying-1x1", "optimized-decorative")
-mask_gleba_territory("split-gill-dying-2x2", "optimized-decorative")
-mask_gleba_territory("split-gill-red-1x1", "optimized-decorative")
-mask_gleba_territory("split-gill-red-2x2", "optimized-decorative")
-mask_gleba_territory("veins", "optimized-decorative")
-mask_gleba_territory("veins-small", "optimized-decorative")
-mask_gleba_territory("mycelium", "optimized-decorative")
-mask_gleba_territory("coral-water", "optimized-decorative")
-mask_gleba_territory("coral-land", "optimized-decorative")
-mask_gleba_territory("black-sceptre", "optimized-decorative")
-mask_gleba_territory("pink-phalanges", "optimized-decorative")
-mask_gleba_territory("pink-lichen-decal", "optimized-decorative")
-mask_gleba_territory("red-lichen-decal", "optimized-decorative")
-mask_gleba_territory("green-cup", "optimized-decorative")
-mask_gleba_territory("brown-cup", "optimized-decorative")
-mask_gleba_territory("blood-grape", "optimized-decorative")
-mask_gleba_territory("blood-grape-vibrant", "optimized-decorative")
-mask_gleba_territory("brambles", "optimized-decorative")
-mask_gleba_territory("polycephalum-slime", "optimized-decorative")
-mask_gleba_territory("polycephalum-balloon", "optimized-decorative")
-mask_gleba_territory("fuchsia-pita", "optimized-decorative")
-mask_gleba_territory("wispy-lichen", "optimized-decorative")
-mask_gleba_territory("grey-cracked-mud-decal", "optimized-decorative")
-mask_gleba_territory("barnacles-decal", "optimized-decorative")
-mask_gleba_territory("coral-stunted", "optimized-decorative")
-mask_gleba_territory("coral-stunted-grey", "optimized-decorative")
-mask_gleba_territory("nerve-roots-veins-dense", "optimized-decorative")
-mask_gleba_territory("nerve-roots-veins-sparse", "optimized-decorative")
-mask_gleba_territory("yellow-coral", "optimized-decorative")
-mask_gleba_territory("solo-barnacle", "optimized-decorative")
-mask_gleba_territory("curly-roots-orange", "optimized-decorative")
-mask_gleba_territory("knobbly-roots", "optimized-decorative")
-mask_gleba_territory("knobbly-roots-orange", "optimized-decorative")
-mask_gleba_territory("matches-small", "optimized-decorative")
-mask_gleba_territory("pale-lettuce-lichen-cups-1x1", "optimized-decorative")
-mask_gleba_territory("pale-lettuce-lichen-cups-3x3", "optimized-decorative")
-mask_gleba_territory("pale-lettuce-lichen-cups-6x6", "optimized-decorative")
-mask_gleba_territory("pale-lettuce-lichen-1x1", "optimized-decorative")
-mask_gleba_territory("pale-lettuce-lichen-3x3", "optimized-decorative")
-mask_gleba_territory("pale-lettuce-lichen-6x6", "optimized-decorative")
-mask_gleba_territory("pale-lettuce-lichen-water-1x1", "optimized-decorative")
-mask_gleba_territory("pale-lettuce-lichen-water-3x3", "optimized-decorative")
-mask_gleba_territory("pale-lettuce-lichen-water-6x6", "optimized-decorative")
-mask_gleba_territory("white-carpet-grass", "optimized-decorative")
-mask_gleba_territory("green-carpet-grass", "optimized-decorative")
-mask_gleba_territory("green-hairy-grass", "optimized-decorative")
-mask_gleba_territory("light-mud-decal", "optimized-decorative")
-mask_gleba_territory("dark-mud-decal", "optimized-decorative")
-mask_gleba_territory("cracked-mud-decal", "optimized-decorative")
-mask_gleba_territory("red-desert-bush", "optimized-decorative")
-mask_gleba_territory("white-desert-bush", "optimized-decorative")
-mask_gleba_territory("red-pita", "optimized-decorative")
-mask_gleba_territory("green-bush-mini", "optimized-decorative")
-mask_gleba_territory("green-croton", "optimized-decorative")
-mask_gleba_territory("green-pita", "optimized-decorative")
-mask_gleba_territory("green-pita-mini", "optimized-decorative")
-mask_gleba_territory("lichen-decal", "optimized-decorative")
-mask_gleba_territory("shroom-decal", "optimized-decorative")
+terrain.mask_gleba_territory("yellow-lettuce-lichen-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("yellow-lettuce-lichen-3x3", "optimized-decorative")
+terrain.mask_gleba_territory("yellow-lettuce-lichen-6x6", "optimized-decorative")
+terrain.mask_gleba_territory("yellow-lettuce-lichen-cups-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("yellow-lettuce-lichen-cups-3x3", "optimized-decorative")
+terrain.mask_gleba_territory("yellow-lettuce-lichen-cups-6x6", "optimized-decorative")
+terrain.mask_gleba_territory("green-lettuce-lichen-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("green-lettuce-lichen-3x3", "optimized-decorative")
+terrain.mask_gleba_territory("green-lettuce-lichen-6x6", "optimized-decorative")
+terrain.mask_gleba_territory("green-lettuce-lichen-water-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("green-lettuce-lichen-water-3x3", "optimized-decorative")
+terrain.mask_gleba_territory("green-lettuce-lichen-water-6x6", "optimized-decorative")
+terrain.mask_gleba_territory("honeycomb-fungus", "optimized-decorative")
+terrain.mask_gleba_territory("honeycomb-fungus-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("honeycomb-fungus-decayed", "optimized-decorative")
+terrain.mask_gleba_territory("split-gill-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("split-gill-2x2", "optimized-decorative")
+terrain.mask_gleba_territory("split-gill-dying-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("split-gill-dying-2x2", "optimized-decorative")
+terrain.mask_gleba_territory("split-gill-red-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("split-gill-red-2x2", "optimized-decorative")
+terrain.mask_gleba_territory("veins", "optimized-decorative")
+terrain.mask_gleba_territory("veins-small", "optimized-decorative")
+terrain.mask_gleba_territory("mycelium", "optimized-decorative")
+terrain.mask_gleba_territory("coral-water", "optimized-decorative")
+terrain.mask_gleba_territory("coral-land", "optimized-decorative")
+terrain.mask_gleba_territory("black-sceptre", "optimized-decorative")
+terrain.mask_gleba_territory("pink-phalanges", "optimized-decorative")
+terrain.mask_gleba_territory("pink-lichen-decal", "optimized-decorative")
+terrain.mask_gleba_territory("red-lichen-decal", "optimized-decorative")
+terrain.mask_gleba_territory("green-cup", "optimized-decorative")
+terrain.mask_gleba_territory("brown-cup", "optimized-decorative")
+terrain.mask_gleba_territory("blood-grape", "optimized-decorative")
+terrain.mask_gleba_territory("blood-grape-vibrant", "optimized-decorative")
+terrain.mask_gleba_territory("brambles", "optimized-decorative")
+terrain.mask_gleba_territory("polycephalum-slime", "optimized-decorative")
+terrain.mask_gleba_territory("polycephalum-balloon", "optimized-decorative")
+terrain.mask_gleba_territory("fuchsia-pita", "optimized-decorative")
+terrain.mask_gleba_territory("wispy-lichen", "optimized-decorative")
+terrain.mask_gleba_territory("grey-cracked-mud-decal", "optimized-decorative")
+terrain.mask_gleba_territory("barnacles-decal", "optimized-decorative")
+terrain.mask_gleba_territory("coral-stunted", "optimized-decorative")
+terrain.mask_gleba_territory("coral-stunted-grey", "optimized-decorative")
+terrain.mask_gleba_territory("nerve-roots-veins-dense", "optimized-decorative")
+terrain.mask_gleba_territory("nerve-roots-veins-sparse", "optimized-decorative")
+terrain.mask_gleba_territory("yellow-coral", "optimized-decorative")
+terrain.mask_gleba_territory("solo-barnacle", "optimized-decorative")
+terrain.mask_gleba_territory("curly-roots-orange", "optimized-decorative")
+terrain.mask_gleba_territory("knobbly-roots", "optimized-decorative")
+terrain.mask_gleba_territory("knobbly-roots-orange", "optimized-decorative")
+terrain.mask_gleba_territory("matches-small", "optimized-decorative")
+terrain.mask_gleba_territory("pale-lettuce-lichen-cups-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("pale-lettuce-lichen-cups-3x3", "optimized-decorative")
+terrain.mask_gleba_territory("pale-lettuce-lichen-cups-6x6", "optimized-decorative")
+terrain.mask_gleba_territory("pale-lettuce-lichen-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("pale-lettuce-lichen-3x3", "optimized-decorative")
+terrain.mask_gleba_territory("pale-lettuce-lichen-6x6", "optimized-decorative")
+terrain.mask_gleba_territory("pale-lettuce-lichen-water-1x1", "optimized-decorative")
+terrain.mask_gleba_territory("pale-lettuce-lichen-water-3x3", "optimized-decorative")
+terrain.mask_gleba_territory("pale-lettuce-lichen-water-6x6", "optimized-decorative")
+terrain.mask_gleba_territory("white-carpet-grass", "optimized-decorative")
+terrain.mask_gleba_territory("green-carpet-grass", "optimized-decorative")
+terrain.mask_gleba_territory("green-hairy-grass", "optimized-decorative")
+terrain.mask_gleba_territory("light-mud-decal", "optimized-decorative")
+terrain.mask_gleba_territory("dark-mud-decal", "optimized-decorative")
+terrain.mask_gleba_territory("cracked-mud-decal", "optimized-decorative")
+terrain.mask_gleba_territory("red-desert-bush", "optimized-decorative")
+terrain.mask_gleba_territory("white-desert-bush", "optimized-decorative")
+terrain.mask_gleba_territory("red-pita", "optimized-decorative")
+terrain.mask_gleba_territory("green-bush-mini", "optimized-decorative")
+terrain.mask_gleba_territory("green-croton", "optimized-decorative")
+terrain.mask_gleba_territory("green-pita", "optimized-decorative")
+terrain.mask_gleba_territory("green-pita-mini", "optimized-decorative")
+terrain.mask_gleba_territory("lichen-decal", "optimized-decorative")
+terrain.mask_gleba_territory("shroom-decal", "optimized-decorative")
 
 -- mask gleba entities
-mask_gleba_territory("iron-stromatolite", "simple-entity")
-mask_gleba_territory("copper-stromatolite", "simple-entity")
+terrain.mask_gleba_territory("iron-stromatolite", "simple-entity")
+terrain.mask_gleba_territory("copper-stromatolite", "simple-entity")
 
 -- Gleba trees
-mask_gleba_territory("cuttlepop", "tree")
-mask_gleba_territory("slipstack", "tree")
-mask_gleba_territory("funneltrunk", "tree")
-mask_gleba_territory("hairyclubnub", "tree")
-mask_gleba_territory("teflilly", "tree")
-mask_gleba_territory("lickmaw", "tree")
-mask_gleba_territory("stingfrond", "tree")
-mask_gleba_territory("boompuff", "tree")
-mask_gleba_territory("sunnycomb", "tree")
-mask_gleba_territory("water-cane", "tree")
+terrain.mask_gleba_territory("cuttlepop", "tree")
+terrain.mask_gleba_territory("slipstack", "tree")
+terrain.mask_gleba_territory("funneltrunk", "tree")
+terrain.mask_gleba_territory("hairyclubnub", "tree")
+terrain.mask_gleba_territory("teflilly", "tree")
+terrain.mask_gleba_territory("lickmaw", "tree")
+terrain.mask_gleba_territory("stingfrond", "tree")
+terrain.mask_gleba_territory("boompuff", "tree")
+terrain.mask_gleba_territory("sunnycomb", "tree")
+terrain.mask_gleba_territory("water-cane", "tree")
 -- END: Mask gleba territory on all autoplace settings
 
 -- START: Update noise expressions
@@ -581,40 +745,40 @@ data.raw.tile["lava-hot"].autoplace.probability_expression = "lava_hot_mountains
 
 -- START: Mask vulcanus territory on all autoplace settings
 -- Mask decoratives close to vulcano
-mask_vulcano_coverage("vulcanus-chimney", "simple-entity")
-mask_vulcano_coverage("vulcanus-chimney-faded", "simple-entity")
-mask_vulcano_coverage("vulcanus-chimney-cold", "simple-entity")
-mask_vulcano_coverage("vulcanus-chimney-short", "simple-entity")
-mask_vulcano_coverage("vulcanus-chimney-truncated", "simple-entity")
-mask_vulcano_coverage("huge-volcanic-rock", "simple-entity")
-mask_vulcano_coverage("big-volcanic-rock", "simple-entity")
+terrain.mask_vulcano_coverage("vulcanus-chimney", "simple-entity")
+terrain.mask_vulcano_coverage("vulcanus-chimney-faded", "simple-entity")
+terrain.mask_vulcano_coverage("vulcanus-chimney-cold", "simple-entity")
+terrain.mask_vulcano_coverage("vulcanus-chimney-short", "simple-entity")
+terrain.mask_vulcano_coverage("vulcanus-chimney-truncated", "simple-entity")
+terrain.mask_vulcano_coverage("huge-volcanic-rock", "simple-entity")
+terrain.mask_vulcano_coverage("big-volcanic-rock", "simple-entity")
 
 -- Mask decoratives close to vulcano terrain
-mask_vulcano_terrain("vulcanus-rock-decal-large", "optimized-decorative")
-mask_vulcano_terrain("vulcanus-crack-decal", "optimized-decorative")
-mask_vulcano_terrain("vulcanus-crack-decal-large", "optimized-decorative")
-mask_vulcano_terrain("vulcanus-crack-decal-huge-warm", "optimized-decorative")
-mask_vulcano_terrain("vulcanus-crack-decal-warm", "optimized-decorative")
-mask_vulcano_terrain("calcite-stain", "optimized-decorative")
-mask_vulcano_terrain("calcite-stain-small", "optimized-decorative")
-mask_vulcano_terrain("sulfur-stain", "optimized-decorative")
-mask_vulcano_terrain("sulfur-stain-small", "optimized-decorative")
-mask_vulcano_terrain("sulfuric-acid-puddle", "optimized-decorative")
-mask_vulcano_terrain("sulfuric-acid-puddle-small", "optimized-decorative")
-mask_vulcano_terrain("crater-small", "optimized-decorative")
-mask_vulcano_terrain("crater-large", "optimized-decorative")
-mask_vulcano_terrain("pumice-relief-decal", "optimized-decorative")
-mask_vulcano_terrain("vulcanus-sand-decal", "optimized-decorative")
-mask_vulcano_terrain("vulcanus-dune-decal", "optimized-decorative")
-mask_vulcano_terrain("waves-decal", "optimized-decorative")
-mask_vulcano_terrain("medium-volcanic-rock", "optimized-decorative")
-mask_vulcano_terrain("small-volcanic-rock", "optimized-decorative")
-mask_vulcano_terrain("tiny-volcanic-rock", "optimized-decorative")
-mask_vulcano_terrain("tiny-rock-cluster", "optimized-decorative")
-mask_vulcano_terrain("small-sulfur-rock", "optimized-decorative")
-mask_vulcano_terrain("tiny-sulfur-rock", "optimized-decorative")
-mask_vulcano_terrain("sulfur-rock-cluster", "optimized-decorative")
-mask_vulcano_terrain("vulcanus-lava-fire", "optimized-decorative")
+terrain.mask_vulcano_terrain("vulcanus-rock-decal-large", "optimized-decorative")
+terrain.mask_vulcano_terrain("vulcanus-crack-decal", "optimized-decorative")
+terrain.mask_vulcano_terrain("vulcanus-crack-decal-large", "optimized-decorative")
+terrain.mask_vulcano_terrain("vulcanus-crack-decal-huge-warm", "optimized-decorative")
+terrain.mask_vulcano_terrain("vulcanus-crack-decal-warm", "optimized-decorative")
+terrain.mask_vulcano_terrain("calcite-stain", "optimized-decorative")
+terrain.mask_vulcano_terrain("calcite-stain-small", "optimized-decorative")
+terrain.mask_vulcano_terrain("sulfur-stain", "optimized-decorative")
+terrain.mask_vulcano_terrain("sulfur-stain-small", "optimized-decorative")
+terrain.mask_vulcano_terrain("sulfuric-acid-puddle", "optimized-decorative")
+terrain.mask_vulcano_terrain("sulfuric-acid-puddle-small", "optimized-decorative")
+terrain.mask_vulcano_terrain("crater-small", "optimized-decorative")
+terrain.mask_vulcano_terrain("crater-large", "optimized-decorative")
+terrain.mask_vulcano_terrain("pumice-relief-decal", "optimized-decorative")
+terrain.mask_vulcano_terrain("vulcanus-sand-decal", "optimized-decorative")
+terrain.mask_vulcano_terrain("vulcanus-dune-decal", "optimized-decorative")
+terrain.mask_vulcano_terrain("waves-decal", "optimized-decorative")
+terrain.mask_vulcano_terrain("medium-volcanic-rock", "optimized-decorative")
+terrain.mask_vulcano_terrain("small-volcanic-rock", "optimized-decorative")
+terrain.mask_vulcano_terrain("tiny-volcanic-rock", "optimized-decorative")
+terrain.mask_vulcano_terrain("tiny-rock-cluster", "optimized-decorative")
+terrain.mask_vulcano_terrain("small-sulfur-rock", "optimized-decorative")
+terrain.mask_vulcano_terrain("tiny-sulfur-rock", "optimized-decorative")
+terrain.mask_vulcano_terrain("sulfur-rock-cluster", "optimized-decorative")
+terrain.mask_vulcano_terrain("vulcanus-lava-fire", "optimized-decorative")
 -- END: Mask vulcanus territory on all autoplace settings
 
 -- START: Update noise expressions

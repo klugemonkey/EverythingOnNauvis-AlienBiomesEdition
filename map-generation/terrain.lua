@@ -223,7 +223,7 @@ terrain.mask_aquilo_territory("snow-lumpy", "tile")
 terrain.mask_aquilo_territory("snow-patchy", "tile")
 terrain.mask_aquilo_territory("ice-rough", "tile")
 terrain.mask_aquilo_territory("ice-smooth", "tile")
-terrain.mask_aquilo_territory("brash-ice", "tile")
+-- terrain.mask_aquilo_territory("brash-ice", "tile")
 
 -- mask aquilo decoratives
 terrain.mask_aquilo_territory("lithium-iceberg-medium", "optimized-decorative")
@@ -242,8 +242,13 @@ terrain.mask_aquilo_territory("lithium-iceberg-big", "simple-entity")
 
 -- START: Update noise expressions
 -- check seed: 2292869786
-data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-10, 500) + 0.01 * (aux - 0.5))"
-data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-10, 500) - 0.01 * (aux - 0.5))"
+-- data.raw.tile["snow-flat"].autoplace.probability_expression = "mask_aquilo_territory(snow_flat + if(updated_water > aquilo_amonia, 1, 0))"
+-- data.raw.tile["ice-rough"].autoplace.probability_expression = "mask_aquilo_territory(ice_rough + if(updated_water > aquilo_amonia, 1, 0))"
+-- data.raw.tile["ice-smooth"].autoplace.probability_expression = "mask_aquilo_territory(ice_smooth + if(updated_water > aquilo_amonia, 1, 0))"
+data.raw.tile["brash-ice"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-4.5, 400))"
+
+data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_amonia + 0.01 * (aux - 0.5))"
+data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_amonia - 0.01 * (aux - 0.5))"
 -- END: Update noise expressions
 
 -- New noise expressions and noise functions
@@ -253,17 +258,26 @@ data:extend
     -- Create mask for aquilo territory
     type = "noise-expression",
     name = "aquilo_mask",
-    -- expression = "mask_off_vulcano_coverage(aquilo_base(0, 100))",
-    expression = "mask_off_vulcano_coverage(if(aquilo_base(0, 100) + north_offset > 0, 1, 0))",
-    -- expression = "if(aquilo_base(0, 100) + north_offset > 0, aquilo_base(0, 100), 0)",
+    -- expression = "mask_off_vulcano_coverage(aquilo_land)",
+    expression = "mask_off_vulcano_coverage(if(nauvis_water_overlap > 0, if(aquilo_land / 1000 + north_offset > 0, 1, 0), 0))",
+    -- expression = "if(aquilo_land + north_offset > 0, aquilo_land, 0)",
     -- "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
     local_expressions = {
-      snow_border = "aquilo_base(0, 100)",
-      ice_border = "aquilo_base(-2, 200)",
-      ammonia = "aquilo_base(-10, 500)",
-      -- north_offset = "clamp((300 - y) / 30, 0, inf)"
-      north_offset = "- 300 - y"
+      north_offset = "clamp((- 300 - y) / 30, -inf, 0)", -- TODO: Add setting where aquilo is only in the north
+      -- nauvis_water_overlap = "if(water_base(0, 100) < 0 | aquilo_land > 0, inf, 0)",
+      -- nauvis_water_overlap = "if(aquilo_land > 0, inf, 0)"
+      nauvis_water_overlap = 1
     }
+  },
+  {
+    type = "noise-expression",
+    name = "aquilo_land",
+    expression = "aquilo_base(0, 100)"
+  },
+  {
+    type = "noise-expression",
+    name = "aquilo_amonia",
+    expression = "aquilo_base(-5, 400)"
   },
   {
     type = "noise-expression",
@@ -275,7 +289,7 @@ data:extend
       wlc_amplitude = 2,
       -- TODO: add slider for ammoniacal lake size
       amonia_level = "10 * log2(control:water:size)",
-      wlc_elevation = "max(aquilo_main - amonia_level * wlc_amplitude, starting_island)",
+      wlc_elevation = "max(aquilo_main - amonia_level * wlc_amplitude + nauvis_water_overlap, starting_island)",
       aquilo_main = "elevation_magnitude * (0.25 * aquilo_detail + 3 * aquilo_macro * starting_macro_multiplier)",
       -- if most of the world is flooded make sure starting areas still have land
       starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
@@ -290,7 +304,8 @@ data:extend
                                                                  output_scale = 0.8,\z
                                                                  octaves = 4,\z
                                                                  octave_input_scale_multiplier = 0.5,\z
-                                                                 persistence = 0.68}"
+                                                                 persistence = 0.68}",
+      nauvis_water_overlap = "if(water_base(0, 100) + aquilo_main > 0, -water_base(0, 100), 0)"
     }
   },
   {
@@ -664,7 +679,7 @@ data:extend
       grass_4 = util.generate_default_name("grass-4"),
       grass = "grass_1 + grass_2 + grass_3 + grass_4",
       starting_island = "20 * (2.5 - distance / 300)",
-      south_offset = "clamp((y - 300) / 30, -15, 0)"
+      south_offset = "clamp((y - 300) / 30, -15, 0)"  -- Add setting where gleba is only in the south
     }
   },
 

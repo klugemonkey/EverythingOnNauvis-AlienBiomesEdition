@@ -261,31 +261,24 @@ data:extend
     -- Create mask for aquilo territory
     type = "noise-expression",
     name = "aquilo_mask",
-    -- expression = "mask_off_vulcano_coverage(aquilo_land)",
-    expression = "mask_off_vulcano_coverage(if(nauvis_water_overlap > 0, if(aquilo_land / 1000 + north_offset > 0, 1, 0), 0))",
-    -- expression = "if(aquilo_land + north_offset > 0, aquilo_land, 0)",
-    -- "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
-    local_expressions = {
-      north_offset = "clamp((- 300 - y) / 30, -inf, 0)",
-      -- nauvis_water_overlap = "if(water_base(0, 100) < 0 | aquilo_land > 0, inf, 0)",
-      -- nauvis_water_overlap = "if(aquilo_land > 0, inf, 0)"
-      nauvis_water_overlap = 1
-    }
+    expression = "if(aquilo_land > -1, 1, 0)",
   },
   {
     type = "noise-expression",
     name = "aquilo_land",
-    expression = "aquilo_base(0, 100)"
+    expression = "mask_off_vulcano_coverage(aquilo_base(0, 100))"
   },
   {
     type = "noise-expression",
     name = "aquilo_amonia",
-    expression = "aquilo_base(-5, 400)"
+    expression = "mask_off_vulcano_coverage(aquilo_base(-5, 400))"
   },
   {
     type = "noise-expression",
     name = "elevation_aquilo",
-    expression = "min(wlc_elevation, starting_lake)",
+    expression = "wlc_elevation + north_offset",  -- "if(max(wlc_elevation, wlc_elevation + north_offset) > 0, wlc_elevation, 0)",
+    -- expression = "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
+    -- if(min(grass, grass - starting_island) > -10
     local_expressions =
     {
       elevation_magnitude = 20,
@@ -297,18 +290,8 @@ data:extend
       -- if most of the world is flooded make sure starting areas still have land
       starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
       starting_macro_multiplier = "clamp(distance * aquilo_segmentation_multiplier / 2000, 0, 1)",
-      starting_lake = "elevation_magnitude * (-3 + (starting_lake_distance + starting_lake_noise) / 8) / 8",
-      starting_lake_distance = "distance_from_nearest_point{x = x, y = y, points = starting_lake_positions, maximum_distance = 1024}",
-      starting_lake_noise = "quick_multioctave_noise_persistence{x = x,\z
-                                                                 y = y,\z
-                                                                 seed0 = map_seed + 1,\z
-                                                                 seed1 = 14,\z
-                                                                 input_scale = 1/8,\z
-                                                                 output_scale = 0.8,\z
-                                                                 octaves = 4,\z
-                                                                 octave_input_scale_multiplier = 0.5,\z
-                                                                 persistence = 0.68}",
-      -- nauvis_water_overlap = "if(water_base(0, 100) > 0, -water_base(0, 100), 0)"
+      -- north_offset = "clamp((y + 300) / 30, 0, 15)"
+      north_offset = "y"
     }
   },
   {
@@ -674,7 +657,6 @@ data:extend
     type = "noise-expression",
     name = "gleba_mask",
     expression = "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
-    -- expression = "if(grass - water_base(0, 100) < 1, inf, 0)", -- puddles of gleba along lake borders
     local_expressions = {
       grass_1 = util.generate_default_name("grass-1"),
       grass_2 = util.generate_default_name("grass-2"),
@@ -682,7 +664,7 @@ data:extend
       grass_4 = util.generate_default_name("grass-4"),
       grass = "grass_1 + grass_2 + grass_3 + grass_4",
       starting_island = "20 * (2.5 - distance / 300)",
-      south_offset = "clamp((y - 300) / 30, -15, 0)"
+      south_offset = "clamp((y - 500) / 30, -15, 0)"
     }
   },
 

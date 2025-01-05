@@ -246,9 +246,9 @@ data.raw.tile["snow-flat"].autoplace.probability_expression = "mask_aquilo_terri
 -- data.raw.tile["snow-crests"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
 -- data.raw.tile["snow-lumpy"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
 -- data.raw.tile["snow-patchy"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
-data.raw.tile["ice-rough"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-3.5, 200))"
-data.raw.tile["ice-smooth"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-4, 200))"
-data.raw.tile["brash-ice"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-4.5, 200))"
+data.raw.tile["ice-rough"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_amonia_depth + 1.5, 200))"
+data.raw.tile["ice-smooth"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_amonia_depth + 1, 200))"
+data.raw.tile["brash-ice"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_amonia_depth + 0.5, 200))"
 
 data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_amonia + 0.01 * (aux - 0.5))"
 data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_amonia - 0.01 * (aux - 0.5))"
@@ -266,17 +266,30 @@ data:extend
   {
     type = "noise-expression",
     name = "aquilo_land",
-    expression = "mask_off_vulcano_coverage(aquilo_base(-1, 100))"
+    expression = "mask_off_vulcano_coverage(aquilo_base(aquilo_max_elevation, 100))"
+  },
+  {
+    type = "noise-expression",
+    name = "aquilo_max_elevation",
+    expression = "-1"
   },
   {
     type = "noise-expression",
     name = "aquilo_amonia",
-    expression = "mask_off_vulcano_coverage(aquilo_base(-5, 200))"
+    expression = "mask_off_vulcano_coverage(aquilo_base(aquilo_amonia_depth, 200))"
+  },
+  {
+    type = "noise-expression",
+    name = "aquilo_amonia_depth",
+    expression = "aquilo_max_elevation - 4"
   },
   {
     type = "noise-expression",
     name = "elevation_aquilo",
-    expression = "max(wlc_elevation, north_offset)", -- "wlc_elevation + north_offset",  -- 
+    expression = "min(offset_elevation, 0)",
+    -- expression = "if(wlc_elevation + north_offset < aquilo_max_elevation,\z
+    --                  wlc_elevation,\z
+    --                  if(wlc_elevation + north_offset > aquilo_amonia_depth - 1, wlc_elevation, -inf))",  -- "if(wlc_elevation + north_offset < aquilo_max_elevation, if(wlc_elevation + north_offset > aquilo_amonia_depth + 0.5, wlc_elevation, -inf), inf)", -- "if(max(wlc_elevation, north_offset) < 10, wlc_elevation, - inf)", -- "wlc_elevation + north_offset",  -- 
     -- expression = "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
     -- if(min(grass, grass - starting_island) > -10
     local_expressions =
@@ -286,12 +299,13 @@ data:extend
       -- TODO: add slider for ammoniacal lake size
       amonia_level = "10 * log2(control:water:size)",
       wlc_elevation = "max(aquilo_main - amonia_level * wlc_amplitude, starting_island)",
+      offset_elevation = "wlc_elevation + north_offset",
       aquilo_main = "elevation_magnitude * (0.25 * aquilo_detail + 3 * aquilo_macro * starting_macro_multiplier)",
       -- if most of the world is flooded make sure starting areas still have land
       starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
       starting_macro_multiplier = "clamp(distance * aquilo_segmentation_multiplier / 2000, 0, 1)",
       -- north_offset = "clamp((y + 300) / 30, 0, 15)"
-      north_offset = "(y + 300) / 30" -- "clamp(y, 0, 15)"
+      north_offset = "max(0, (y + 300) / 30)" -- "clamp((y + 300) / 30, -inf, inf)" -- "clamp(y, 0, 15)"
     }
   },
   {
@@ -375,7 +389,7 @@ data:extend
 
 -- START: Update map gen settings
 -- autoplace_controls
--- data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["gleba_plants"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["gleba_plants"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["gleba_water"] = {}
 
 -- tile settings

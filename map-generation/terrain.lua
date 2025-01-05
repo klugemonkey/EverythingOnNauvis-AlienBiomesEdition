@@ -302,7 +302,7 @@ data:extend
   {
     type = "noise-expression",
     name = "elevation_aquilo",
-    expression = "wlc_elevation",
+    expression = "if(wlc_elevation > factorio_base_aquilo_elevation, wlc_elevation, min(factorio_base_aquilo_elevation, -1.1))",
     local_expressions =
     {
       elevation_magnitude = 20,
@@ -315,6 +315,62 @@ data:extend
       starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
       starting_macro_multiplier = "clamp(distance * aquilo_segmentation_multiplier / 2000, 0, 1)",
       north_bias = "aquilo_main + elevation_magnitude * (2.5 + y * segmentation_multiplier / 200)",
+      -- formation_clumped = "-25\z
+      --                     + 12 * max(aquilo_island_peaks, random_island_peaks)\z
+      --                     + 15 * tri_crack",
+      -- formation_broken  = "-20\z
+      --                     + 8 * max(aquilo_island_peaks * 1.1, min(0., random_island_peaks - 0.2))\z
+      --                     + 13 * (pow(voronoi_large * max(0, voronoi_large_cell * 1.2 - 0.2) + 0.5 * voronoi_small * max(0, aux + 0.1), 0.5))",
+    }
+  },
+  {
+    type = "noise-expression",
+    name = "factorio_base_aquilo_elevation",
+    --intended_property = "elevation",
+    expression = "lerp(blended, maxed, 0.4)",
+    local_expressions = {
+      maxed = "max(formation_clumped, formation_broken)",
+      blended = "lerp(formation_clumped, formation_broken, 0.4)",
+      formation_clumped = "-25\z
+                          + 12 * max(aquilo_island_peaks, random_island_peaks)\z
+                          + 15 * tri_crack",
+      formation_broken  = "-20\z
+                          + 8 * max(aquilo_island_peaks * 1.1, min(0., random_island_peaks - 0.2))\z
+                          + 13 * (pow(voronoi_large * max(0, voronoi_large_cell * 1.2 - 0.2) + 0.5 * voronoi_small * max(0, aux + 0.1), 0.5))",
+      random_island_peaks = "abs(amplitude_corrected_multioctave_noise{x = x,\z
+                                                                  y = y,\z
+                                                                  seed0 = map_seed,\z
+                                                                  seed1 = 1000,\z
+                                                                  input_scale = segmentation_mult / 1.2,\z
+                                                                  offset_x = -10000,\z
+                                                                  octaves = 6,\z
+                                                                  persistence = 0.8,\z
+                                                                  amplitude = 1})",
+      voronoi_large = "voronoi_facet_noise{   x = x + aquilo_wobble_x * 2,\z
+                                              y = y + aquilo_wobble_y * 2,\z
+                                              seed0 = map_seed,\z
+                                              seed1 = 'aquilo-cracks',\z
+                                              grid_size = 24,\z
+                                              distance_type = 'euclidean',\z
+                                              jitter = 1}",
+      voronoi_large_cell = "voronoi_cell_id{  x = x + aquilo_wobble_x * 2,\z
+                                              y = y + aquilo_wobble_y * 2,\z
+                                              seed0 = map_seed,\z
+                                              seed1 = 'aquilo-cracks',\z
+                                              grid_size = 24,\z
+                                              distance_type = 'euclidean',\z
+                                              jitter = 1}",
+      voronoi_small  = "voronoi_facet_noise{   x = x + aquilo_wobble_x * 2,\z
+                                              y = y + aquilo_wobble_y * 2,\z
+                                              seed0 = map_seed,\z
+                                              seed1 = 'aquilo-cracks',\z
+                                              grid_size = 10,\z
+                                              distance_type = 'euclidean',\z
+                                              jitter = 1}",
+      tri_crack = "min(aquilo_simple_billows{seed1 = 2000, octaves = 3, input_scale = segmentation_mult / 1.5},\z
+                       aquilo_simple_billows{seed1 = 3000, octaves = 3, input_scale = segmentation_mult / 1.2},\z
+                       aquilo_simple_billows{seed1 = 4000, octaves = 3, input_scale = segmentation_mult})",
+      segmentation_mult = "aquilo_segmentation_multiplier / 25",
     }
   },
   {

@@ -246,9 +246,9 @@ data.raw.tile["snow-flat"].autoplace.probability_expression = "mask_aquilo_terri
 -- data.raw.tile["snow-crests"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
 -- data.raw.tile["snow-lumpy"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
 -- data.raw.tile["snow-patchy"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
-data.raw.tile["ice-rough"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-3.5, 400))"
-data.raw.tile["ice-smooth"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-4, 400))"
-data.raw.tile["brash-ice"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-4.5, 400))"
+data.raw.tile["ice-rough"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-3.5, 200))"
+data.raw.tile["ice-smooth"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-4, 200))"
+data.raw.tile["brash-ice"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(-4.5, 200))"
 
 data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_amonia + 0.01 * (aux - 0.5))"
 data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_amonia - 0.01 * (aux - 0.5))"
@@ -266,17 +266,17 @@ data:extend
   {
     type = "noise-expression",
     name = "aquilo_land",
-    expression = "mask_off_vulcano_coverage(aquilo_base(0, 100))"
+    expression = "mask_off_vulcano_coverage(aquilo_base(-1, 100))"
   },
   {
     type = "noise-expression",
     name = "aquilo_amonia",
-    expression = "mask_off_vulcano_coverage(aquilo_base(-5, 400))"
+    expression = "mask_off_vulcano_coverage(aquilo_base(-5, 200))"
   },
   {
     type = "noise-expression",
     name = "elevation_aquilo",
-    expression = "wlc_elevation + north_offset",  -- "if(max(wlc_elevation, wlc_elevation + north_offset) > 0, wlc_elevation, 0)",
+    expression = "max(wlc_elevation, north_offset)", -- "wlc_elevation + north_offset",  -- 
     -- expression = "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
     -- if(min(grass, grass - starting_island) > -10
     local_expressions =
@@ -291,7 +291,7 @@ data:extend
       starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
       starting_macro_multiplier = "clamp(distance * aquilo_segmentation_multiplier / 2000, 0, 1)",
       -- north_offset = "clamp((y + 300) / 30, 0, 15)"
-      north_offset = "y"
+      north_offset = "(y + 300) / 30" -- "clamp(y, 0, 15)"
     }
   },
   {
@@ -375,7 +375,7 @@ data:extend
 
 -- START: Update map gen settings
 -- autoplace_controls
-data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["gleba_plants"] = {}
+-- data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["gleba_plants"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["gleba_water"] = {}
 
 -- tile settings

@@ -22,6 +22,14 @@ function terrain.mask_off_aquilo_territory(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_aquilo_territory(" .. util.generate_default_name(decorative) .. ")"
 end
 
+function terrain.mask_amonia_ocean(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_amonia_ocean(" .. util.generate_default_name(decorative) .. ")"
+end
+
+function terrain.mask_off_amonia_ocean(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_amonia_ocean(" .. util.generate_default_name(decorative) .. ")"
+end
+
 function terrain.mask_gleba_territory(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_gleba_territory(" .. util.generate_default_name(decorative) .. ")"
 end
@@ -69,6 +77,7 @@ data.raw.tile["deepwater"].autoplace = {
   probability_expression = "updated_deepwater"
 }
 
+-- START: Mask nauvis territory on all autoplace settings
 -- Remove nauvis trees from vulcanus_terrain
 -- data.raw["noise-expression"]["trees_forest_path_cutout"].expression = "mask_off_vulcano_terrain(min(nauvis_bridge_paths, nauvis_hills_paths, forest_paths))"
 data.raw["noise-expression"]["trees_forest_path_cutout_faded"].expression = "mask_nauvis_territory(trees_forest_path_cutout * 0.3 + tree_small_noise * 0.1)"
@@ -137,6 +146,7 @@ terrain.mask_nauvis_territory("red-desert-2", "tile")
 terrain.mask_nauvis_territory("red-desert-3", "tile")
 -- terrain.mask_nauvis_territory("water", "tile")
 -- terrain.mask_nauvis_territory("deepwater", "tile")
+-- END: Mask nauvis territory on all autoplace settings
 
 -- Remove nauvis cliffs from vulcanus_terrain
 data.raw["noise-expression"]["cliffiness_nauvis"].expression = "(main_cliffiness >= cliff_cutoff) * 10 + if(vulcanus_terrain, -inf, 0)"
@@ -261,7 +271,13 @@ data:extend
     -- Create mask for aquilo territory
     type = "noise-expression",
     name = "aquilo_mask",
-    expression = "if(aquilo_land > -1, 1, 0)",
+    expression = "aquilo_land > -1",
+  },
+  {
+    -- Create mask for aquilo territory
+    type = "noise-expression",
+    name = "amonia_mask",
+    expression = "aquilo_amonia > -1",
   },
   {
     type = "noise-expression",
@@ -286,26 +302,19 @@ data:extend
   {
     type = "noise-expression",
     name = "elevation_aquilo",
-    expression = "min(offset_elevation, 0)",
-    -- expression = "if(wlc_elevation + north_offset < aquilo_max_elevation,\z
-    --                  wlc_elevation,\z
-    --                  if(wlc_elevation + north_offset > aquilo_amonia_depth - 1, wlc_elevation, -inf))",  -- "if(wlc_elevation + north_offset < aquilo_max_elevation, if(wlc_elevation + north_offset > aquilo_amonia_depth + 0.5, wlc_elevation, -inf), inf)", -- "if(max(wlc_elevation, north_offset) < 10, wlc_elevation, - inf)", -- "wlc_elevation + north_offset",  -- 
-    -- expression = "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
-    -- if(min(grass, grass - starting_island) > -10
+    expression = "wlc_elevation",
     local_expressions =
     {
       elevation_magnitude = 20,
       wlc_amplitude = 2,
       -- TODO: add slider for ammoniacal lake size
       amonia_level = "10 * log2(control:water:size)",
-      wlc_elevation = "max(aquilo_main - amonia_level * wlc_amplitude, starting_island)",
-      offset_elevation = "wlc_elevation + north_offset",
+      wlc_elevation = "max(aquilo_main - amonia_level * wlc_amplitude, starting_island, north_bias)",
       aquilo_main = "elevation_magnitude * (0.25 * aquilo_detail + 3 * aquilo_macro * starting_macro_multiplier)",
       -- if most of the world is flooded make sure starting areas still have land
       starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
       starting_macro_multiplier = "clamp(distance * aquilo_segmentation_multiplier / 2000, 0, 1)",
-      -- north_offset = "clamp((y + 300) / 30, 0, 15)"
-      north_offset = "max(0, (y + 300) / 30)" -- "clamp((y + 300) / 30, -inf, inf)" -- "clamp(y, 0, 15)"
+      north_bias = "aquilo_main + elevation_magnitude * (2.5 + y * segmentation_multiplier / 200)",
     }
   },
   {
@@ -381,6 +390,20 @@ data:extend
     name = "mask_off_aquilo_territory",
     parameters = {"expression"},
     expression = "if(aquilo_mask, -inf, expression)"
+  },
+  {
+    -- Mask all amonia ocean territory
+    type = "noise-function",
+    name = "mask_amonia_ocean",
+    parameters = {"expression"},
+    expression = "if(amonia_mask, expression, -inf)"
+  },
+  {
+    -- Mask off all amonia ocean territory
+    type = "noise-function",
+    name = "mask_off_amonia_ocean",
+    parameters = {"expression"},
+    expression = "if(amonia_mask, -inf, expression)"
   },
 })
 --------------------------------------------------------------------------------
@@ -910,3 +933,5 @@ data:extend
   },
 })
 -- END: Update noise expressions
+
+return terrain

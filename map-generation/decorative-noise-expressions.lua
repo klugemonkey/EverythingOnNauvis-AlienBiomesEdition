@@ -14,6 +14,14 @@ end
 
 data:extend({
   -- START: Nauvis
+  -- Nauvis resources
+  noise_expression("iron-ore", "resource"),
+  noise_expression("copper-ore", "resource"),
+  noise_expression("stone", "resource"),
+  noise_expression("coal", "resource"),
+  noise_expression("uranium-ore", "resource"),
+  noise_expression("crude-oil", "resource"),
+
   -- Nauvis tiles
   noise_expression("grass-1", "tile"),
   noise_expression("grass-2", "tile"),

@@ -1,7 +1,8 @@
 Config changes
-  - Add setting for enable/disable demolishers
+  + Add setting for enable/disable demolishers (Already done by default)
   + Add setting for vulcano size
   + Add setting for vulcano frequenzy
+  - Add space connection from nauvis to solar system edge
 
 Cosmetic changes
   - Add vulcanus / gleba cliffs. I think this is not easy to do...
@@ -15,3 +16,4 @@ Low Prio:
   + remove north_offset and south_offset for aquilo and gleba and replace them for a similar function like starting_island local expression
   - Add setting for having north and south pole (aquilo at north and gleba at south)
   + for masks use code like "a > b" instead "if(a > b, 1, 0)"
+  - Update masks such that their values are only true or false

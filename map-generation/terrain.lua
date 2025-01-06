@@ -54,8 +54,7 @@ function terrain.mask_off_vulcano_terrain(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_vulcano_terrain(" .. util.generate_default_name(decorative) .. ")"
 end
 
-data:extend
-({
+data:extend({
   -- Noise expressions
   {
     -- Define starting radius
@@ -149,10 +148,9 @@ terrain.mask_nauvis_territory("red-desert-3", "tile")
 -- END: Mask nauvis territory on all autoplace settings
 
 -- Remove nauvis cliffs from vulcanus_terrain
-data.raw["noise-expression"]["cliffiness_nauvis"].expression = "(main_cliffiness >= cliff_cutoff) * 10 + if(vulcanus_terrain, -inf, 0)"
+data.raw["noise-expression"]["cliffiness_nauvis"].expression = "mask_off_aquilo_territory(mask_off_vulcano_terrain((main_cliffiness >= cliff_cutoff) * 10))"
 
-data:extend
-({
+data:extend({
   -- Noise expressions
   {
     -- Fix water coverage
@@ -265,8 +263,7 @@ data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquil
 data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_ammonia - 0.01 * (aux - 0.5))"
 -- END: Update noise expressions
 
-data:extend
-({
+data:extend({
   {
     type = "autoplace-control",
     name = "ammonia_ocean",
@@ -277,8 +274,7 @@ data:extend
 })
 
 -- New noise expressions and noise functions
-data:extend
-({
+data:extend({
   {
     -- Create mask for aquilo territory
     type = "noise-expression",
@@ -325,7 +321,7 @@ data:extend
       -- if most of the world is flooded make sure starting areas still have land
       starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
       starting_macro_multiplier = "clamp(distance * aquilo_segmentation_multiplier / 2000, 0, 1)",
-      north_bias = "aquilo_main + elevation_magnitude * (2.5 + y * segmentation_multiplier / 200)",
+      north_bias = "aquilo_main + elevation_magnitude * (2 + y * segmentation_multiplier / 500)",
     }
   },
   {
@@ -751,8 +747,7 @@ data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "mask_gleba_te
 -- END: Update noise expressions
 
 -- New noise expressions and noise functions
-data:extend
-({
+data:extend({
   {
     -- Create mask for gleba territory
     type = "noise-expression",
@@ -764,7 +759,7 @@ data:extend
       grass_3 = util.generate_default_name("grass-3"),
       grass_4 = util.generate_default_name("grass-4"),
       grass = "grass_1 + grass_2 + grass_3 + grass_4",
-      starting_island = "20 * (2.5 - distance / 300)",
+      starting_island = "20 * (4 - distance / 300)",
       south_offset = "clamp((y - 500) / 30, -15, 0)"
     }
   },
@@ -932,8 +927,7 @@ data.raw["noise-expression"]["lava_hot_mountains_range"].expression = "1000 * ra
 data.raw["noise-expression"]["crater_cliff"].expression = "mask_vulcano_coverage(0.5 * (vulcanus_rock_noise + 0.5 * aux - 0.5 * moisture) * (1 - max(vulcanus_basalts_biome,vulcanus_ashlands_biome)) * place_every_n(21,21,0,0))"
 
 -- New noise expressions and noise functions
-data:extend
-({
+data:extend({
   -- Noise expressions
   {
     -- To remove the small random lava puddles

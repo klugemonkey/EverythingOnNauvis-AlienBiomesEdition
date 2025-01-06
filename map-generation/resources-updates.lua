@@ -2,6 +2,29 @@
 -- Fixes map generation for resources
 --------------------------------------------------------------------------------
 local terrain = require("map-generation.terrain")
+local hit_effects = require ("__base__.prototypes.entity.hit-effects")
+local decorative_trigger_effects = require("__base__.prototypes.decorative.decorative-trigger-effects")
+
+util =
+{
+  table = {}
+}
+
+function util.spritesheets_to_pictures(spritesheets)
+  local pictures = {}
+  for _, spritesheet in pairs(spritesheets) do
+    for i = 1, spritesheet.frame_count or 1, 1 do
+      table.insert(pictures, util.sprite_load(spritesheet.path,
+        {
+          frame_index = i - 1,
+          scale = spritesheet.scale or 0.5,
+          dice_y = spritesheet.dice_y
+        })
+      )
+    end
+  end
+  return pictures
+end
 
 --------------------------------------------------------------------------------
 -- MARK: Fix Nauvis resources
@@ -30,32 +53,6 @@ data.raw.planet["aquilo"].map_gen_settings.autoplace_controls = {nil}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["holmium-ore"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["holmium-ore"] = {}
 terrain.mask_off_ammonia_ocean("holmium-ore", "resource")
--- TODO: make them "minable" by inserters
-data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["fulgoran-ruin-vault"] = {}
-data.raw["simple-entity"]["fulgoran-ruin-vault"].autoplace.probability_expression = "fulgoran_ruin_vault"
-data.raw["simple-entity"]["fulgoran-ruin-vault"].map_color = {250, 200, 150, 128}
--- terrain.mask_nauvis_territory("fulgoran-ruin-vault", "simple-entity")
-
-data:extend({
-  {
-    type = "noise-expression",
-    name = "fulgoran_ruin_vault",
-    expression = "random_island_peaks ^ 2 > 0.8",
-    local_expressions = {
-      fulgora_segmentation_multiplier = "1",
-      segmentation_mult = "fulgora_segmentation_multiplier / 25",
-      random_island_peaks = "abs(amplitude_corrected_multioctave_noise{x = x,\z
-                                                                       y = y,\z
-                                                                       seed0 = map_seed,\z
-                                                                       seed1 = 1000,\z
-                                                                       input_scale = segmentation_mult / 1.2,\z
-                                                                       offset_x = -10000,\z
-                                                                       octaves = 6,\z
-                                                                       persistence = 0.8,\z
-                                                                       amplitude = 1})",
-    }
-  }
-})
 
 --------------------------------------------------------------------------------
 -- MARK: Add Vulcanus resources to Nauvis

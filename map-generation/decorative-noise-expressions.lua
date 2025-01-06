@@ -1,9 +1,9 @@
 local util = require("data-util")
 
-local function noise_expression(name, type)
+function noise_expression(name, type)
   local expression = {
-    type = "noise-expression",
-    name = util.generate_default_name(name),
+  type = "noise-expression",
+  name = util.generate_default_name(name),
     expression = data.raw[type][name].autoplace.probability_expression
   }
   if data.raw[type][name].autoplace.local_expressions then
@@ -56,7 +56,7 @@ data:extend({
   noise_expression("brown-hairy-grass", "optimized-decorative"),
   noise_expression("cracked-mud-decal", "optimized-decorative"),
   noise_expression("dark-mud-decal", "optimized-decorative"),
-  -- noise_expression("enemy-decal", "optimized-decorative"),
+  --   noise_expression("enemy-decal", "optimized-decorative"),
   noise_expression("garballo", "optimized-decorative"),
   noise_expression("garballo-mini-dry", "optimized-decorative"),
   noise_expression("green-asterisk", "optimized-decorative"),
@@ -74,8 +74,8 @@ data:extend({
   noise_expression("light-mud-decal", "optimized-decorative"),
   noise_expression("medium-rock", "optimized-decorative"),
   noise_expression("medium-sand-rock", "optimized-decorative"),
-  -- noise_expression("muddy-stump", "optimized-decorative"),
-  -- noise_expression("nuclear-ground-patch", "optimized-decorative"),
+  --   noise_expression("muddy-stump", "optimized-decorative"),
+  --   noise_expression("nuclear-ground-patch", "optimized-decorative"),
   noise_expression("red-asterisk", "optimized-decorative"),
   noise_expression("red-croton", "optimized-decorative"),
   noise_expression("red-desert-bush", "optimized-decorative"),
@@ -88,7 +88,7 @@ data:extend({
   noise_expression("small-sand-rock", "optimized-decorative"),
   noise_expression("tiny-rock", "optimized-decorative"),
   noise_expression("white-desert-bush", "optimized-decorative"),
-  -- noise_expression("worms-decal", "optimized-decorative"),
+  --   noise_expression("worms-decal", "optimized-decorative"),
   -- END: Nauvis
 
   -- START: Aquilo
@@ -101,7 +101,7 @@ data:extend({
   noise_expression("ice-smooth", "tile"),
   noise_expression("brash-ice", "tile"),
 
-    -- Aquilo decoratives
+  -- Aquilo decoratives
   noise_expression("lithium-iceberg-medium", "optimized-decorative"),
   noise_expression("lithium-iceberg-small", "optimized-decorative"),
   noise_expression("lithium-iceberg-tiny", "optimized-decorative"),
@@ -291,4 +291,7 @@ data:extend({
   noise_expression("sulfur-rock-cluster", "optimized-decorative"),
   noise_expression("vulcanus-lava-fire", "optimized-decorative"),
   -- END: Vulcanus
+
+  -- START: Custom
+  noise_expression("holmium-ore", "resource")
 })

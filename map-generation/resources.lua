@@ -32,7 +32,7 @@ data:extend({
     driving_sound = stone_driving_sound,
     minable =
     {
-    mining_particle = "stone-particle",
+    mining_particle = "stone-particle",  -- TODO: Add particle - There is an actual holmium-ore-particle-1.png in space-age\graphics\particle\holmium-ore-particle
     mining_time = 2,
     result = "holmium-ore",
     },

@@ -1,4 +1,5 @@
 local data_util = require("data-util")
+local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-definitions")
 
 -- Remove planets
 
@@ -30,7 +31,22 @@ data_util.delete_prototype("space-connection", "vulcanus-gleba")
 data_util.delete_prototype("space-connection", "gleba-fulgora")
 data_util.delete_prototype("space-connection", "gleba-aquilo")
 data_util.delete_prototype("space-connection", "fulgora-aquilo")
-data_util.delete_prototype("space-connection", "aquilo-solar-system-edge")
+data.raw["space-connection"]["aquilo-solar-system-edge"].from = "nauvis"
+-- data_util.delete_prototype("space-connection", "aquilo-solar-system-edge")
+
+-- -- add space connection to solar system edge
+-- data:extend({
+--   {
+--     type = "space-connection",
+--     name = "nauvis-solar-system-edge",
+--     subgroup = "planet-connections",
+--     from = "nauvis",
+--     to = "solar-system-edge",
+--     order = "a",
+--     length = 100000,
+--     asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.aquilo_solar_system_edge)
+--   },
+-- })
 
 -- remove space age menu simulations
 data.raw["utility-constants"]["default"].main_menu_simulations.nauvis_artillery = nil

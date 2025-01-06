@@ -2,7 +2,7 @@ Config changes
   + Add setting for enable/disable demolishers (Already done by default)
   + Add setting for vulcano size
   + Add setting for vulcano frequenzy
-  - Add space connection from nauvis to solar system edge
+  + Add space connection from nauvis to solar system edge
 
 Cosmetic changes
   ? Add promethium as ore

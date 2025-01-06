@@ -2,7 +2,7 @@ local data_util = require("data-util")
 
 -- Remove planets
 
--- data.raw.planet["aquilo"].map_gen_settings = nil
+data.raw.planet["aquilo"].map_gen_settings = nil
 if data.raw.planet["aquilo"] then
   data.raw.planet["aquilo"].hidden = true
 end
@@ -31,6 +31,31 @@ data_util.delete_prototype("space-connection", "gleba-fulgora")
 data_util.delete_prototype("space-connection", "gleba-aquilo")
 data_util.delete_prototype("space-connection", "fulgora-aquilo")
 data_util.delete_prototype("space-connection", "aquilo-solar-system-edge")
+
+-- remove space age menu simulations
+data.raw["utility-constants"]["default"].main_menu_simulations.nauvis_artillery = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.nauvis_oil_refinery = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.train_junction = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.nauvis_train_station = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.nauvis_train_junction = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.platform_science = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.platform_moving = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.platform_messy_nuclear = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.vulcanus_lava_forge = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.vulcanus_crossing = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.vulcanus_punishmnent = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.vulcanus_sulfur_drop = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.gleba_agri_towers = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.gleba_pentapod_ponds = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.gleba_egg_escape = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.gleba_farm_attack = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.gleba_grotto = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.fulgora_city_crossing = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.fulgora_recycling_hell = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.fulgora_nightfall = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.fulgora_race = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.aquilo_send_help = nil
+data.raw["utility-constants"]["default"].main_menu_simulations.aquilo_starter = nil
 
 -- delete technologies
 data_util.hide_prototype("technology", "planet-discovery-aquilo")

@@ -5,6 +5,11 @@ Config changes
   - Add space connection from nauvis to solar system edge
 
 Cosmetic changes
+  ? Add promethium as ore
+  + Add holmium ore - make it hard ore
+  - check technology tree
+  + remove menu simulations
+  + fix surface conditions for recipes
   - Add vulcanus / gleba cliffs. I think this is not easy to do...
   - Increase verly slowly but up to inf the moisture towards the south
   + Remove grass from vulcanus tiles volcanic-folds and volcanic-folds-flat

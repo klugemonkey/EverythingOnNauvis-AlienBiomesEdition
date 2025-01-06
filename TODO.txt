@@ -8,6 +8,8 @@ Cosmetic changes
   ? Add promethium as ore
   + Add holmium ore - make it hard ore
   - check technology tree
+    - Add Fulguran vault ruins, or unlock recycler by different method
+    + Unlock holmium processing by mining holmium ore
   + remove menu simulations
   + fix surface conditions for recipes
   - Add vulcanus / gleba cliffs. I think this is not easy to do...

@@ -7,22 +7,20 @@ local terrain = require("map-generation.terrain")
 -- MARK: Fix Nauvis resources
 --------------------------------------------------------------------------------
 
--- Remove resources spawning on amonia ocean
-terrain.mask_off_amonia_ocean("iron-ore", "resource")
-terrain.mask_off_amonia_ocean("copper-ore", "resource")
-terrain.mask_off_amonia_ocean("stone", "resource")
-terrain.mask_off_amonia_ocean("coal", "resource")
-terrain.mask_off_amonia_ocean("uranium-ore", "resource")
-terrain.mask_off_amonia_ocean("crude-oil", "resource")
+-- Remove resources spawning on ammonia ocean
+terrain.mask_off_ammonia_ocean("iron-ore", "resource")
+terrain.mask_off_ammonia_ocean("copper-ore", "resource")
+terrain.mask_off_ammonia_ocean("stone", "resource")
+terrain.mask_off_ammonia_ocean("coal", "resource")
+terrain.mask_off_ammonia_ocean("uranium-ore", "resource")
+terrain.mask_off_ammonia_ocean("crude-oil", "resource")
 
 --------------------------------------------------------------------------------
--- MARK: Add Gleba resources to Nauvis
+-- MARK: Remove Aquilo resources to from Aquilo -- Dunno why i have to do this only for this planet...
 --------------------------------------------------------------------------------
 
--- Set vulcane as resource
-data.raw["autoplace-control"]["vulcanus_volcanism"].can_be_disabled = true
-data.raw["autoplace-control"]["vulcanus_volcanism"].order = nil
-data.raw["autoplace-control"]["vulcanus_volcanism"].category = "resource"
+data.raw["noise-expression"]["aquilo_crude_oil_spots"].expression = "0"  --  This removes aquilo islands for crude oil
+data.raw.planet["aquilo"].map_gen_settings.autoplace_controls = {nil}
 
 --------------------------------------------------------------------------------
 -- MARK: Add Vulcanus resources to Nauvis
@@ -36,13 +34,12 @@ data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:sul
 data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:tungsten-ore:probability"] = "vulcanus_tungsten_ore_probability"
 data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:tungsten-ore:richness"] = "vulcanus_tungsten_ore_richness"
 
--- -- Mask resources from amonia ocean
--- terrain.mask_off_amonia_ocean("calcite", "resource")
--- terrain.mask_off_amonia_ocean("tungsten-ore", "resource")
+-- -- Mask resources from ammonia ocean
+-- terrain.mask_off_ammonia_ocean("calcite", "resource")
+-- terrain.mask_off_ammonia_ocean("tungsten-ore", "resource")
 
--- Set vulcane as resource
-data.raw["autoplace-control"]["vulcanus_volcanism"].can_be_disabled = true
-data.raw["autoplace-control"]["vulcanus_volcanism"].order = nil
+-- -- Set vulcane as resource
+data.raw["autoplace-control"]["vulcanus_volcanism"].order = "z-volcanism"
 data.raw["autoplace-control"]["vulcanus_volcanism"].category = "resource"
 
 -- Add resources to nauvis
@@ -72,7 +69,7 @@ data.raw.resource["calcite"].autoplace.base_density = 10
 data.raw.resource["calcite"].autoplace.regular_rq_factor_multiplier = 1.1
 data.raw.resource["calcite"].autoplace.starting_rq_factor_multiplier = 1.5
 data.raw.resource["calcite"].autoplace.candidate_spot_count = 22
-data.raw["noise-expression"]["vulcanus_calcite_probability"].expression = "mask_off_amonia_ocean((control:calcite:size > 0) * (1000 * ((0.5 + vulcanus_calcite_region) * random_penalty_between(0.9, 1, 1) - 1)))"
+data.raw["noise-expression"]["vulcanus_calcite_probability"].expression = "mask_off_ammonia_ocean((control:calcite:size > 0) * (1000 * ((0.5 + vulcanus_calcite_region) * random_penalty_between(0.9, 1, 1) - 1)))"
 -- data.raw["noise-expression"]["vulcanus_calcite_probability"].expression = "(control:calcite:size > 0) * (1000 * ((0.5 + vulcanus_calcite_region) * random_penalty_between(0.9, 1, 1) - 1))"
 
 -- sulfuric-acid-geyser will only spawn around volcano and only rarely.
@@ -83,6 +80,6 @@ data.raw.resource["tungsten-ore"].autoplace.base_density = 10
 data.raw.resource["tungsten-ore"].autoplace.regular_rq_factor_multiplier = 1.1
 data.raw.resource["tungsten-ore"].autoplace.starting_rq_factor_multiplier = 1.5
 data.raw.resource["tungsten-ore"].autoplace.candidate_spot_count = 22
-data.raw["noise-expression"]["vulcanus_tungsten_ore_probability"].expression = "mask_off_amonia_ocean((control:tungsten_ore:size > 0) * (1000 * ((0.7 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1)))"
+data.raw["noise-expression"]["vulcanus_tungsten_ore_probability"].expression = "mask_off_ammonia_ocean((control:tungsten_ore:size > 0) * (1000 * ((0.7 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1)))"
 -- data.raw["noise-expression"]["vulcanus_tungsten_ore_probability"].expression = "(control:tungsten_ore:size > 0) * (1000 * ((0.7 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1))"
 -- END: Update noise expressions

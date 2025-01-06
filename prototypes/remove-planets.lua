@@ -3,9 +3,9 @@ local data_util = require("data-util")
 -- Remove planets
 
 -- data.raw.planet["aquilo"].map_gen_settings = nil
--- if data.raw.planet["aquilo"] then
---   data.raw.planet["aquilo"].hidden = true
--- end
+if data.raw.planet["aquilo"] then
+  data.raw.planet["aquilo"].hidden = true
+end
 
 data.raw.planet["fulgora"].map_gen_settings = nil
 if data.raw.planet["fulgora"] then
@@ -42,7 +42,15 @@ data_util.hide_prototype("technology", "planet-discovery-vulcanus")
 -- data_util.hide_prototype("technology", "tungsten-carbide")
 
 -- delete autoplace controlls
+-- data.raw["resource"]["aquilo-crude-oil"].autoplace = nil
+-- data.raw["noise-expression"]["aquilo_crude_oil_probability"].expression = "0"
+-- data.raw["noise-expression"]["aquilo_crude_oil_richness"].expression = "0"
+-- data.raw["resource"]["scrap"].autoplace = nil
+data.raw["autoplace-control"]["aquilo_crude_oil"] = nil
 data.raw["resource"]["scrap"].autoplace = nil  -- why is this needed? who knows... moving on...
 data.raw["autoplace-control"]["scrap"] = nil
+data.raw["autoplace-control"]["fulgora_cliff"] = nil
+data.raw["autoplace-control"]["fulgora_islands"] = nil
 data.raw["autoplace-control"]["gleba_stone"] = nil
+data.raw["autoplace-control"]["gleba_cliff"] = nil
 data.raw["autoplace-control"]["vulcanus_coal"] = nil

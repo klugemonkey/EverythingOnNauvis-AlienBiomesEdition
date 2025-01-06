@@ -22,12 +22,12 @@ function terrain.mask_off_aquilo_territory(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_aquilo_territory(" .. util.generate_default_name(decorative) .. ")"
 end
 
-function terrain.mask_amonia_ocean(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_amonia_ocean(" .. util.generate_default_name(decorative) .. ")"
+function terrain.mask_ammonia_ocean(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_ammonia_ocean(" .. util.generate_default_name(decorative) .. ")"
 end
 
-function terrain.mask_off_amonia_ocean(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_amonia_ocean(" .. util.generate_default_name(decorative) .. ")"
+function terrain.mask_off_ammonia_ocean(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_ammonia_ocean(" .. util.generate_default_name(decorative) .. ")"
 end
 
 function terrain.mask_gleba_territory(decorative, decorative_type)
@@ -192,6 +192,7 @@ data:extend
 -- autoplace_controls
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["lithium_brine"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["fluorine_vent"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["ammonia_ocean"] = {}
 
 -- tile settings
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.tile.settings["snow-flat"] = {}
@@ -256,13 +257,24 @@ data.raw.tile["snow-flat"].autoplace.probability_expression = "mask_aquilo_terri
 -- data.raw.tile["snow-crests"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
 -- data.raw.tile["snow-lumpy"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
 -- data.raw.tile["snow-patchy"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
-data.raw.tile["ice-rough"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_amonia_depth + 1.5, 200))"
-data.raw.tile["ice-smooth"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_amonia_depth + 1, 200))"
-data.raw.tile["brash-ice"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_amonia_depth + 0.5, 200))"
+data.raw.tile["ice-rough"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 1.5, 200))"
+data.raw.tile["ice-smooth"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 1, 200))"
+data.raw.tile["brash-ice"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 0.5, 200))"
 
-data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_amonia + 0.01 * (aux - 0.5))"
-data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_amonia - 0.01 * (aux - 0.5))"
+data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_ammonia + 0.01 * (aux - 0.5))"
+data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_ammonia - 0.01 * (aux - 0.5))"
 -- END: Update noise expressions
+
+data:extend
+({
+  {
+    type = "autoplace-control",
+    name = "ammonia_ocean",
+    order = "z-ammonia",
+    category = "resource",
+    can_be_disabled = false
+  },
+})
 
 -- New noise expressions and noise functions
 data:extend
@@ -276,8 +288,8 @@ data:extend
   {
     -- Create mask for aquilo territory
     type = "noise-expression",
-    name = "amonia_mask",
-    expression = "aquilo_amonia > -1",
+    name = "ammonia_mask",
+    expression = "aquilo_ammonia > -1",
   },
   {
     type = "noise-expression",
@@ -291,12 +303,12 @@ data:extend
   },
   {
     type = "noise-expression",
-    name = "aquilo_amonia",
-    expression = "mask_off_vulcano_coverage(aquilo_base(aquilo_amonia_depth, 200))"
+    name = "aquilo_ammonia",
+    expression = "mask_off_vulcano_coverage(aquilo_base(aquilo_ammonia_depth, 200))"
   },
   {
     type = "noise-expression",
-    name = "aquilo_amonia_depth",
+    name = "aquilo_ammonia_depth",
     expression = "aquilo_max_elevation - 4"
   },
   {
@@ -307,20 +319,13 @@ data:extend
     {
       elevation_magnitude = 20,
       wlc_amplitude = 2,
-      -- TODO: add slider for ammoniacal lake size
-      amonia_level = "10 * log2(control:water:size)",
-      wlc_elevation = "max(aquilo_main - amonia_level * wlc_amplitude, starting_island, north_bias)",
+      ammonia_level = "10 * log2(control:ammonia_ocean:size)",
+      wlc_elevation = "max(aquilo_main - ammonia_level * wlc_amplitude, starting_island, north_bias)",
       aquilo_main = "elevation_magnitude * (0.25 * aquilo_detail + 3 * aquilo_macro * starting_macro_multiplier)",
       -- if most of the world is flooded make sure starting areas still have land
       starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
       starting_macro_multiplier = "clamp(distance * aquilo_segmentation_multiplier / 2000, 0, 1)",
       north_bias = "aquilo_main + elevation_magnitude * (2.5 + y * segmentation_multiplier / 200)",
-      -- formation_clumped = "-25\z
-      --                     + 12 * max(aquilo_island_peaks, random_island_peaks)\z
-      --                     + 15 * tri_crack",
-      -- formation_broken  = "-20\z
-      --                     + 8 * max(aquilo_island_peaks * 1.1, min(0., random_island_peaks - 0.2))\z
-      --                     + 13 * (pow(voronoi_large * max(0, voronoi_large_cell * 1.2 - 0.2) + 0.5 * voronoi_small * max(0, aux + 0.1), 0.5))",
     }
   },
   {
@@ -389,8 +394,7 @@ data:extend
   {
     type = "noise-expression",
     name = "aquilo_segmentation_multiplier",
-    -- TODO: add slider for ammoniacal lake frequency
-    expression = "1.5 * control:water:frequency"
+    expression = "0.5 * control:ammonia_ocean:frequency"
   },
   {
     type = "noise-expression",
@@ -448,18 +452,18 @@ data:extend
     expression = "if(aquilo_mask, -inf, expression)"
   },
   {
-    -- Mask all amonia ocean territory
+    -- Mask all ammonia ocean territory
     type = "noise-function",
-    name = "mask_amonia_ocean",
+    name = "mask_ammonia_ocean",
     parameters = {"expression"},
-    expression = "if(amonia_mask, expression, -inf)"
+    expression = "if(ammonia_mask, expression, -inf)"
   },
   {
-    -- Mask off all amonia ocean territory
+    -- Mask off all ammonia ocean territory
     type = "noise-function",
-    name = "mask_off_amonia_ocean",
+    name = "mask_off_ammonia_ocean",
     parameters = {"expression"},
-    expression = "if(amonia_mask, -inf, expression)"
+    expression = "if(ammonia_mask, -inf, expression)"
   },
 })
 --------------------------------------------------------------------------------
@@ -734,6 +738,10 @@ terrain.mask_gleba_territory("sunnycomb", "tree")
 terrain.mask_gleba_territory("water-cane", "tree")
 -- END: Mask gleba territory on all autoplace settings
 
+-- Update autoplace controls
+data.raw["autoplace-control"]["gleba_plants"].can_be_disabled = true
+data.raw["autoplace-control"]["gleba_water"].can_be_disabled = true
+
 -- START: Update noise expressions
 -- Mask gleba plants to gleba terrain
 data.raw["noise-expression"]["gleba_plants_noise"].expression = "mask_gleba_territory(abs(multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 700000, octaves = 3, input_scale = 1/20 }\z
@@ -915,7 +923,7 @@ data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spo
                                                                                                  basement_value = 0,\z
                                                                                                  maximum_spot_basement_radius = volcano_spot_radius}"
 -- Make volcano spots much rarer, see region_size
-data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.volcano_spot_radius = "300 * volcanism * sqrt(control:vulcanus_volcanism:size + 1)"
+data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.volcano_spot_radius = "300 * volcanism * sqrt(1 + control:vulcanus_volcanism:size)"
 -- Removes all lava spots except vulkane
 data.raw["noise-expression"]["lava_mountains_range"].expression = "1100 * range_select_base(mountain_lava_spots, 0.3, 1, 1, 0, 1) - offset_vulcano"
 -- Removes all lava spots except vulkane

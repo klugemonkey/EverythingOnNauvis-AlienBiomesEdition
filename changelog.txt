@@ -1,0 +1,10 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.0.2
+Date: 2025-01-06
+  Bugfixes:
+    - Removed some gleba water tiles, since there is no smooth transition towards nauvis water
+---------------------------------------------------------------------------------------------------
+Version: 0.0.1
+Date: 2025-01-06
+  Features:
+    - Initial release

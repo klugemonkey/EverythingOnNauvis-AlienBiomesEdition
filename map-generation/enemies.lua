@@ -59,17 +59,6 @@ data.raw.planet["nauvis"].map_gen_settings.territory_settings = data.raw.planet[
 -- Add demolishers - TODO: Add setting for enabling demolishers
 data.raw["noise-expression"]["demolisher_starting_area"].expression = "if(vulcano_coverage > 0.2, 0, 1)"
 
-data:extend({
-  {
-    type = "autoplace-control",
-    name = "vulcanus_enemy_base",
-    richness = false,
-    order = "z",
-    category = "enemy",
-    can_be_disabled = true
-  }
-})
-
 --------------------------------------------------------------------------------
 -- MARK: Add Gleba enemies aka strafer, stompers and wriggler pentapods
 --------------------------------------------------------------------------------

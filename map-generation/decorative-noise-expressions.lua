@@ -257,6 +257,20 @@ data:extend({
   -- END: Gleba
 
   -- START: Vulcanus
+  -- Vulcanus tiles
+  noise_expression("volcanic-ash-flats", "tile"),
+  noise_expression("volcanic-ash-light", "tile"),
+  noise_expression("volcanic-ash-dark", "tile"),
+  noise_expression("volcanic-cracks", "tile"),
+  noise_expression("volcanic-cracks-warm", "tile"),
+  noise_expression("volcanic-folds-warm", "tile"),
+  noise_expression("volcanic-pumice-stones", "tile"),
+  noise_expression("volcanic-cracks-hot", "tile"),
+  noise_expression("volcanic-jagged-ground", "tile"),
+  noise_expression("volcanic-smooth-stone", "tile"),
+  noise_expression("volcanic-smooth-stone-warm", "tile"),
+  noise_expression("volcanic-ash-cracks", "tile"),
+
   -- Vulcanus decoratives - Note, most already exist as noise layer under some other name
   noise_expression("vulcanus-chimney", "simple-entity"),
   noise_expression("vulcanus-chimney-faded", "simple-entity"),

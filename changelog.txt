@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.4
+Date: 2025-01-09
+  Features:
+    - Agriculture technology, calcite processing and tungsten carbide technologies are unlocked earier
+    - Heating tower is unlocked after nuclear power
+---------------------------------------------------------------------------------------------------
 Version: 0.0.3
 Date: 2025-01-07
   Bugfixes:

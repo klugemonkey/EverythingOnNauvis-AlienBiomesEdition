@@ -835,6 +835,19 @@ data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["b
 -- END: Update map gen settings
 
 -- Fix probability expressions for tiles
+terrain.mask_vulcano_coverage("volcanic-ash-flats", "tile")
+terrain.mask_vulcano_coverage("volcanic-ash-light", "tile")
+terrain.mask_vulcano_coverage("volcanic-ash-dark", "tile")
+terrain.mask_vulcano_coverage("volcanic-cracks", "tile")
+terrain.mask_vulcano_coverage("volcanic-cracks-warm", "tile")
+terrain.mask_vulcano_coverage("volcanic-folds-warm", "tile")
+terrain.mask_vulcano_coverage("volcanic-pumice-stones", "tile")
+terrain.mask_vulcano_coverage("volcanic-cracks-hot", "tile")
+terrain.mask_vulcano_coverage("volcanic-jagged-ground", "tile")
+terrain.mask_vulcano_coverage("volcanic-smooth-stone", "tile")
+terrain.mask_vulcano_coverage("volcanic-smooth-stone-warm", "tile")
+terrain.mask_vulcano_coverage("volcanic-ash-cracks", "tile")
+
 data.raw.tile["volcanic-folds"].autoplace.probability_expression = "updated_volcanic_folds" -- Removes all lava spots except vulkane
 data.raw.tile["volcanic-folds-flat"].autoplace.probability_expression = "updated_volcanic_folds_flat" -- Adds big ring around vulcano
 data.raw.tile["lava"].autoplace.probability_expression = "lava_mountains_range"

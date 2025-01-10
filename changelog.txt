@@ -3,6 +3,7 @@ Version: 0.0.5
 Date: 2025-01-09
   Bugfixes:
     - Removed some research triggers that were needed to continue with fulgora items
+    - Updated mod compatibility list
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.4
 Date: 2025-01-09

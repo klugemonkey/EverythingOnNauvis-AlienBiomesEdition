@@ -1,13 +1,13 @@
 Bug fixes:
-
+  - Romve the small random lava patches
 
 Config changes
   + Add setting for enable/disable demolishers (Already done by default)
   + Add setting for vulcano size
   + Add setting for vulcano frequenzy
   + Add space connection from nauvis to solar system edge
-  - Make incompatible with Naufulglebunusilo
-  - Make incompatible with Resource Spawner Overhaul
+  + Make incompatible with Naufulglebunusilo
+  + Make incompatible with Resource Spawner Overhaul
   - Add description to settings
 
 Cosmetic changes

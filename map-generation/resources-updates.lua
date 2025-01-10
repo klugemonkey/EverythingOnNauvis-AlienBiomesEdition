@@ -70,6 +70,10 @@ data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:tun
 -- terrain.mask_off_ammonia_ocean("calcite", "resource")
 -- terrain.mask_off_ammonia_ocean("tungsten-ore", "resource")
 
+-- Add calcite to volcanic rocks
+table.insert(data.raw["simple-entity"]["big-volcanic-rock"].minable.results, {type = "item", name = "calcite", amount_min = 2, amount_max = 8})
+table.insert(data.raw["simple-entity"]["huge-volcanic-rock"].minable.results, {type = "item", name = "calcite", amount_min = 3, amount_max = 15})
+
 -- Set vulcane as resource
 data.raw["autoplace-control"]["vulcanus_volcanism"].order = "z-volcanism"
 data.raw["autoplace-control"]["vulcanus_volcanism"].category = "resource"

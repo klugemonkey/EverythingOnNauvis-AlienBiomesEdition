@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.7
+Date: 2025-01-14
+  Features:
+    - Asteroid chunks now have stack size of 50
+    - new technology for traveling to solar system edge
+    - removed rail support foundations technology since fulgora does not exist any more
+---------------------------------------------------------------------------------------------------
 Version: 0.0.6
 Date: 2025-01-10
   Bugfixes:

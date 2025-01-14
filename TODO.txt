@@ -9,6 +9,9 @@ Config changes
   + Make incompatible with Naufulglebunusilo
   + Make incompatible with Resource Spawner Overhaul
   - Add description to settings
+  - Increase coal patch density by factor 2-3
+  - Reduce stone by factor 2-3
+  - change stack stizes of asteroid chunks
 
 Cosmetic changes
   ? Add promethium as ore

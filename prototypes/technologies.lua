@@ -60,10 +60,11 @@ data:extend({
 table.insert(data.raw.technology["promethium-science-pack"].prerequisites, "solar-system-edge-discovery")
 
 -- Aquilo
-data.raw.technology["heating-tower"].prerequisites = {"nuclear-power"}
+data.raw.technology["lithium-processing"].prerequisites = {"rocket-turret", "advanced-asteroid-processing", "heating-tower", "asteroid-reprocessing", "electromagnetic-science-pack"}
 
 -- Gleba
 data.raw.technology["agriculture"].prerequisites = {"landfill", "steel-processing"}
+data.raw.technology["heating-tower"].prerequisites = {"concrete"}
 
 -- Fulgora
 data.raw.technology["holmium-processing"].research_trigger = {type = "mine-entity", entity = "holmium-ore"}

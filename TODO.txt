@@ -1,5 +1,6 @@
 Bug fixes:
   - Romve the small random lava patches
+  - Add back gleba water (wetland-blue-slime and gleba-deep-lake) and surround them by a land tile such that they do not touch nauvis water. I think without them gleba might have some solid terrain without plants
 
 Config changes
   + Add setting for enable/disable demolishers (Already done by default)

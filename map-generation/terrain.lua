@@ -948,7 +948,7 @@ data:extend({
     -- To remove the small random lava puddles
     type = "noise-expression",
     name = "offset_vulcano",
-    expression = "1"
+    expression = "1.5"
   },
   {
     -- Noise expression for ring around lava spots
@@ -966,13 +966,13 @@ data:extend({
     -- Noise expression for vulcano spot and close surround as mask
     type = "noise-expression",
     name = "vulcano_coverage",
-    expression = "if(max(updated_volcanic_folds, lava_mountains_range, lava_hot_mountains_range) > 0, 1, 0)"
+    expression = "max(updated_volcanic_folds, lava_mountains_range, lava_hot_mountains_range) > 0"
   },
   {
     -- Noise expression for all vulcanus terrain as mask
     type = "noise-expression",
     name = "vulcanus_terrain",
-    expression = "if(max(vulcano_coverage, updated_volcanic_folds_flat) > 0, 1, 0)"
+    expression = "max(vulcano_coverage, updated_volcanic_folds_flat) > 0"
   },
 
   -- Noise functions

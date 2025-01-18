@@ -1,11 +1,12 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0
-Date: 2025-01-18
+Date: 2025-01-19
   Features:
     - This version was played from finish through end
     - Added descriptions to resources
   Bugfixes:
     - Removed startup settings which did not do anything.
+    - Removed small lava patches around the map (or at least the ones that i carefully checked out :))
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.9
 Date: 2025-01-18

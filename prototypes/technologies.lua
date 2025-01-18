@@ -10,14 +10,14 @@ data:extend({
     type = "technology",
     name = "solar-system-edge-discovery",
     icon = "__space-age__/graphics/icons/solar-system-edge.png",
-    -- icons = util.technology_icon_constant_planet("__space-age__/graphics/technology/aquilo.png"),
     icon_size = 64,
-    -- essential = true,
+    essential = true,
     effects =
     {
       {
         type = "unlock-space-location",
-        space_location = "solar-system-edge"
+        space_location = "solar-system-edge",
+        use_icon_overlay_constant = true
       },
       {
         type = "unlock-recipe",

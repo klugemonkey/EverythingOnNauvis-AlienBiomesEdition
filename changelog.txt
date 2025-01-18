@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2025-01-18
+  Features:
+    - This version was played from finish through end
+  Bugfixes:
+    - Removed startup settings which did not do anything.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.9
 Date: 2025-01-18
   Bugfixes:

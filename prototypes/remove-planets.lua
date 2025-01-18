@@ -34,20 +34,6 @@ data_util.delete_prototype("space-connection", "fulgora-aquilo")
 data.raw["space-connection"]["aquilo-solar-system-edge"].from = "nauvis"
 -- data_util.delete_prototype("space-connection", "aquilo-solar-system-edge")
 
--- -- add space connection to solar system edge
--- data:extend({
---   {
---     type = "space-connection",
---     name = "nauvis-solar-system-edge",
---     subgroup = "planet-connections",
---     from = "nauvis",
---     to = "solar-system-edge",
---     order = "a",
---     length = 100000,
---     asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.aquilo_solar_system_edge)
---   },
--- })
-
 -- remove space age menu simulations
 data.raw["utility-constants"]["default"].main_menu_simulations.nauvis_artillery = nil
 data.raw["utility-constants"]["default"].main_menu_simulations.nauvis_oil_refinery = nil
@@ -79,14 +65,6 @@ data_util.hide_prototype("technology", "planet-discovery-fulgora")
 data_util.hide_prototype("technology", "planet-discovery-gleba")
 data_util.hide_prototype("technology", "planet-discovery-vulcanus")
 
--- data_util.hide_prototype("technology", "calcite-processing")
--- data_util.hide_prototype("technology", "tungsten-carbide")
-
--- delete autoplace controlls
--- data.raw["resource"]["aquilo-crude-oil"].autoplace = nil
--- data.raw["noise-expression"]["aquilo_crude_oil_probability"].expression = "0"
--- data.raw["noise-expression"]["aquilo_crude_oil_richness"].expression = "0"
--- data.raw["resource"]["scrap"].autoplace = nil
 data.raw["autoplace-control"]["aquilo_crude_oil"] = nil
 data.raw["resource"]["scrap"].autoplace = nil  -- why is this needed? who knows... moving on...
 data.raw["autoplace-control"]["scrap"] = nil

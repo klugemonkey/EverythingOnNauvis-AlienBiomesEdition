@@ -55,6 +55,12 @@ data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["h
 terrain.mask_off_ammonia_ocean("holmium-ore", "resource")
 
 --------------------------------------------------------------------------------
+-- MARK: Gleba
+--------------------------------------------------------------------------------
+
+data.raw["autoplace-control"]["gleba_plants"].localised_description = {"autoplace-control-names.gleba_plants_description"}
+
+--------------------------------------------------------------------------------
 -- MARK: Add Vulcanus resources to Nauvis
 --------------------------------------------------------------------------------
 
@@ -76,6 +82,7 @@ table.insert(data.raw["simple-entity"]["huge-volcanic-rock"].minable.results, {t
 
 -- Set vulcane as resource
 data.raw["autoplace-control"]["vulcanus_volcanism"].order = "z-volcanism"
+data.raw["autoplace-control"]["vulcanus_volcanism"].localised_description = {"autoplace-control-names.vulcanus_volcanism_description"}
 data.raw["autoplace-control"]["vulcanus_volcanism"].category = "resource"
 
 -- reorder autoplace controls

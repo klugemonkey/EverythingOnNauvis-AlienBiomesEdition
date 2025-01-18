@@ -1,6 +1,7 @@
 Bug fixes:
   - Romve the small random lava patches
   - Add back gleba water (wetland-blue-slime and gleba-deep-lake) and surround them by a land tile such that they do not touch nauvis water. I think without them gleba might have some solid terrain without plants
+  - Show solar system view button in Map view
 
 Config changes
   + Add setting for enable/disable demolishers (Already done by default)
@@ -9,10 +10,10 @@ Config changes
   + Add space connection from nauvis to solar system edge
   + Make incompatible with Naufulglebunusilo
   + Make incompatible with Resource Spawner Overhaul
-  - Add description to settings
+  + Add description to settings
   - Increase coal patch density by factor 2-3
   - Reduce stone by factor 2-3
-  - change stack stizes of asteroid chunks
+  + change stack stizes of asteroid chunks
 
 Cosmetic changes
   ? Add promethium as ore
@@ -33,4 +34,3 @@ Low Prio:
   + remove north_offset and south_offset for aquilo and gleba and replace them for a similar function like starting_island local expression
   - Add setting for having north and south pole (aquilo at north and gleba at south)
   + for masks use code like "a > b" instead "if(a > b, 1, 0)"
-  - Update masks such that their values are only true or false

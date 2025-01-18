@@ -30,39 +30,37 @@ data:extend({
     tree_removal_max_distance = 32 * 32,
     walking_sound = base_sounds.ore,
     driving_sound = stone_driving_sound,
-    minable =
-    {
-    mining_particle = "stone-particle",  -- TODO: Add particle - There is an actual holmium-ore-particle-1.png in space-age\graphics\particle\holmium-ore-particle
-    mining_time = 2,
-    result = "holmium-ore",
+    minable = {
+      mining_particle = "stone-particle",  -- TODO: Add particle - There is an actual holmium-ore-particle-1.png in space-age\graphics\particle\holmium-ore-particle
+      mining_time = 2,
+      result = "holmium-ore",
     },
     category = "hard-solid",
     collision_box = {{-0.1, -0.1}, {0.1, 0.1}},
     selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-    autoplace = resource_autoplace.resource_autoplace_settings
-    {
-    name = "holmium-ore",
-    order = "c",
-    base_density = 0.9,
-    base_spots_per_km2 = 1.25,
-    has_starting_area_placement = false,
-    random_spot_size_minimum = 2,
-    random_spot_size_maximum = 4,
-    regular_rq_factor_multiplier = 1
+    autoplace = resource_autoplace.resource_autoplace_settings {
+      name = "holmium-ore",
+      order = "c-holmium",
+      base_density = 0.4,
+      base_spots_per_km2 = 1.25,
+      has_starting_area_placement = false,
+      random_spot_size_minimum = 2,
+      random_spot_size_maximum = 4,
+      regular_rq_factor_multiplier = 1
     },
-    stage_counts = {10000, 6330, 3670, 1930, 870, 270, 100, 50},
+    stage_counts = {15000, 9500, 5500, 2900, 1300, 400, 150, 80},
     stages =
     {
-    sheet =
-    {
-      filename = "__EverythingOnNauvis__/graphics/holmium-ore-patches.png",
-      priority = "extra-high",
-      width = 128,
-      height = 128,
-      frame_count = 8,
-      variation_count = 8,
-      scale = 0.5
-    }
+      sheet =
+      {
+        filename = "__EverythingOnNauvis__/graphics/holmium-ore-patches.png",
+        priority = "extra-high",
+        width = 128,
+        height = 128,
+        frame_count = 8,
+        variation_count = 8,
+        scale = 0.5
+      }
     },
     effect_animation_period = 5,
     effect_animation_period_deviation = 1,

@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.1
+Date: 2025-01-19
+  Modding:
+    - Resource changes to tungsten ore and calcite are now done in data instead of data-final-fixes
+---------------------------------------------------------------------------------------------------
 Version: 0.1.0
 Date: 2025-01-19
   Features:

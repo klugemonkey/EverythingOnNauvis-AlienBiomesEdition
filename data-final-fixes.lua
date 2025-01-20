@@ -1,4 +1,4 @@
 
 require("prototypes.remove-planets")
 
-require("map-generation.resource-final-fixes")
+-- require("map-generation.resource-final-fixes")

@@ -29,8 +29,8 @@ Cosmetic changes
   + Restore big patches of trees. See: "also removes big patches of trees on map, but i would like to keep the forests"
 
 Low Prio:
-  ? Make that calcite patch behaves like nauvis ore
-  ? Make that tungsten ore patch behaves like nauvis ore
+  + Make that calcite patch behaves like nauvis ore
+  + Make that tungsten ore patch behaves like nauvis ore
   + remove north_offset and south_offset for aquilo and gleba and replace them for a similar function like starting_island local expression
   - Add setting for having north and south pole (aquilo at north and gleba at south)
   + for masks use code like "a > b" instead "if(a > b, 1, 0)"

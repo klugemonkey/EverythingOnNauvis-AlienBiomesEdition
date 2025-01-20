@@ -63,12 +63,12 @@ data.raw["autoplace-control"]["gleba_plants"].localised_description = {"autoplac
 --------------------------------------------------------------------------------
 
 -- property_expression_names
-data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:calcite:probability"] = "vulcanus_calcite_probability"
-data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:calcite:richness"] = "vulcanus_calcite_richness"
+-- data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:calcite:probability"] = "vulcanus_calcite_probability"
+-- data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:calcite:richness"] = "vulcanus_calcite_richness"
 data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:sulfuric-acid-geyser:probability"] = "vulcanus_sulfuric_acid_geyser_probability"
 data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:sulfuric-acid-geyser:richness"] = "vulcanus_sulfuric_acid_geyser_richness"
-data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:tungsten-ore:probability"] = "vulcanus_tungsten_ore_probability"
-data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:tungsten-ore:richness"] = "vulcanus_tungsten_ore_richness"
+-- data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:tungsten-ore:probability"] = "vulcanus_tungsten_ore_probability"
+-- data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:tungsten-ore:richness"] = "vulcanus_tungsten_ore_richness"
 
 -- -- Mask resources from ammonia ocean
 -- terrain.mask_off_ammonia_ocean("calcite", "resource")
@@ -92,9 +92,9 @@ data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["s
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["tungsten-ore"] = {}
 
 -- autoplace_controls
-data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["calcite"] = {}
+-- data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["calcite"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["sulfuric_acid_geyser"] = {}
-data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["tungsten_ore"] = {}
+-- data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["tungsten_ore"] = {}
 
 -- START: Fix Resource spawning
 data.raw.resource["calcite"].autoplace.has_starting_area_placement = false -- Does nothing but noise expression vulcanus_starting_calcite removes starter spot

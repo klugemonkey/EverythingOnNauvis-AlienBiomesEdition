@@ -4,6 +4,7 @@ Date: 2025-01-19
   Features:
     - This version was played from finish through end
     - Added descriptions to resources
+    - Tungsten ore and calcite now spawn like normal nauvis ores
   Bugfixes:
     - Removed startup settings which did not do anything.
     - Removed small lava patches around the map (or at least the ones that i carefully checked out :))

@@ -307,5 +307,7 @@ data:extend({
   -- END: Vulcanus
 
   -- START: Custom
+  noise_expression("calcite", "resource"),
+  noise_expression("tungsten-ore", "resource"),
   noise_expression("holmium-ore", "resource")
 })

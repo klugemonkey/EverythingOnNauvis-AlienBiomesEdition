@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.1
 Date: 2025-01-19
+  Bugfixes:
+    - Calcite and Tungsten ore wont spawn on ammonia oceans
   Modding:
     - Resource changes to tungsten ore and calcite are now done in data instead of data-final-fixes
 ---------------------------------------------------------------------------------------------------

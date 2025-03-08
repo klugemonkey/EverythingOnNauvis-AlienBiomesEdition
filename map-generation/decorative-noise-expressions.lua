@@ -2,8 +2,8 @@ local util = require("data-util")
 
 function noise_expression(name, type)
   local expression = {
-  type = "noise-expression",
-  name = util.generate_default_name(name),
+    type = "noise-expression",
+    name = util.generate_default_name(name),
     expression = data.raw[type][name].autoplace.probability_expression
   }
   if data.raw[type][name].autoplace.local_expressions then

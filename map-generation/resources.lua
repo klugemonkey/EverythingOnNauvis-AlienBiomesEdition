@@ -42,7 +42,7 @@ data:extend({
       mining_particle = "stone-particle",  -- TODO: Add particle - There is an actual calcite-particle-1.png in space-age\graphics\particle\calcite-particle
       mining_time = 1,
       result = "calcite",
-  },
+    },
     category = "hard-solid",
     collision_box = {{-0.1, -0.1}, {0.1, 0.1}},
     selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
@@ -55,28 +55,28 @@ data:extend({
       random_spot_size_minimum = 2,
       random_spot_size_maximum = 4,
       regular_rq_factor_multiplier = 1
-  },
-  stage_counts = {15000, 9500, 5500, 2900, 1300, 400, 150, 80},
-  stages = {
-    sheet =
-    {
-      filename = "__space-age__/graphics/entity/calcite/calcite.png",
-      priority = "extra-high",
-      width = 128,
-      height = 128,
-      frame_count = 8,
-      variation_count = 8,
-      scale = 0.5
-      }
-  },
-  effect_animation_period = 5,
-  effect_animation_period_deviation = 1,
-  effect_darkness_multiplier = 3.6,
-  min_effect_alpha = 0.2,
-  max_effect_alpha = 0.3,
-  mining_visualisation_tint = {r = 0.99, g = 1.0, b = 0.92, a = 1.000},
-  map_color = {0.8, 0.7, 0.7},
-  factoriopedia_simulation = simulations.factoriopedia_calcite,
+    },
+    stage_counts = {15000, 9500, 5500, 2900, 1300, 400, 150, 80},
+    stages = {
+      sheet =
+      {
+        filename = "__space-age__/graphics/entity/calcite/calcite.png",
+        priority = "extra-high",
+        width = 128,
+        height = 128,
+        frame_count = 8,
+        variation_count = 8,
+        scale = 0.5
+        }
+    },
+    effect_animation_period = 5,
+    effect_animation_period_deviation = 1,
+    effect_darkness_multiplier = 3.6,
+    min_effect_alpha = 0.2,
+    max_effect_alpha = 0.3,
+    mining_visualisation_tint = {r = 0.99, g = 1.0, b = 0.92, a = 1.000},
+    map_color = {0.8, 0.7, 0.7},
+    factoriopedia_simulation = simulations.factoriopedia_calcite,
   },
   {
     type = "autoplace-control",

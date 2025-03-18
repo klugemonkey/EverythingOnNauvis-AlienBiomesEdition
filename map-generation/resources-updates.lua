@@ -29,12 +29,12 @@ end
 --------------------------------------------------------------------------------
 
 -- Remove resources spawning on ammonia ocean
-terrain.mask_off_ammonia_ocean("iron-ore", "resource")
-terrain.mask_off_ammonia_ocean("copper-ore", "resource")
-terrain.mask_off_ammonia_ocean("stone", "resource")
-terrain.mask_off_ammonia_ocean("coal", "resource")
-terrain.mask_off_ammonia_ocean("uranium-ore", "resource")
-terrain.mask_off_ammonia_ocean("crude-oil", "resource")
+terrain.mask_nauvis_territory("iron-ore", "resource")
+terrain.mask_nauvis_territory("copper-ore", "resource")
+terrain.mask_nauvis_territory("stone", "resource")
+terrain.mask_nauvis_territory("coal", "resource")
+terrain.mask_nauvis_territory("uranium-ore", "resource")
+terrain.mask_nauvis_territory("crude-oil", "resource")
 
 --------------------------------------------------------------------------------
 -- MARK: Remove Aquilo resources to from Aquilo -- Dunno why i have to do this only for this planet...
@@ -50,7 +50,7 @@ data.raw.planet["aquilo"].map_gen_settings.autoplace_controls = {nil}
 -- Add holmium as ore
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["holmium-ore"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["holmium-ore"] = {}
-terrain.mask_off_ammonia_ocean("holmium-ore", "resource")
+terrain.mask_nauvis_territory("holmium-ore", "resource")
 
 --------------------------------------------------------------------------------
 -- MARK: Gleba
@@ -87,8 +87,8 @@ data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["t
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["sulfuric_acid_geyser"] = {}
 
 -- Mask resources from ammonia ocean
-terrain.mask_off_ammonia_ocean("calcite", "resource")
-terrain.mask_off_ammonia_ocean("tungsten-ore", "resource")
+terrain.mask_nauvis_territory("calcite", "resource")
+terrain.mask_nauvis_territory("tungsten-ore", "resource")
 
 -- START: Fix Resource spawning
 data.raw.resource["calcite"].autoplace.has_starting_area_placement = false -- Does nothing but noise expression vulcanus_starting_calcite removes starter spot

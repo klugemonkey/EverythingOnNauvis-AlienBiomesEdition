@@ -250,7 +250,6 @@ terrain.mask_aquilo_territory("lithium-iceberg-big", "simple-entity")
 -- END: Mask aquilo territory on all autoplace settings
 
 -- START: Update noise expressions
--- check seed: 2292869786
 data.raw.tile["snow-flat"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
 -- data.raw.tile["snow-crests"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
 -- data.raw.tile["snow-lumpy"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"

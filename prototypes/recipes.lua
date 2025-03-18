@@ -7,3 +7,6 @@ for _, category in pairs(data.raw) do
         end
     end
 end
+
+data.raw.recipe["lightning-rod"].hidden = true
+data.raw.recipe["lightning-collector"].hidden = true

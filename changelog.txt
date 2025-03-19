@@ -2,7 +2,7 @@
 Version: 0.1.6
 Date: 2025-03-21
   Changes:
-    - Ores related to Nauvis will not spawn on snow or ice
+    - Ores related to Nauvis will not spawn on ice
     - Lightning collectors are now hidden from player
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.5

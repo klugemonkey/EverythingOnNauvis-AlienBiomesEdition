@@ -14,6 +14,10 @@ function terrain.mask_off_nauvis_territory(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_nauvis_territory(" .. util.generate_default_name(decorative) .. ")"
 end
 
+function terrain.mask_resource_territory(decorative, decorative_type)
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_resource_territory(" .. util.generate_default_name(decorative) .. ")"
+end
+
 function terrain.mask_aquilo_territory(decorative, decorative_type)
   data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_aquilo_territory(" .. util.generate_default_name(decorative) .. ")"
 end
@@ -164,6 +168,12 @@ data:extend({
     name = "updated_deepwater",
     expression = "mask_nauvis_territory(water_base(-2, 200))"
   },
+  {
+    -- region for nauvis resources to spawn
+    type = "noise-expression",
+    name = "resource_territory",
+    expression = "aquilo_base(aquilo_ammonia_depth + 2, 200)"
+  },
 
   -- Noise functions
   {
@@ -179,6 +189,13 @@ data:extend({
     name = "mask_off_nauvis_territory",
     parameters = {"expression"},
     expression = "if(mask_nauvis_territory(expression) < 0, expression, -inf)"
+  },
+  {
+    -- Mask resource territory
+    type = "noise-function",
+    name = "mask_resource_territory",
+    parameters = {"expression"},
+    expression = "if(resource_territory <= 0, expression, -inf)"
   },
 })
 
@@ -250,6 +267,9 @@ terrain.mask_aquilo_territory("lithium-iceberg-big", "simple-entity")
 -- END: Mask aquilo territory on all autoplace settings
 
 -- START: Update noise expressions
+data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_ammonia + 0.01 * (aux - 0.5))"
+data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_ammonia - 0.01 * (aux - 0.5))"
+
 data.raw.tile["snow-flat"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
 -- data.raw.tile["snow-crests"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
 -- data.raw.tile["snow-lumpy"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
@@ -257,9 +277,6 @@ data.raw.tile["snow-flat"].autoplace.probability_expression = "mask_aquilo_terri
 data.raw.tile["ice-rough"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 1.5, 200))"
 data.raw.tile["ice-smooth"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 1, 200))"
 data.raw.tile["brash-ice"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 0.5, 200))"
-
-data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_ammonia + 0.01 * (aux - 0.5))"
-data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_ammonia - 0.01 * (aux - 0.5))"
 -- END: Update noise expressions
 
 data:extend({

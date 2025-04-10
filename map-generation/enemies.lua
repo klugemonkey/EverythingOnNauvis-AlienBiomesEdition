@@ -43,12 +43,12 @@ data:extend({
   },
 })
 
-data.raw["unit-spawner"]["biter-spawner"].autoplace.probability_expression = "mask_nauvis_territory(biter_spawner)"
-data.raw["unit-spawner"]["spitter-spawner"].autoplace.probability_expression = "mask_nauvis_territory(spitter_spawner)"
-data.raw["turret"]["small-worm-turret"].autoplace.probability_expression = "mask_nauvis_territory(small_worm_turret)"
-data.raw["turret"]["medium-worm-turret"].autoplace.probability_expression = "mask_nauvis_territory(medium_worm_turret)"
-data.raw["turret"]["big-worm-turret"].autoplace.probability_expression = "mask_nauvis_territory(big_worm_turret)"
-data.raw["turret"]["behemoth-worm-turret"].autoplace.probability_expression = "mask_nauvis_territory(behemoth_worm_turret)"
+data.raw["unit-spawner"]["biter-spawner"].autoplace.probability_expression = "eon_mask_nauvis_territory(biter_spawner)"
+data.raw["unit-spawner"]["spitter-spawner"].autoplace.probability_expression = "eon_mask_nauvis_territory(spitter_spawner)"
+data.raw["turret"]["small-worm-turret"].autoplace.probability_expression = "eon_mask_nauvis_territory(small_worm_turret)"
+data.raw["turret"]["medium-worm-turret"].autoplace.probability_expression = "eon_mask_nauvis_territory(medium_worm_turret)"
+data.raw["turret"]["big-worm-turret"].autoplace.probability_expression = "eon_mask_nauvis_territory(big_worm_turret)"
+data.raw["turret"]["behemoth-worm-turret"].autoplace.probability_expression = "eon_mask_nauvis_territory(behemoth_worm_turret)"
 
 --------------------------------------------------------------------------------
 -- MARK: Add Vulcanus enemies aka demolishers
@@ -67,5 +67,5 @@ data.raw["noise-expression"]["demolisher_starting_area"].expression = "if(vulcan
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["gleba_enemy_base"] = {}
 
 -- Normal spawning
-data.raw["noise-expression"]["gleba_spawner"].expression = "mask_gleba_territory(max(0.01 * gleba_starting_enemies, max(min(0.02, enemy_autoplace_base(0, 8)), min(0.001, gleba_fertile_spots_coastal * 5000 - gleba_biome_mask_green * 25000)) * (distance > 500 * gleba_starting_area_multiplier)) * gleba_above_deep_water_mask)"
-data.raw["noise-expression"]["gleba_spawner_small"].expression = "mask_gleba_territory(max(0.02 * gleba_starting_enemies, 0.02 * gleba_starting_enemies_safe, min(0.02, enemy_autoplace_base(0, 8)), min(0.001, gleba_fertile_spots_coastal * 5000 - gleba_biome_mask_green * 25000)) * gleba_above_deep_water_mask)"
+data.raw["noise-expression"]["gleba_spawner"].expression = "eon_mask_gleba_territory(max(0.01 * gleba_starting_enemies, max(min(0.02, enemy_autoplace_base(0, 8)), min(0.001, gleba_fertile_spots_coastal * 5000 - gleba_biome_mask_green * 25000)) * (distance > 500 * gleba_starting_area_multiplier)) * gleba_above_deep_water_mask)"
+data.raw["noise-expression"]["gleba_spawner_small"].expression = "eon_mask_gleba_territory(max(0.02 * gleba_starting_enemies, 0.02 * gleba_starting_enemies_safe, min(0.02, enemy_autoplace_base(0, 8)), min(0.001, gleba_fertile_spots_coastal * 5000 - gleba_biome_mask_green * 25000)) * gleba_above_deep_water_mask)"

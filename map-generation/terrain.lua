@@ -7,55 +7,55 @@ local util = require("data-util")
 local terrain = {}
 
 function terrain.mask_nauvis_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_nauvis_territory(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_nauvis_territory(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_nauvis_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_nauvis_territory(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_nauvis_territory(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_resource_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_resource_territory(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_resource_territory(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_aquilo_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_aquilo_territory(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_aquilo_territory(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_aquilo_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_aquilo_territory(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_aquilo_territory(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_ammonia_ocean(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_ammonia_ocean(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_ammonia_ocean(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_ammonia_ocean(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_ammonia_ocean(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_ammonia_ocean(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_gleba_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_gleba_territory(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_gleba_territory(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_gleba_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_gleba_territory(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_gleba_territory(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_vulcano_coverage(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_vulcano_coverage(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_vulcano_coverage(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_vulcano_coverage(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_vulcano_coverage(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_vulcano_coverage(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_vulcano_terrain(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_vulcano_terrain(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_vulcano_terrain(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_vulcano_terrain(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "mask_off_vulcano_terrain(" .. util.generate_default_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_vulcano_terrain(" .. util.generate_eon_name(decorative) .. ")"
 end
 
 data:extend({
@@ -83,7 +83,7 @@ data.raw.tile["deepwater"].autoplace = {
 -- START: Mask nauvis territory on all autoplace settings
 -- Remove nauvis trees from vulcanus_terrain
 -- data.raw["noise-expression"]["trees_forest_path_cutout"].expression = "mask_off_vulcano_terrain(min(nauvis_bridge_paths, nauvis_hills_paths, forest_paths))"
-data.raw["noise-expression"]["trees_forest_path_cutout_faded"].expression = "mask_nauvis_territory(trees_forest_path_cutout * 0.3 + tree_small_noise * 0.1)"
+data.raw["noise-expression"]["trees_forest_path_cutout_faded"].expression = "eon_mask_nauvis_territory(trees_forest_path_cutout * 0.3 + tree_small_noise * 0.1)"
 
 -- Remove nauvis decoratives from vulcano_coverage
 terrain.mask_nauvis_territory("cracked-mud-decal", "optimized-decorative")
@@ -152,7 +152,7 @@ terrain.mask_nauvis_territory("red-desert-3", "tile")
 -- END: Mask nauvis territory on all autoplace settings
 
 -- Remove nauvis cliffs from vulcanus_terrain
-data.raw["noise-expression"]["cliffiness_nauvis"].expression = "mask_off_aquilo_territory(mask_off_vulcano_terrain((main_cliffiness >= cliff_cutoff) * 10))"
+data.raw["noise-expression"]["cliffiness_nauvis"].expression = "eon_mask_off_aquilo_territory(eon_mask_off_vulcano_terrain((main_cliffiness >= cliff_cutoff) * 10))"
 
 data:extend({
   -- Noise expressions
@@ -160,13 +160,13 @@ data:extend({
     -- Fix water coverage
     type = "noise-expression",
     name = "updated_water",
-    expression = "mask_nauvis_territory(water_base(0, 100))"
+    expression = "eon_mask_nauvis_territory(water_base(0, 100))"
   },
   {
     -- Fix deepwater coverage
     type = "noise-expression",
     name = "updated_deepwater",
-    expression = "mask_nauvis_territory(water_base(-2, 200))"
+    expression = "eon_mask_nauvis_territory(water_base(-2, 200))"
   },
   {
     -- region for nauvis resources to spawn
@@ -179,21 +179,21 @@ data:extend({
   {
     -- Mask all nauvis territory
     type = "noise-function",
-    name = "mask_nauvis_territory",
+    name = "eon_mask_nauvis_territory",
     parameters = {"expression"},
-    expression = "mask_off_aquilo_territory(mask_off_gleba_territory(mask_off_vulcano_terrain(expression)))"
+    expression = "eon_mask_off_aquilo_territory(eon_mask_off_gleba_territory(eon_mask_off_vulcano_terrain(expression)))"
   },
   {
     -- Mask all nauvis territory
     type = "noise-function",
-    name = "mask_off_nauvis_territory",
+    name = "eon_mask_off_nauvis_territory",
     parameters = {"expression"},
-    expression = "if(mask_nauvis_territory(expression) < 0, expression, -inf)"
+    expression = "if(eon_mask_nauvis_territory(expression) < 0, expression, -inf)"
   },
   {
     -- Mask resource territory
     type = "noise-function",
-    name = "mask_resource_territory",
+    name = "eon_mask_resource_territory",
     parameters = {"expression"},
     expression = "if(resource_territory <= 0, expression, -inf)"
   },
@@ -267,16 +267,16 @@ terrain.mask_aquilo_territory("lithium-iceberg-big", "simple-entity")
 -- END: Mask aquilo territory on all autoplace settings
 
 -- START: Update noise expressions
-data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_ammonia + 0.01 * (aux - 0.5))"
-data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_ammonia - 0.01 * (aux - 0.5))"
+data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_ammonia + 0.01 * (aux - 0.5))"
+data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_ammonia - 0.01 * (aux - 0.5))"
 
-data.raw.tile["snow-flat"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
--- data.raw.tile["snow-crests"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
--- data.raw.tile["snow-lumpy"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
--- data.raw.tile["snow-patchy"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_land)"
-data.raw.tile["ice-rough"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 1.5, 200))"
-data.raw.tile["ice-smooth"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 1, 200))"
-data.raw.tile["brash-ice"].autoplace.probability_expression = "mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 0.5, 200))"
+data.raw.tile["snow-flat"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_land)"
+-- data.raw.tile["snow-crests"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_land)"
+-- data.raw.tile["snow-lumpy"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_land)"
+-- data.raw.tile["snow-patchy"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_land)"
+data.raw.tile["ice-rough"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 1.5, 200))"
+data.raw.tile["ice-smooth"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 1, 200))"
+data.raw.tile["brash-ice"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 0.5, 200))"
 -- END: Update noise expressions
 
 data:extend({
@@ -307,7 +307,7 @@ data:extend({
   {
     type = "noise-expression",
     name = "aquilo_land",
-    expression = "mask_off_vulcano_coverage(aquilo_base(aquilo_max_elevation, 100))"
+    expression = "eon_mask_off_vulcano_coverage(aquilo_base(aquilo_max_elevation, 100))"
   },
   {
     type = "noise-expression",
@@ -317,7 +317,7 @@ data:extend({
   {
     type = "noise-expression",
     name = "aquilo_ammonia",
-    expression = "mask_off_vulcano_coverage(aquilo_base(aquilo_ammonia_depth, 200))"
+    expression = "eon_mask_off_vulcano_coverage(aquilo_base(aquilo_ammonia_depth, 200))"
   },
   {
     type = "noise-expression",
@@ -453,28 +453,28 @@ data:extend({
   {
     -- Mask all aquilo territory
     type = "noise-function",
-    name = "mask_aquilo_territory",
+    name = "eon_mask_aquilo_territory",
     parameters = {"expression"},
     expression = "if(aquilo_mask, expression, -inf)"
   },
   {
     -- Mask off all aquilo territory
     type = "noise-function",
-    name = "mask_off_aquilo_territory",
+    name = "eon_mask_off_aquilo_territory",
     parameters = {"expression"},
     expression = "if(aquilo_mask, -inf, expression)"
   },
   {
     -- Mask all ammonia ocean territory
     type = "noise-function",
-    name = "mask_ammonia_ocean",
+    name = "eon_mask_ammonia_ocean",
     parameters = {"expression"},
     expression = "if(ammonia_mask, expression, -inf)"
   },
   {
     -- Mask off all ammonia ocean territory
     type = "noise-function",
-    name = "mask_off_ammonia_ocean",
+    name = "eon_mask_off_ammonia_ocean",
     parameters = {"expression"},
     expression = "if(ammonia_mask, -inf, expression)"
   },
@@ -758,9 +758,9 @@ data.raw["autoplace-control"]["gleba_water"].can_be_disabled = true
 
 -- START: Update noise expressions
 -- Mask gleba plants to gleba terrain
-data.raw["noise-expression"]["gleba_plants_noise"].expression = "mask_gleba_territory(abs(multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 700000, octaves = 3, input_scale = 1/20 }\z
+data.raw["noise-expression"]["gleba_plants_noise"].expression = "eon_mask_gleba_territory(abs(multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 700000, octaves = 3, input_scale = 1/20 }\z
                                                                                           * multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 200000, octaves = 3, input_scale = 1/6 * control:gleba_plants:frequency }))"
-data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "mask_gleba_territory(abs(multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 750000, octaves = 3, input_scale = 1/20 * control:gleba_plants:frequency }\z
+data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "eon_mask_gleba_territory(abs(multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 750000, octaves = 3, input_scale = 1/20 * control:gleba_plants:frequency }\z
                                                                                             * multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 250000, octaves = 3, input_scale = 1/6 * control:gleba_plants:frequency }))"
 -- END: Update noise expressions
 
@@ -770,12 +770,12 @@ data:extend({
     -- Create mask for gleba territory
     type = "noise-expression",
     name = "gleba_mask",
-    expression = "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
+    expression = "eon_mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
     local_expressions = {
-      grass_1 = util.generate_default_name("grass-1"),
-      grass_2 = util.generate_default_name("grass-2"),
-      grass_3 = util.generate_default_name("grass-3"),
-      grass_4 = util.generate_default_name("grass-4"),
+      grass_1 = util.generate_eon_name("grass-1"),
+      grass_2 = util.generate_eon_name("grass-2"),
+      grass_3 = util.generate_eon_name("grass-3"),
+      grass_4 = util.generate_eon_name("grass-4"),
       grass = "grass_1 + grass_2 + grass_3 + grass_4",
       starting_island = "20 * (4 - distance / 300)",
       south_offset = "clamp((y - 500) / 30, -15, 0)"
@@ -786,14 +786,14 @@ data:extend({
   {
     -- Mask all gleba territory
     type = "noise-function",
-    name = "mask_gleba_territory",
+    name = "eon_mask_gleba_territory",
     parameters = {"expression"},
     expression = "if(gleba_mask, expression, -inf)"
   },
   {
     -- Mask off all gleba territory
     type = "noise-function",
-    name = "mask_off_gleba_territory",
+    name = "eon_mask_off_gleba_territory",
     parameters = {"expression"},
     expression = "if(gleba_mask, -inf, expression)"
   },
@@ -955,7 +955,7 @@ data.raw["noise-expression"]["lava_mountains_range"].expression = "1100 * range_
 -- Removes all lava spots except vulkane
 data.raw["noise-expression"]["lava_hot_mountains_range"].expression = "1000 * range_select_base(mountain_lava_spots, 0.15, 0.35, 1, 0, 1) - offset_vulcano"
 -- Mask vulcanus decoratives
-data.raw["noise-expression"]["crater_cliff"].expression = "mask_vulcano_coverage(0.5 * (vulcanus_rock_noise + 0.5 * aux - 0.5 * moisture) * (1 - max(vulcanus_basalts_biome,vulcanus_ashlands_biome)) * place_every_n(21,21,0,0))"
+data.raw["noise-expression"]["crater_cliff"].expression = "eon_mask_vulcano_coverage(0.5 * (vulcanus_rock_noise + 0.5 * aux - 0.5 * moisture) * (1 - max(vulcanus_basalts_biome,vulcanus_ashlands_biome)) * place_every_n(21,21,0,0))"
 
 -- New noise expressions and noise functions
 data:extend({
@@ -995,28 +995,28 @@ data:extend({
   {
     -- Mask close surroundings of vulcano
     type = "noise-function",
-    name = "mask_vulcano_coverage",
+    name = "eon_mask_vulcano_coverage",
     parameters = {"expression"},
     expression = "if(vulcano_coverage, expression, -inf)"
   },
   {
     -- Mask all vulcanus terrain
     type = "noise-function",
-    name = "mask_vulcano_terrain",
+    name = "eon_mask_vulcano_terrain",
     parameters = {"expression"},
     expression = "if(vulcanus_terrain, expression, -inf)"
   },
   {
     -- Mask off close surroundings of vulcano
     type = "noise-function",
-    name = "mask_off_vulcano_coverage",
+    name = "eon_mask_off_vulcano_coverage",
     parameters = {"expression"},
     expression = "if(vulcano_coverage, -inf, expression)"
   },
   {
     -- Mask off all vulcanus terrain
     type = "noise-function",
-    name = "mask_off_vulcano_terrain",
+    name = "eon_mask_off_vulcano_terrain",
     parameters = {"expression"},
     expression = "if(vulcanus_terrain, -inf, expression)"
   },

@@ -93,13 +93,13 @@ terrain.mask_resource_territory("tungsten-ore", "resource")
 -- START: Fix Resource spawning
 data.raw.resource["calcite"].autoplace.has_starting_area_placement = false -- Does nothing but noise expression vulcanus_starting_calcite removes starter spot
 data.raw["noise-expression"]["vulcanus_starting_calcite"].expression = "-inf"
-data.raw["noise-expression"]["vulcanus_calcite_probability"].expression = "mask_off_ammonia_ocean((control:calcite:size > 0) * (1000 * ((0.5 + vulcanus_calcite_region) * random_penalty_between(0.9, 1, 1) - 1)))"
+data.raw["noise-expression"]["vulcanus_calcite_probability"].expression = "eon_mask_off_ammonia_ocean((control:calcite:size > 0) * (1000 * ((0.5 + vulcanus_calcite_region) * random_penalty_between(0.9, 1, 1) - 1)))"
 
 data.raw.resource["sulfuric-acid-geyser"].autoplace.has_starting_area_placement = false -- Does nothing but noise expression vulcanus_starting_sulfur removes starter spot
 data.raw["noise-expression"]["vulcanus_sulfuric_acid_geyser_probability"].expression = "(control:sulfuric_acid_geyser:size > 0) * (0.005 * ((vulcanus_sulfuric_acid_region_patchy > 0) + 2 * updated_volcanic_folds))"
 data.raw["noise-expression"]["vulcanus_starting_sulfur"].expression = "-inf"
 
 data.raw.resource["tungsten-ore"].autoplace.has_starting_area_placement = false -- Does nothing but noise expression vulcanus_starting_tungsten removes starter spot
-data.raw["noise-expression"]["vulcanus_tungsten_ore_probability"].expression = "mask_off_ammonia_ocean((control:tungsten_ore:size > 0) * (1000 * ((0.7 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1)))"
+data.raw["noise-expression"]["vulcanus_tungsten_ore_probability"].expression = "eon_mask_off_ammonia_ocean((control:tungsten_ore:size > 0) * (1000 * ((0.7 + vulcanus_tungsten_ore_region) * random_penalty_between(0.9, 1, 1) - 1)))"
 data.raw["noise-expression"]["vulcanus_starting_tungsten"].expression = "-inf"
 -- END: Fix Resource spawning

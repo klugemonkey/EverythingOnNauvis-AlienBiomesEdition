@@ -1,6 +1,6 @@
 {
     "name": "EverythingOnNauvis",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "title": "Everything on Nauvis",
     "description": "Moves all resources to Nauvis",
     "author": "Spaghetti",
@@ -8,8 +8,8 @@
     "factorio_version": "2.0",
     "space_travel_required": true,
     "dependencies": [
-        "base >= 2.0.28",
-        "space-age >= 2.0.28",
+        "base >= 2.0.43",
+        "space-age >= 2.0.43",
         "! naufulglebunusilo",
         "! rso-mod"
     ]

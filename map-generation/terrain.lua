@@ -63,7 +63,7 @@ data:extend({
   {
     -- Define starting radius
     type = "noise-expression",
-    name = "new_starting_radius",
+    name = "eon_starting_radius",
     expression = "0.7 * 0.75"
   },
 })
@@ -74,10 +74,10 @@ data:extend({
 
 -- Remove water where at vulcano spots
 data.raw.tile["water"].autoplace = {
-  probability_expression = "updated_water"
+  probability_expression = "eon_updated_water"
 }
 data.raw.tile["deepwater"].autoplace = {
-  probability_expression = "updated_deepwater"
+  probability_expression = "eon_updated_deepwater"
 }
 
 -- START: Mask nauvis territory on all autoplace settings
@@ -159,20 +159,20 @@ data:extend({
   {
     -- Fix water coverage
     type = "noise-expression",
-    name = "updated_water",
-    expression = "eon_mask_nauvis_territory(water_base(0, 100))"
+    name = "eon_updated_water",
+    expression = "eon_mask_nauvis_territory(eon_water_base(0, 100))"
   },
   {
     -- Fix deepwater coverage
     type = "noise-expression",
-    name = "updated_deepwater",
-    expression = "eon_mask_nauvis_territory(water_base(-2, 200))"
+    name = "eon_updated_deepwater",
+    expression = "eon_mask_nauvis_territory(eon_water_base(-2, 200))"
   },
   {
     -- region for nauvis resources to spawn
     type = "noise-expression",
-    name = "resource_territory",
-    expression = "aquilo_base(aquilo_ammonia_depth + 2, 200)"
+    name = "eon_resource_territory",
+    expression = "eon_aquilo_base(eon_aquilo_ammonia_depth + 2, 200)"
   },
 
   -- Noise functions
@@ -195,7 +195,7 @@ data:extend({
     type = "noise-function",
     name = "eon_mask_resource_territory",
     parameters = {"expression"},
-    expression = "if(resource_territory <= 0, expression, -inf)"
+    expression = "if(eon_resource_territory <= 0, expression, -inf)"
   },
 })
 
@@ -267,16 +267,16 @@ terrain.mask_aquilo_territory("lithium-iceberg-big", "simple-entity")
 -- END: Mask aquilo territory on all autoplace settings
 
 -- START: Update noise expressions
-data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_ammonia + 0.01 * (aux - 0.5))"
-data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_ammonia - 0.01 * (aux - 0.5))"
+data.raw.tile["ammoniacal-ocean"].autoplace.probability_expression = "eon_mask_aquilo_territory(eon_aquilo_ammonia + 0.01 * (aux - 0.5))"
+data.raw.tile["ammoniacal-ocean-2"].autoplace.probability_expression = "eon_mask_aquilo_territory(eon_aquilo_ammonia - 0.01 * (aux - 0.5))"
 
-data.raw.tile["snow-flat"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_land)"
--- data.raw.tile["snow-crests"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_land)"
--- data.raw.tile["snow-lumpy"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_land)"
--- data.raw.tile["snow-patchy"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_land)"
-data.raw.tile["ice-rough"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 1.5, 200))"
-data.raw.tile["ice-smooth"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 1, 200))"
-data.raw.tile["brash-ice"].autoplace.probability_expression = "eon_mask_aquilo_territory(aquilo_base(aquilo_ammonia_depth + 0.5, 200))"
+data.raw.tile["snow-flat"].autoplace.probability_expression = "eon_mask_aquilo_territory(eon_aquilo_land)"
+-- data.raw.tile["snow-crests"].autoplace.probability_expression = "eon_mask_aquilo_territory(eon_aquilo_land)"
+-- data.raw.tile["snow-lumpy"].autoplace.probability_expression = "eon_mask_aquilo_territory(eon_aquilo_land)"
+-- data.raw.tile["snow-patchy"].autoplace.probability_expression = "eon_mask_aquilo_territory(eon_aquilo_land)"
+data.raw.tile["ice-rough"].autoplace.probability_expression = "eon_mask_aquilo_territory(eon_aquilo_base(eon_aquilo_ammonia_depth + 1.5, 200))"
+data.raw.tile["ice-smooth"].autoplace.probability_expression = "eon_mask_aquilo_territory(eon_aquilo_base(eon_aquilo_ammonia_depth + 1, 200))"
+data.raw.tile["brash-ice"].autoplace.probability_expression = "eon_mask_aquilo_territory(eon_aquilo_base(eon_aquilo_ammonia_depth + 0.5, 200))"
 -- END: Update noise expressions
 
 data:extend({
@@ -295,55 +295,55 @@ data:extend({
   {
     -- Create mask for aquilo territory
     type = "noise-expression",
-    name = "aquilo_mask",
-    expression = "aquilo_land > -1",
+    name = "eon_aquilo_mask",
+    expression = "eon_aquilo_land > -1",
   },
   {
     -- Create mask for aquilo territory
     type = "noise-expression",
-    name = "ammonia_mask",
-    expression = "aquilo_ammonia > -1",
+    name = "eon_ammonia_mask",
+    expression = "eon_aquilo_ammonia > -1",
   },
   {
     type = "noise-expression",
-    name = "aquilo_land",
-    expression = "eon_mask_off_vulcano_coverage(aquilo_base(aquilo_max_elevation, 100))"
+    name = "eon_aquilo_land",
+    expression = "eon_mask_off_vulcano_coverage(eon_aquilo_base(eon_aquilo_max_elevation, 100))"
   },
   {
     type = "noise-expression",
-    name = "aquilo_max_elevation",
+    name = "eon_aquilo_max_elevation",
     expression = "-1"
   },
   {
     type = "noise-expression",
-    name = "aquilo_ammonia",
-    expression = "eon_mask_off_vulcano_coverage(aquilo_base(aquilo_ammonia_depth, 200))"
+    name = "eon_aquilo_ammonia",
+    expression = "eon_mask_off_vulcano_coverage(eon_aquilo_base(eon_aquilo_ammonia_depth, 200))"
   },
   {
     type = "noise-expression",
-    name = "aquilo_ammonia_depth",
-    expression = "aquilo_max_elevation - 4"
+    name = "eon_aquilo_ammonia_depth",
+    expression = "eon_aquilo_max_elevation - 4"
   },
   {
     type = "noise-expression",
-    name = "elevation_aquilo",
-    expression = "if(wlc_elevation > factorio_base_aquilo_elevation, wlc_elevation, min(factorio_base_aquilo_elevation, -1.1))",
+    name = "eon_elevation_aquilo",
+    expression = "if(wlc_elevation > eon_factorio_base_aquilo_elevation, wlc_elevation, min(eon_factorio_base_aquilo_elevation, -1.1))",
     local_expressions =
     {
       elevation_magnitude = 20,
       wlc_amplitude = 2,
       ammonia_level = "10 * log2(control:ammonia_ocean:size)",
       wlc_elevation = "max(aquilo_main - ammonia_level * wlc_amplitude, starting_island, north_bias)",
-      aquilo_main = "elevation_magnitude * (0.25 * aquilo_detail + 3 * aquilo_macro * starting_macro_multiplier)",
+      aquilo_main = "elevation_magnitude * (0.25 * eon_aquilo_detail + 3 * eon_aquilo_macro * starting_macro_multiplier)",
       -- if most of the world is flooded make sure starting areas still have land
       starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
-      starting_macro_multiplier = "clamp(distance * aquilo_segmentation_multiplier / 2000, 0, 1)",
+      starting_macro_multiplier = "clamp(distance * eon_aquilo_segmentation_multiplier / 2000, 0, 1)",
       north_bias = "aquilo_main + elevation_magnitude * (2 + y * segmentation_multiplier / 500)",
     }
   },
   {
     type = "noise-expression",
-    name = "factorio_base_aquilo_elevation",
+    name = "eon_factorio_base_aquilo_elevation",
     --intended_property = "elevation",
     expression = "lerp(blended, maxed, 0.4)",
     local_expressions = {
@@ -388,95 +388,95 @@ data:extend({
       tri_crack = "min(aquilo_simple_billows{seed1 = 2000, octaves = 3, input_scale = segmentation_mult / 1.5},\z
                        aquilo_simple_billows{seed1 = 3000, octaves = 3, input_scale = segmentation_mult / 1.2},\z
                        aquilo_simple_billows{seed1 = 4000, octaves = 3, input_scale = segmentation_mult})",
-      segmentation_mult = "aquilo_segmentation_multiplier / 25",
+      segmentation_mult = "eon_aquilo_segmentation_multiplier / 25",
     }
   },
   {
     type = "noise-expression",
-    name = "aquilo_detail", -- the small scale details with variable persistance for a mix of smooth and jagged coastline
+    name = "eon_aquilo_detail", -- the small scale details with variable persistance for a mix of smooth and jagged coastline
     expression = "variable_persistence_multioctave_noise{x = x,\z
                                                          y = y,\z
                                                          seed0 = map_seed + 1,\z
                                                          seed1 = 600,\z
-                                                         input_scale = aquilo_segmentation_multiplier / 14,\z
+                                                         input_scale = eon_aquilo_segmentation_multiplier / 14,\z
                                                          output_scale = 0.03,\z
-                                                         offset_x = 10000 / aquilo_segmentation_multiplier,\z
+                                                         offset_x = 10000 / eon_aquilo_segmentation_multiplier,\z
                                                          octaves = 5,\z
-                                                         persistence = aquilo_persistance}"
+                                                         persistence = eon_aquilo_persistance}"
   },
   {
     type = "noise-expression",
-    name = "aquilo_segmentation_multiplier",
+    name = "eon_aquilo_segmentation_multiplier",
     expression = "0.5 * control:ammonia_ocean:frequency"
   },
   {
     type = "noise-expression",
-    name = "aquilo_persistance",
+    name = "eon_aquilo_persistance",
     expression = "clamp(amplitude_corrected_multioctave_noise{x = x,\z
                                                               y = y,\z
                                                               seed0 = map_seed + 1,\z
                                                               seed1 = 500,\z
                                                               octaves = 5,\z
-                                                              input_scale = aquilo_segmentation_multiplier / 2,\z
-                                                              offset_x = 10000 / aquilo_segmentation_multiplier,\z
+                                                              input_scale = eon_aquilo_segmentation_multiplier / 2,\z
+                                                              offset_x = 10000 / eon_aquilo_segmentation_multiplier,\z
                                                               persistence = 0.7,\z
                                                               amplitude = 0.5} + 0.55,\z
                         0.5, 0.65)"
   },
   {
     type = "noise-expression",
-    name = "aquilo_macro",
+    name = "eon_aquilo_macro",
     expression = "multioctave_noise{x = x,\z
                                     y = y,\z
                                     persistence = 0.6,\z
                                     seed0 = map_seed + 1,\z
                                     seed1 = 1000,\z
                                     octaves = 2,\z
-                                    input_scale = aquilo_segmentation_multiplier / 1600}\z
+                                    input_scale = eon_aquilo_segmentation_multiplier / 1600}\z
                   * max(0, multioctave_noise{x = x,\z
                                     y = y,\z
                                     persistence = 0.6,\z
                                     seed0 = map_seed + 1,\z
                                     seed1 = 1100,\z
                                     octaves = 1,\z
-                                    input_scale = aquilo_segmentation_multiplier / 1600})",
+                                    input_scale = eon_aquilo_segmentation_multiplier / 1600})",
   },
 
   -- Noise functions
   {
     -- aquilo lakes
     type = "noise-function",
-    name = "aquilo_base",
+    name = "eon_aquilo_base",
     parameters = {"max_elevation", "influence"},
-    expression = "if(max_elevation >= elevation_aquilo, influence * min(max_elevation - elevation_aquilo, 1), -inf)"
+    expression = "if(max_elevation >= eon_elevation_aquilo, influence * min(max_elevation - eon_elevation_aquilo, 1), -inf)"
   },
   {
     -- Mask all aquilo territory
     type = "noise-function",
     name = "eon_mask_aquilo_territory",
     parameters = {"expression"},
-    expression = "if(aquilo_mask, expression, -inf)"
+    expression = "if(eon_aquilo_mask, expression, -inf)"
   },
   {
     -- Mask off all aquilo territory
     type = "noise-function",
     name = "eon_mask_off_aquilo_territory",
     parameters = {"expression"},
-    expression = "if(aquilo_mask, -inf, expression)"
+    expression = "if(eon_aquilo_mask, -inf, expression)"
   },
   {
     -- Mask all ammonia ocean territory
     type = "noise-function",
     name = "eon_mask_ammonia_ocean",
     parameters = {"expression"},
-    expression = "if(ammonia_mask, expression, -inf)"
+    expression = "if(eon_ammonia_mask, expression, -inf)"
   },
   {
     -- Mask off all ammonia ocean territory
     type = "noise-function",
     name = "eon_mask_off_ammonia_ocean",
     parameters = {"expression"},
-    expression = "if(ammonia_mask, -inf, expression)"
+    expression = "if(eon_ammonia_mask, -inf, expression)"
   },
 })
 
@@ -910,7 +910,7 @@ terrain.mask_vulcano_terrain("vulcanus-lava-fire", "optimized-decorative")
 
 -- START: Update noise expressions
 -- Increase radius for vulcane to start spawning
-data.raw["noise-expression"]["vulcanus_starting_area_radius"].expression = "new_starting_radius"
+data.raw["noise-expression"]["vulcanus_starting_area_radius"].expression = "eon_starting_radius"
 -- Influences volcanic-folds-flat tile - distance and radius are increased to match mountain_volcano_spots, also removes remains of starter spot
 data.raw["noise-expression"]["vulcanus_ashlands_start"].expression = "4 * starting_spot_at_angle{ angle = vulcanus_ashlands_angle,\z
                                                                                                   distance = 170 * vulcanus_starting_area_radius,\z

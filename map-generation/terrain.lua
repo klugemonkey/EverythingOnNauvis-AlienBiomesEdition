@@ -785,12 +785,37 @@ data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "eon_mask_gleb
 -- END: Update noise expressions
 
 -- New noise expressions and noise functions
+data.raw.tile["wetland-jellynut"].autoplace.probability_expression = "eon_jellynut_spots"
+data.raw.tile["wetland-yumako"].autoplace.probability_expression = "eon_yumako_spots"
+data.raw.tile["natural-jellynut-soil"].autoplace.probability_expression = "eon_jellynut_soil"
+data.raw.tile["natural-yumako-soil"].autoplace.probability_expression = "eon_yumako_soil"
+
 data:extend({
   -- Noise functions
   {
     type = "noise-expression",
     name = "eon_gleba_mask",
     expression = "eon_gleba_region(0)"
+  },
+  {
+    type = "noise-expression",
+    name = "eon_jellynut_spots",
+    expression = "clamp(eon_gleba_agriculture_spots(1, 64) * 5000, -inf, 2)"
+  },
+  {
+    type = "noise-expression",
+    name = "eon_yumako_spots",
+    expression = "clamp(eon_gleba_agriculture_spots(2, 64) * 5000, -inf, 2)"
+  },
+  {
+    type = "noise-expression",
+    name = "eon_jellynut_soil",
+    expression = "eon_gleba_agriculture_spots(1, 32) * 6"
+  },
+  {
+    type = "noise-expression",
+    name = "eon_yumako_soil",
+    expression = "eon_gleba_agriculture_spots(2, 32) * 6"
   },
 
   -- Noise functions
@@ -825,7 +850,33 @@ data:extend({
       south_offset_addend = "y_offset / (1 + pow(2, 0.01 * y_offset)) + 0.1 * y_offset - 60"
     }
   },
-
+  {
+    type = "noise-function",
+    name = "eon_gleba_agriculture_spots",
+    -- WHY THE FUCK IS spot_radius_expression NOT DOING ANYTHING HERE???
+    parameters = {"seed", "spot_radius_expression"},
+    expression = "eon_mask_gleba_territory(spot_noise{x = x + wobble_noise_x * 15,\z
+                                                      y = y + wobble_noise_y * 15,\z
+                                                      seed0 = map_seed,\z
+                                                      seed1 = seed,\z
+                                                      candidate_spot_count = 4,\z
+                                                      suggested_minimum_candidate_point_spacing = 128,\z
+                                                      skip_span = 1,\z
+                                                      skip_offset = 0,\z
+                                                      region_size = 1024,\z
+                                                      density_expression = 80,\z
+                                                      spot_quantity_expression = 1000,\z
+                                                      spot_radius_expression = spot_radius_expression,\z
+                                                      hard_region_target_quantity = 0,\z
+                                                      spot_favorability_expression = 60,\z
+                                                      basement_value = -0.5,\z
+                                                      maximum_spot_basement_radius = 128})",
+    local_expressions =
+    {
+      wobble_noise_x = "multioctave_noise{x = x, y = y, persistence = 0.5, seed0 = map_seed, seed1 = 3000000, octaves = 2, input_scale = 1/20}",
+      wobble_noise_y = "multioctave_noise{x = x, y = y, persistence = 0.5, seed0 = map_seed, seed1 = 4000000, octaves = 2, input_scale = 1/20}"
+    }
+  },
   {
     -- Mask all gleba territory
     type = "noise-function",

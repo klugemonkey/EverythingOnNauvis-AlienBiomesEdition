@@ -1008,12 +1008,7 @@ data:extend({
     -- Seed: 3329457809 south east
     type = "noise-expression",
     name = "eon_mountain_lava_spots",
-    -- expression = "clamp(vulcanus_threshold(eon_mountain_volcano_spots * 1.95 - 0.95, 0.4 * vulcanus_threshold(clamp(vulcanus_plasma(17453, 0.2, 0.4, 10, 20) / 20, 0, 1), 1.8)), 0, 1)"
     expression = "clamp(vulcanus_threshold(eon_mountain_volcano_spots * 1.95 - 0.95, 0.4 * vulcanus_threshold(clamp(vulcanus_plasma(17453, 0.2, 0.4, 10, 20) / 20, 0, 1), 3.5)), 0, 1)"
-    -- expression = "clamp(vulcanus_threshold(eon_mountain_volcano_spots * 1.95 - 0.95,\z
-    --                                        0.4 * clamp(vulcanus_threshold(vulcanus_mountains_biome, 0.5), 0, 1))\z
-    --                                        * vulcanus_threshold(clamp(vulcanus_plasma(17453, 0.2, 0.4, 10, 20) / 20, 0, 1), 1.8),\z
-    --                     0, 1)"
   },
   {
     -- Removes all lava spots except vulkane

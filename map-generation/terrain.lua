@@ -81,11 +81,11 @@ data.raw.tile["deepwater"].autoplace = {
 }
 
 -- START: Mask nauvis territory on all autoplace settings
--- Remove nauvis trees from vulcanus_terrain
+-- Remove nauvis trees from eon_vulcanus_terrain
 -- data.raw["noise-expression"]["trees_forest_path_cutout"].expression = "mask_off_vulcano_terrain(min(nauvis_bridge_paths, nauvis_hills_paths, forest_paths))"
 data.raw["noise-expression"]["trees_forest_path_cutout_faded"].expression = "eon_mask_nauvis_territory(trees_forest_path_cutout * 0.3 + tree_small_noise * 0.1)"
 
--- Remove nauvis decoratives from vulcano_coverage
+-- Remove nauvis decoratives from eon_vulcano_coverage
 terrain.mask_nauvis_territory("cracked-mud-decal", "optimized-decorative")
 terrain.mask_nauvis_territory("dark-mud-decal", "optimized-decorative")
 terrain.mask_nauvis_territory("lichen-decal", "optimized-decorative")
@@ -94,7 +94,7 @@ terrain.mask_nauvis_territory("small-rock", "optimized-decorative")
 terrain.mask_nauvis_territory("small-sand-rock", "optimized-decorative")
 terrain.mask_nauvis_territory("tiny-rock", "optimized-decorative")
 
--- Remove nauvis decoratives from vulcanus_terrain
+-- Remove nauvis decoratives from eon_vulcanus_terrain
 terrain.mask_nauvis_territory("big-rock", "simple-entity")
 terrain.mask_nauvis_territory("big-sand-rock", "simple-entity")
 terrain.mask_nauvis_territory("brown-asterisk", "optimized-decorative")
@@ -151,7 +151,7 @@ terrain.mask_nauvis_territory("red-desert-3", "tile")
 -- terrain.mask_nauvis_territory("deepwater", "tile")
 -- END: Mask nauvis territory on all autoplace settings
 
--- Remove nauvis cliffs from vulcanus_terrain
+-- Remove nauvis cliffs from eon_vulcanus_terrain
 data.raw["noise-expression"]["cliffiness_nauvis"].expression = "eon_mask_off_aquilo_territory(eon_mask_off_vulcano_terrain((main_cliffiness >= cliff_cutoff) * 10))"
 
 data:extend({
@@ -758,10 +758,34 @@ data.raw["autoplace-control"]["gleba_water"].can_be_disabled = true
 
 -- START: Update noise expressions
 -- Mask gleba plants to gleba terrain
-data.raw["noise-expression"]["gleba_plants_noise"].expression = "eon_mask_gleba_territory(abs(multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 700000, octaves = 3, input_scale = 1/20 }\z
-                                                                                          * multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 200000, octaves = 3, input_scale = 1/6 * control:gleba_plants:frequency }))"
-data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "eon_mask_gleba_territory(abs(multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 750000, octaves = 3, input_scale = 1/20 * control:gleba_plants:frequency }\z
-                                                                                            * multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 250000, octaves = 3, input_scale = 1/6 * control:gleba_plants:frequency }))"
+data.raw["noise-expression"]["gleba_plants_noise"].expression = "eon_mask_gleba_territory(abs(multioctave_noise{x = x,\z
+                                                                                                                y = y,\z
+                                                                                                                persistence = 0.8,\z
+                                                                                                                seed0 = map_seed,\z
+                                                                                                                seed1 = 700000,\z
+                                                                                                                octaves = 3,\z
+                                                                                                                input_scale = 1/20 }\z
+                                                                                            * multioctave_noise{x = x,\z
+                                                                                                                y = y,\z
+                                                                                                                persistence = 0.8,\z
+                                                                                                                seed0 = map_seed,\z
+                                                                                                                seed1 = 200000,\z
+                                                                                                                octaves = 3,\z
+                                                                                                                input_scale = 1/6 * control:gleba_plants:frequency }))"
+data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "eon_mask_gleba_territory(abs(multioctave_noise{x = x,\z
+                                                                                                                  y = y,\z
+                                                                                                                  persistence = 0.8,\z
+                                                                                                                  seed0 = map_seed,\z
+                                                                                                                  seed1 = 750000,\z
+                                                                                                                  octaves = 3,\z
+                                                                                                                  input_scale = 1/20 * control:gleba_plants:frequency }\z
+                                                                                              * multioctave_noise{x = x,\z
+                                                                                                                  y = y,\z
+                                                                                                                  persistence = 0.8,\z
+                                                                                                                  seed0 = map_seed,\z
+                                                                                                                  seed1 = 250000,\z
+                                                                                                                  octaves = 3,\z
+                                                                                                                  input_scale = 1/6 * control:gleba_plants:frequency }))"
 -- END: Update noise expressions
 
 -- New noise expressions and noise functions
@@ -769,7 +793,7 @@ data:extend({
   {
     -- Create mask for gleba territory
     type = "noise-expression",
-    name = "gleba_mask",
+    name = "eon_gleba_mask",
     expression = "eon_mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
     local_expressions = {
       grass_1 = util.generate_eon_name("grass-1"),
@@ -788,14 +812,14 @@ data:extend({
     type = "noise-function",
     name = "eon_mask_gleba_territory",
     parameters = {"expression"},
-    expression = "if(gleba_mask, expression, -inf)"
+    expression = "if(eon_gleba_mask, expression, -inf)"
   },
   {
     -- Mask off all gleba territory
     type = "noise-function",
     name = "eon_mask_off_gleba_territory",
     parameters = {"expression"},
-    expression = "if(gleba_mask, -inf, expression)"
+    expression = "if(eon_gleba_mask, -inf, expression)"
   },
 })
 
@@ -851,7 +875,7 @@ data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["h
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["big-volcanic-rock"] = {}
 -- END: Update map gen settings
 
--- Fix probability expressions for tiles
+-- Fix probability expressions for tiles and cliffs
 terrain.mask_vulcano_coverage("volcanic-ash-flats", "tile")
 terrain.mask_vulcano_coverage("volcanic-ash-light", "tile")
 terrain.mask_vulcano_coverage("volcanic-ash-dark", "tile")
@@ -865,10 +889,13 @@ terrain.mask_vulcano_coverage("volcanic-smooth-stone", "tile")
 terrain.mask_vulcano_coverage("volcanic-smooth-stone-warm", "tile")
 terrain.mask_vulcano_coverage("volcanic-ash-cracks", "tile")
 
-data.raw.tile["volcanic-folds"].autoplace.probability_expression = "updated_volcanic_folds" -- Removes all lava spots except vulkane
-data.raw.tile["volcanic-folds-flat"].autoplace.probability_expression = "updated_volcanic_folds_flat" -- Adds big ring around vulcano
-data.raw.tile["lava"].autoplace.probability_expression = "lava_mountains_range"
-data.raw.tile["lava-hot"].autoplace.probability_expression = "lava_hot_mountains_range"
+data.raw.tile["volcanic-folds"].autoplace.probability_expression = "eon_updated_volcanic_folds" -- Removes all lava spots except vulkane
+data.raw.tile["volcanic-folds-flat"].autoplace.probability_expression = "eon_updated_volcanic_folds_flat" -- Adds big ring around vulcano
+data.raw.tile["lava"].autoplace.probability_expression = "eon_lava_mountains_range"
+data.raw.tile["lava-hot"].autoplace.probability_expression = "eon_lava_hot_mountains_range"
+
+data.raw.cliff["crater-cliff"].autoplace.probability_expression = "eon_lava_hot_mountains_range"
+
 
 -- START: Mask vulcanus territory on all autoplace settings
 -- Mask decoratives close to vulcano
@@ -908,87 +935,133 @@ terrain.mask_vulcano_terrain("sulfur-rock-cluster", "optimized-decorative")
 terrain.mask_vulcano_terrain("vulcanus-lava-fire", "optimized-decorative")
 -- END: Mask vulcanus territory on all autoplace settings
 
--- START: Update noise expressions
--- Increase radius for vulcane to start spawning
-data.raw["noise-expression"]["vulcanus_starting_area_radius"].expression = "eon_starting_radius"
--- Influences volcanic-folds-flat tile - distance and radius are increased to match mountain_volcano_spots, also removes remains of starter spot
-data.raw["noise-expression"]["vulcanus_ashlands_start"].expression = "4 * starting_spot_at_angle{ angle = vulcanus_ashlands_angle,\z
-                                                                                                  distance = 170 * vulcanus_starting_area_radius,\z
-                                                                                                  radius = 740 * vulcanus_starting_area_radius,\z
-                                                                                                  x_distortion = 0.1 * vulcanus_starting_area_radius * (vulcanus_wobble_x + vulcanus_wobble_large_x + vulcanus_wobble_huge_x),\z
-                                                                                                  y_distortion = 0.1 * vulcanus_starting_area_radius * (vulcanus_wobble_y + vulcanus_wobble_large_y + vulcanus_wobble_huge_y)}"
--- Influences volcanic-folds-flat tile - distance and radius are increased to match mountain_volcano_spots, also removes remains of starter spot
-data.raw["noise-expression"]["vulcanus_basalts_start"].expression = "2 * starting_spot_at_angle{ angle = vulcanus_basalts_angle,\z
-                                                                                                 distance = 180 * vulcanus_starting_area_radius,\z
-                                                                                                 radius = 760 * vulcanus_starting_area_radius,\z
-                                                                                                 x_distortion = 0.1 * vulcanus_starting_area_radius * (vulcanus_wobble_x + vulcanus_wobble_large_x + vulcanus_wobble_huge_x),\z
-                                                                                                 y_distortion = 0.1 * vulcanus_starting_area_radius * (vulcanus_wobble_y + vulcanus_wobble_large_y + vulcanus_wobble_huge_y)}"
--- Influences volcanic-folds-flat tile - distance and radius are increased to match mountain_volcano_spots, also removes remains of starter spot
-data.raw["noise-expression"]["vulcanus_mountains_start"].expression = "2 * starting_spot_at_angle{ angle = vulcanus_mountains_angle,\z
-                                                                                                   distance = 190 * vulcanus_starting_area_radius,\z
-                                                                                                   radius = 780 * vulcanus_starting_area_radius,\z
-                                                                                                   x_distortion = 0.05 * vulcanus_starting_area_radius * (vulcanus_wobble_x + vulcanus_wobble_large_x + vulcanus_wobble_huge_x),\z
-                                                                                                   y_distortion = 0.05 * vulcanus_starting_area_radius * (vulcanus_wobble_y + vulcanus_wobble_large_y + vulcanus_wobble_huge_y)}"
--- Removes starter spot from vulcanus
-data.raw["noise-expression"]["mountain_volcano_spots"].expression = "raw_spots - starting_protector"
-data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.density_multiplier = "5 / sqrt(control:vulcanus_volcanism:frequency)"
-data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spots = "spot_noise{x = x + vulcanus_wobble_x/2 + vulcanus_wobble_large_x/12 + vulcanus_wobble_huge_x/80,\z
-                                                                                                 y = y + vulcanus_wobble_y/2 + vulcanus_wobble_large_y/12 + vulcanus_wobble_huge_y/80,\z
-                                                                                                 seed0 = map_seed,\z
-                                                                                                 seed1 = 1,\z
-                                                                                                 candidate_spot_count = 1,\z
-                                                                                                 suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
-                                                                                                 skip_span = 1,\z
-                                                                                                 skip_offset = 0,\z
-                                                                                                 region_size = 256*density_multiplier,\z
-                                                                                                 density_expression = volcano_area / volcanism_sq,\z
-                                                                                                 spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
-                                                                                                 spot_radius_expression = volcano_spot_radius,\z
-                                                                                                 hard_region_target_quantity = 0,\z
-                                                                                                 spot_favorability_expression = volcano_area,\z
-                                                                                                 basement_value = 0,\z
-                                                                                                 maximum_spot_basement_radius = volcano_spot_radius}"
--- Make volcano spots much rarer, see region_size
-data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.volcano_spot_radius = "300 * volcanism * sqrt(1 + control:vulcanus_volcanism:size)"
--- Removes all lava spots except vulkane
-data.raw["noise-expression"]["lava_mountains_range"].expression = "1100 * range_select_base(mountain_lava_spots, 0.3, 1, 1, 0, 1) - offset_vulcano"
--- Removes all lava spots except vulkane
-data.raw["noise-expression"]["lava_hot_mountains_range"].expression = "1000 * range_select_base(mountain_lava_spots, 0.15, 0.35, 1, 0, 1) - offset_vulcano"
--- Mask vulcanus decoratives
-data.raw["noise-expression"]["crater_cliff"].expression = "eon_mask_vulcano_coverage(0.5 * (vulcanus_rock_noise + 0.5 * aux - 0.5 * moisture) * (1 - max(vulcanus_basalts_biome,vulcanus_ashlands_biome)) * place_every_n(21,21,0,0))"
-
 -- New noise expressions and noise functions
 data:extend({
   -- Noise expressions
   {
+    -- Influences volcanic-folds-flat tile - distance and radius are increased to match mountain_volcano_spots, also removes remains of starter spot
+    type = "noise-expression",
+    name = "eon_vulcanus_ashlands_start",
+    expression = "4 * starting_spot_at_angle{angle = vulcanus_ashlands_angle,\z
+                                             distance = 170 * eon_starting_radius,\z
+                                             radius = 740 * eon_starting_radius,\z
+                                             x_distortion = 0.1 * eon_starting_radius * (vulcanus_wobble_x + vulcanus_wobble_large_x + vulcanus_wobble_huge_x),\z
+                                             y_distortion = 0.1 * eon_starting_radius * (vulcanus_wobble_y + vulcanus_wobble_large_y + vulcanus_wobble_huge_y)}"
+  },
+  {
+    -- Influences volcanic-folds-flat tile - distance and radius are increased to match mountain_volcano_spots, also removes remains of starter spot
+    type = "noise-expression",
+    name = "eon_vulcanus_basalts_start",
+    expression = "2 * starting_spot_at_angle{angle = vulcanus_basalts_angle,\z
+                                             distance = 180 * eon_starting_radius,\z
+                                             radius = 760 * eon_starting_radius,\z
+                                             x_distortion = 0.1 * eon_starting_radius * (vulcanus_wobble_x + vulcanus_wobble_large_x + vulcanus_wobble_huge_x),\z
+                                             y_distortion = 0.1 * eon_starting_radius * (vulcanus_wobble_y + vulcanus_wobble_large_y + vulcanus_wobble_huge_y)}"
+  },
+  {
+    -- Influences volcanic-folds-flat tile - distance and radius are increased to match mountain_volcano_spots, also removes remains of starter spot
+    type = "noise-expression",
+    name = "eon_vulcanus_mountains_start",
+    expression = "2 * starting_spot_at_angle{angle = vulcanus_mountains_angle,\z
+                                             distance = 190 * eon_starting_radius,\z
+                                             radius = 780 * eon_starting_radius,\z
+                                             x_distortion = 0.05 * eon_starting_radius * (vulcanus_wobble_x + vulcanus_wobble_large_x + vulcanus_wobble_huge_x),\z
+                                             y_distortion = 0.05 * eon_starting_radius * (vulcanus_wobble_y + vulcanus_wobble_large_y + vulcanus_wobble_huge_y)}"
+  },
+  {
+    type = "noise-expression",
+    name = "eon_mountain_volcano_spots",
+    -- Removes starter spot from vulcanus
+    expression = "raw_spots - starting_protector",
+    local_expressions =
+    {
+      starting_protector = "clamp(starting_spot_at_angle{ angle = vulcanus_mountains_angle + 180 * vulcanus_starting_direction,\z
+                                                          distance = (400 * vulcanus_starting_area_radius) / 2,\z
+                                                          radius = 800 * vulcanus_starting_area_radius,\z
+                                                          x_distortion = vulcanus_wobble_x/2 + vulcanus_wobble_large_x/12 + vulcanus_wobble_huge_x/80,\z
+                                                          y_distortion = vulcanus_wobble_y/2 + vulcanus_wobble_large_y/12 + vulcanus_wobble_huge_y/80}, 0, 1)",
+      raw_spots = "spot_noise{x = x + vulcanus_wobble_x/2 + vulcanus_wobble_large_x/12 + vulcanus_wobble_huge_x/80,\z
+                              y = y + vulcanus_wobble_y/2 + vulcanus_wobble_large_y/12 + vulcanus_wobble_huge_y/80,\z
+                              seed0 = map_seed,\z
+                              seed1 = 1,\z
+                              candidate_spot_count = 1,\z
+                              suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
+                              skip_span = 1,\z
+                              skip_offset = 0,\z
+                              region_size = 256*density_multiplier,\z
+                              density_expression = volcano_area / volcanism_sq,\z
+                              spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
+                              spot_radius_expression = volcano_spot_radius,\z
+                              hard_region_target_quantity = 0,\z
+                              spot_favorability_expression = volcano_area,\z
+                              basement_value = 0,\z
+                              maximum_spot_basement_radius = volcano_spot_radius}",
+      volcano_area = "lerp(vulcanus_mountains_biome_full_pre_volcano, 0, vulcanus_starting_area)",
+      volcano_spot_radius = "300 * volcanism * sqrt(1 + control:vulcanus_volcanism:size)",
+      volcano_spot_spacing = "1500 * volcanism",
+      volcanism = "0.3 + 0.7 * slider_rescale(control:vulcanus_volcanism:size, 3) / slider_rescale(vulcanus_scale_multiplier, 3)",
+      volcanism_sq = "volcanism * volcanism",
+      density_multiplier = "5 / sqrt(control:vulcanus_volcanism:frequency)"
+    }
+  },
+  {
+    -- Seed: 3329457809 south east
+    type = "noise-expression",
+    name = "eon_mountain_lava_spots",
+    -- expression = "clamp(vulcanus_threshold(eon_mountain_volcano_spots * 1.95 - 0.95, 0.4 * vulcanus_threshold(clamp(vulcanus_plasma(17453, 0.2, 0.4, 10, 20) / 20, 0, 1), 1.8)), 0, 1)"
+    expression = "clamp(vulcanus_threshold(eon_mountain_volcano_spots * 1.95 - 0.95, 0.4 * vulcanus_threshold(clamp(vulcanus_plasma(17453, 0.2, 0.4, 10, 20) / 20, 0, 1), 3.5)), 0, 1)"
+    -- expression = "clamp(vulcanus_threshold(eon_mountain_volcano_spots * 1.95 - 0.95,\z
+    --                                        0.4 * clamp(vulcanus_threshold(vulcanus_mountains_biome, 0.5), 0, 1))\z
+    --                                        * vulcanus_threshold(clamp(vulcanus_plasma(17453, 0.2, 0.4, 10, 20) / 20, 0, 1), 1.8),\z
+    --                     0, 1)"
+  },
+  {
+    -- Removes all lava spots except vulkane
+    type = "noise-expression",
+    name = "eon_lava_mountains_range",
+    expression = "1100 * range_select_base(eon_mountain_lava_spots, 0.3, 1, 1, 0, 1) - eon_offset_vulcano"
+  },
+  {
+    -- Removes all lava spots except vulkane
+    type = "noise-expression",
+    name = "eon_lava_hot_mountains_range",
+    expression = "1000 * range_select_base(eon_mountain_lava_spots, 0.15, 0.35, 1, 0, 1) - eon_offset_vulcano"
+  },
+  {
+    -- Mask vulcanus decoratives
+    type = "noise-expression",
+    name = "eon_crater_cliff",
+    expression = "eon_mask_vulcano_coverage(0.5 * (vulcanus_rock_noise + 0.5 * aux - 0.5 * moisture) * (1 - max(vulcanus_basalts_biome,vulcanus_ashlands_biome)) * place_every_n(21,21,0,0))"
+  },
+  {
     -- To remove the small random lava puddles
     type = "noise-expression",
-    name = "offset_vulcano",
+    name = "eon_offset_vulcano",
     expression = "1.5"
   },
   {
     -- Noise expression for ring around lava spots
     type = "noise-expression",
-    name = "updated_volcanic_folds",
-    expression = "10 * range_select_base(mountain_volcano_spots * 1.95 - 0.9, 0.16, 10, 1, 0, 1) - offset_vulcano"  --  Creates ring around lava_hot_mountains_range
+    name = "eon_updated_volcanic_folds",
+    expression = "10 * range_select_base(eon_mountain_volcano_spots * 1.95 - 0.9, 0.16, 10, 1, 0, 1) - eon_offset_vulcano"  --  Creates ring around eon_lava_hot_mountains_range
   },
   {
-    -- Noise expression for surroundings of updated_volcanic_folds
+    -- Noise expression for surroundings of eon_updated_volcanic_folds
     type = "noise-expression",
-    name = "updated_volcanic_folds_flat",
-    expression = "10 * range_select_base(mountain_volcano_spots * 1.95 - 0.9, 0, 0.5, 1, 0, 1) - offset_vulcano"  --  Creates ring around updated_volcanic_folds
+    name = "eon_updated_volcanic_folds_flat",
+    expression = "10 * range_select_base(eon_mountain_volcano_spots * 1.95 - 0.9, 0, 0.5, 1, 0, 1) - eon_offset_vulcano"  --  Creates ring around updated_volcanic_folds
   },
   {
     -- Noise expression for vulcano spot and close surround as mask
     type = "noise-expression",
-    name = "vulcano_coverage",
-    expression = "max(updated_volcanic_folds, lava_mountains_range, lava_hot_mountains_range) > 0"
+    name = "eon_vulcano_coverage",
+    expression = "max(eon_updated_volcanic_folds, eon_lava_mountains_range, eon_lava_hot_mountains_range) > 0"
   },
   {
     -- Noise expression for all vulcanus terrain as mask
     type = "noise-expression",
-    name = "vulcanus_terrain",
-    expression = "max(vulcano_coverage, updated_volcanic_folds_flat) > 0"
+    name = "eon_vulcanus_terrain",
+    expression = "max(eon_vulcano_coverage, eon_updated_volcanic_folds_flat) > 0"
   },
 
   -- Noise functions
@@ -997,28 +1070,28 @@ data:extend({
     type = "noise-function",
     name = "eon_mask_vulcano_coverage",
     parameters = {"expression"},
-    expression = "if(vulcano_coverage, expression, -inf)"
+    expression = "if(eon_vulcano_coverage, expression, -inf)"
   },
   {
     -- Mask all vulcanus terrain
     type = "noise-function",
     name = "eon_mask_vulcano_terrain",
     parameters = {"expression"},
-    expression = "if(vulcanus_terrain, expression, -inf)"
+    expression = "if(eon_vulcanus_terrain, expression, -inf)"
   },
   {
     -- Mask off close surroundings of vulcano
     type = "noise-function",
     name = "eon_mask_off_vulcano_coverage",
     parameters = {"expression"},
-    expression = "if(vulcano_coverage, -inf, expression)"
+    expression = "if(eon_vulcano_coverage, -inf, expression)"
   },
   {
     -- Mask off all vulcanus terrain
     type = "noise-function",
     name = "eon_mask_off_vulcano_terrain",
     parameters = {"expression"},
-    expression = "if(vulcanus_terrain, -inf, expression)"
+    expression = "if(eon_vulcanus_terrain, -inf, expression)"
   },
 })
 -- END: Update noise expressions

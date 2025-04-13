@@ -73,12 +73,8 @@ data:extend({
 --------------------------------------------------------------------------------
 
 -- Remove water where at vulcano spots
-data.raw.tile["water"].autoplace = {
-  probability_expression = "eon_updated_water"
-}
-data.raw.tile["deepwater"].autoplace = {
-  probability_expression = "eon_updated_deepwater"
-}
+data.raw.tile["water"].autoplace.probability_expression = "eon_updated_water + if(eon_gleba_region(-10), -inf, 0)"
+data.raw.tile["deepwater"].autoplace.probability_expression = "eon_updated_deepwater + if(eon_gleba_region(-100), -inf, 0)"
 
 -- START: Mask nauvis territory on all autoplace settings
 -- Remove nauvis trees from eon_vulcanus_terrain
@@ -160,7 +156,7 @@ data:extend({
     -- Fix water coverage
     type = "noise-expression",
     name = "eon_updated_water",
-    expression = "eon_mask_nauvis_territory(eon_water_base(0, 100))"
+    expression = "eon_mask_nauvis_territory(eon_water_base(0, 100) + eon_gleba_region(-100))"
   },
   {
     -- Fix deepwater coverage
@@ -790,23 +786,46 @@ data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "eon_mask_gleb
 
 -- New noise expressions and noise functions
 data:extend({
+  -- Noise functions
   {
-    -- Create mask for gleba territory
     type = "noise-expression",
     name = "eon_gleba_mask",
-    expression = "eon_mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
-    local_expressions = {
-      grass_1 = util.generate_eon_name("grass-1"),
-      grass_2 = util.generate_eon_name("grass-2"),
-      grass_3 = util.generate_eon_name("grass-3"),
-      grass_4 = util.generate_eon_name("grass-4"),
-      grass = "grass_1 + grass_2 + grass_3 + grass_4",
-      starting_island = "20 * (4 - distance / 300)",
-      south_offset = "clamp((y - 500) / 30, -15, 0)"
-    }
+    expression = "eon_gleba_region(0)"
   },
 
   -- Noise functions
+  {
+    type = "noise-function",
+    name = "eon_gleba_region",
+    parameters = {"threshold"},
+    expression = "eon_mask_off_vulcano_coverage(if(gleba_noise + gleba_small_noise + moisture_nauvis + south_offset_addend > threshold, 1, 0))",
+    local_expressions = {
+      gleba_noise = "quick_multioctave_noise{x = x,\z
+                                             y = y,\z
+                                             seed0 = map_seed,\z
+                                             seed1 = 5,\z
+                                             octaves = 4,\z
+                                             input_scale = var('control:gleba_plants:frequency') / 32,\z
+                                             output_scale = 1/2,\z
+                                             offset_x = 40000 / var('control:gleba_plants:frequency'),\z
+                                             octave_output_scale_multiplier = 3,\z
+                                             octave_input_scale_multiplier = 1/3}",
+      gleba_small_noise = "quick_multioctave_noise{x = x,\z
+                                                   y = y,\z
+                                                   seed0 = map_seed,\z
+                                                   seed1 = 5,\z
+                                                   octaves = 4,\z
+                                                   input_scale = var('control:gleba_plants:frequency') / 32,\z
+                                                   output_scale = 20,\z
+                                                   offset_x = 40000 / var('control:gleba_plants:frequency'),\z
+                                                   octave_output_scale_multiplier = 3,\z
+                                                   octave_input_scale_multiplier = 1/3}",
+      south_offset = 1000,
+      y_offset = "y - south_offset",
+      south_offset_addend = "y_offset / (1 + pow(2, 0.01 * y_offset)) + 0.1 * y_offset - 60"
+    }
+  },
+
   {
     -- Mask all gleba territory
     type = "noise-function",

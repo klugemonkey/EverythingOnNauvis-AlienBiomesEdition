@@ -63,7 +63,6 @@ data.raw["noise-expression"]["demolisher_starting_area"].expression = "if(eon_vu
 -- MARK: Add Gleba enemies aka strafer, stompers and wriggler pentapods
 --------------------------------------------------------------------------------
 
-
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["gleba_enemy_base"] = {}
 
 -- Normal spawning

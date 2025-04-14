@@ -3,6 +3,10 @@ Version: 0.1.7
 Date: 2025-04-18
   Changes:
     - Gleba tiles are much more prevalent in the south
+    - New algorithm for spawning yumako and jellynut
+    - Vulcane have a slightly different lava spot size
+  Bugfixes:
+    - Yumako and jellynut plants now will spawn with water disabled
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.6
 Date: 2025-03-21

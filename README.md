@@ -1,6 +1,6 @@
 # Everything on Nauvis
 
-Adds all the main recources and terrains from other planets to Nauvis. 
+Adds all the main recources and terrains from other planets to Nauvis.
 
 ## Features
 

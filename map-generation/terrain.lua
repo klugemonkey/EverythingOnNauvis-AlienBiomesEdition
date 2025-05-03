@@ -572,8 +572,10 @@ data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.setting
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["barnacles-decal"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["coral-stunted"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["coral-stunted-grey"] = {}
-data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["nerve-roots-veins-dense"] = {}
-data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["nerve-roots-veins-sparse"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["nerve-roots-dense"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["nerve-roots-sparse"] = {}
+-- data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["nerve-roots-veins-dense"] = {}
+-- data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["nerve-roots-veins-sparse"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["yellow-coral"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["solo-barnacle"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["curly-roots-orange"] = {}
@@ -698,8 +700,10 @@ terrain.mask_gleba_territory("grey-cracked-mud-decal", "optimized-decorative")
 terrain.mask_gleba_territory("barnacles-decal", "optimized-decorative")
 terrain.mask_gleba_territory("coral-stunted", "optimized-decorative")
 terrain.mask_gleba_territory("coral-stunted-grey", "optimized-decorative")
-terrain.mask_gleba_territory("nerve-roots-veins-dense", "optimized-decorative")
-terrain.mask_gleba_territory("nerve-roots-veins-sparse", "optimized-decorative")
+terrain.mask_gleba_territory("nerve-roots-dense", "optimized-decorative")
+terrain.mask_gleba_territory("nerve-roots-sparse", "optimized-decorative")
+-- terrain.mask_gleba_territory("nerve-roots-veins-dense", "optimized-decorative")
+-- terrain.mask_gleba_territory("nerve-roots-veins-sparse", "optimized-decorative")
 terrain.mask_gleba_territory("yellow-coral", "optimized-decorative")
 terrain.mask_gleba_territory("solo-barnacle", "optimized-decorative")
 terrain.mask_gleba_territory("curly-roots-orange", "optimized-decorative")

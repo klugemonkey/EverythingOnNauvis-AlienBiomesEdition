@@ -541,9 +541,6 @@ data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.setting
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["green-lettuce-lichen-water-1x1"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["green-lettuce-lichen-water-3x3"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["green-lettuce-lichen-water-6x6"] = {}
-data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["honeycomb-fungus"] = {}
-data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["honeycomb-fungus-1x1"] = {}
-data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["honeycomb-fungus-decayed"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["split-gill-1x1"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["split-gill-2x2"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["split-gill-dying-1x1"] = {}
@@ -607,6 +604,12 @@ data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.setting
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["lichen-decal"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["shroom-decal"] = {}
 
+if not mods["Spaghetorio"] then
+  data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["honeycomb-fungus"] = {}
+  data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["honeycomb-fungus-1x1"] = {}
+  data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.decorative.settings["honeycomb-fungus-decayed"] = {}
+end
+
 -- entity settings
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["iron-stromatolite"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["copper-stromatolite"] = {}
@@ -669,9 +672,6 @@ terrain.mask_gleba_territory("green-lettuce-lichen-6x6", "optimized-decorative")
 terrain.mask_gleba_territory("green-lettuce-lichen-water-1x1", "optimized-decorative")
 terrain.mask_gleba_territory("green-lettuce-lichen-water-3x3", "optimized-decorative")
 terrain.mask_gleba_territory("green-lettuce-lichen-water-6x6", "optimized-decorative")
-terrain.mask_gleba_territory("honeycomb-fungus", "optimized-decorative")
-terrain.mask_gleba_territory("honeycomb-fungus-1x1", "optimized-decorative")
-terrain.mask_gleba_territory("honeycomb-fungus-decayed", "optimized-decorative")
 terrain.mask_gleba_territory("split-gill-1x1", "optimized-decorative")
 terrain.mask_gleba_territory("split-gill-2x2", "optimized-decorative")
 terrain.mask_gleba_territory("split-gill-dying-1x1", "optimized-decorative")
@@ -750,6 +750,12 @@ terrain.mask_gleba_territory("stingfrond", "tree")
 terrain.mask_gleba_territory("boompuff", "tree")
 terrain.mask_gleba_territory("sunnycomb", "tree")
 terrain.mask_gleba_territory("water-cane", "tree")
+
+if not mods["Spaghetorio"] then
+  terrain.mask_gleba_territory("honeycomb-fungus", "optimized-decorative")
+  terrain.mask_gleba_territory("honeycomb-fungus-1x1", "optimized-decorative")
+  terrain.mask_gleba_territory("honeycomb-fungus-decayed", "optimized-decorative")
+end
 -- END: Mask gleba territory on all autoplace settings
 
 -- Update autoplace controls

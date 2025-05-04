@@ -2,6 +2,7 @@
 Version: 0.1.8
 Date: 2025-05-09
   Bugfixes:
+    - Fixed compatibility for honeycomb fungus when playing with Spaghetorio mod
     - Fixed some locale typo
     - Fixed compatibility with factorio 2.0.44 with new gleba decoratives
 ---------------------------------------------------------------------------------------------------

@@ -185,9 +185,6 @@ data:extend({
   duplicate_noise_expression("green-lettuce-lichen-water-1x1", "optimized-decorative"),
   duplicate_noise_expression("green-lettuce-lichen-water-3x3", "optimized-decorative"),
   duplicate_noise_expression("green-lettuce-lichen-water-6x6", "optimized-decorative"),
-  duplicate_noise_expression("honeycomb-fungus", "optimized-decorative"),
-  duplicate_noise_expression("honeycomb-fungus-1x1", "optimized-decorative"),
-  duplicate_noise_expression("honeycomb-fungus-decayed", "optimized-decorative"),
   duplicate_noise_expression("split-gill-1x1", "optimized-decorative"),
   duplicate_noise_expression("split-gill-2x2", "optimized-decorative"),
   duplicate_noise_expression("split-gill-dying-1x1", "optimized-decorative"),
@@ -327,3 +324,11 @@ data:extend({
   -- MARK: Noise expressions
   duplicate_noise_function("water_base")
 })
+
+if not mods["Spaghetorio"] then
+  data:extend({
+    duplicate_noise_expression("honeycomb-fungus", "optimized-decorative"),
+    duplicate_noise_expression("honeycomb-fungus-1x1", "optimized-decorative"),
+    duplicate_noise_expression("honeycomb-fungus-decayed", "optimized-decorative"),
+  })
+end

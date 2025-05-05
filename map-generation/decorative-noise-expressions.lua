@@ -1,11 +1,11 @@
-local util = require("data-util")
+local data_util = require("data-util")
 
 
 -- Returns new noise expression with name "name" to "eon_name"
 function duplicate_noise_expression(name, type)
   local expression = {
     type = "noise-expression",
-    name = util.generate_eon_name(name),
+    name = data_util.generate_eon_name(name),
     expression = data.raw[type][name].autoplace.probability_expression
   }
   if data.raw[type][name].autoplace.local_expressions then
@@ -17,7 +17,7 @@ end
 -- Returns new noise function with name "name" to "default_name"
 function duplicate_noise_function(name)
   expression = table.deepcopy(data.raw["noise-function"][name])
-  expression.name = util.generate_eon_name(name)
+  expression.name = data_util.generate_eon_name(name)
   return expression
 end
 

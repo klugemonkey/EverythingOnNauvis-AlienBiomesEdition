@@ -1,10 +1,12 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.8
 Date: 2025-05-09
+  Changes:
+    - Borders of gleba terrain are less smooth now
   Bugfixes:
     - Fixed compatibility for honeycomb fungus when playing with Spaghetorio mod
     - Fixed some locale typo
-    - Fixed compatibility with factorio 2.0.44 with new gleba decoratives
+    - Fixed compatibility with factorio 2.0.47 with new gleba decoratives
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.7
 Date: 2025-04-18

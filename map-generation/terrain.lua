@@ -1,61 +1,61 @@
 --------------------------------------------------------------------------------
 -- Fixes map generation for terrain
 --------------------------------------------------------------------------------
-local util = require("data-util")
+local data_util = require("data-util")
 
 
 local terrain = {}
 
 function terrain.mask_nauvis_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_nauvis_territory(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_nauvis_territory(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_nauvis_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_nauvis_territory(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_nauvis_territory(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_resource_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_resource_territory(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_resource_territory(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_aquilo_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_aquilo_territory(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_aquilo_territory(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_aquilo_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_aquilo_territory(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_aquilo_territory(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_ammonia_ocean(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_ammonia_ocean(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_ammonia_ocean(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_ammonia_ocean(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_ammonia_ocean(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_ammonia_ocean(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_gleba_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_gleba_territory(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_gleba_territory(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_gleba_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_gleba_territory(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_gleba_territory(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_vulcano_coverage(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_vulcano_coverage(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_vulcano_coverage(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_vulcano_coverage(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_vulcano_coverage(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_vulcano_coverage(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_vulcano_terrain(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_vulcano_terrain(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_vulcano_terrain(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 function terrain.mask_off_vulcano_terrain(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_vulcano_terrain(" .. util.generate_eon_name(decorative) .. ")"
+  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_vulcano_terrain(" .. data_util.generate_eon_name(decorative) .. ")"
 end
 
 data:extend({
@@ -833,7 +833,7 @@ data:extend({
     type = "noise-function",
     name = "eon_gleba_region",
     parameters = {"threshold"},
-    expression = "eon_mask_off_vulcano_coverage(if(gleba_noise + gleba_small_noise + moisture_nauvis + south_offset_addend > threshold, 1, 0))",
+    expression = "eon_mask_off_vulcano_coverage(if(gleba_noise + gleba_intermediate_noise + gleba_small_noise + moisture_nauvis + south_offset > threshold, 1, 0))",
     local_expressions = {
       gleba_noise = "quick_multioctave_noise{x = x,\z
                                              y = y,\z
@@ -842,22 +842,28 @@ data:extend({
                                              octaves = 4,\z
                                              input_scale = var('control:gleba_plants:frequency') / 32,\z
                                              output_scale = 1/2,\z
-                                             offset_x = 40000 / var('control:gleba_plants:frequency'),\z
                                              octave_output_scale_multiplier = 3,\z
                                              octave_input_scale_multiplier = 1/3}",
+      gleba_intermediate_noise = "quick_multioctave_noise{x = x,\z
+                                                          y = y,\z
+                                                          seed0 = map_seed,\z
+                                                          seed1 = 6,\z
+                                                          octaves = 4,\z
+                                                          input_scale = var('control:gleba_plants:frequency') / 32,\z
+                                                          output_scale = 2,\z
+                                                          octave_output_scale_multiplier = 3,\z
+                                                          octave_input_scale_multiplier = 1/3}",
       gleba_small_noise = "quick_multioctave_noise{x = x,\z
-                                                   y = y,\z
-                                                   seed0 = map_seed,\z
-                                                   seed1 = 5,\z
-                                                   octaves = 4,\z
-                                                   input_scale = var('control:gleba_plants:frequency') / 32,\z
-                                                   output_scale = 20,\z
-                                                   offset_x = 40000 / var('control:gleba_plants:frequency'),\z
-                                                   octave_output_scale_multiplier = 3,\z
-                                                   octave_input_scale_multiplier = 1/3}",
-      south_offset = 1000,
-      y_offset = "y - south_offset",
-      south_offset_addend = "y_offset / (1 + pow(2, 0.01 * y_offset)) + 0.1 * y_offset - 60"
+                                                          y = y,\z
+                                                          seed0 = map_seed,\z
+                                                          seed1 = 7,\z
+                                                          octaves = 4,\z
+                                                          input_scale = var('control:gleba_plants:frequency') / 4,\z
+                                                          output_scale = 1,\z
+                                                          octave_output_scale_multiplier = 3,\z
+                                                          octave_input_scale_multiplier = 1/3}",
+      y_offset = "y - 1000",  -- gleba starts around 1000 tiles to the south
+      south_offset = "y_offset / (1 + pow(2, 0.01 * y_offset)) + 0.1 * y_offset - 60"
     }
   },
   {

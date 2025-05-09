@@ -1,3 +1,6 @@
+Features:
+  - Add promethium asteroids when traveling to solar system edge: https://mods.factorio.com/mod/EverythingOnNauvis/discussion/68038ab7f0baa46ee78d5010
+
 Bug fixes:
   + Romve the small random lava patches - See noise expression offset_vulcano - Check seed 379334167
   - Add back gleba water (wetland-blue-slime and gleba-deep-lake) and surround them by a land tile such that they do not touch nauvis water. I think without them gleba might have some solid terrain without plants
@@ -14,6 +17,8 @@ Config changes
   - Increase coal patch density by factor 2-3
   - Reduce stone by factor 2-3
   + change stack stizes of asteroid chunks
+  - Consider changing casting recipes: https://mods.factorio.com/mod/EverythingOnNauvis/discussion/681abec547afb4fc3a0d4238
+  - Make Everything on Nauvis more region based: https://mods.factorio.com/mod/EverythingOnNauvis/discussion/6818e9f53fea09b18dee3b34
 
 Cosmetic changes
   ? Add promethium as ore
@@ -32,5 +37,4 @@ Low Prio:
   + Make that calcite patch behaves like nauvis ore
   + Make that tungsten ore patch behaves like nauvis ore
   + remove north_offset and south_offset for aquilo and gleba and replace them for a similar function like starting_island local expression
-  - Add setting for having north and south pole (aquilo at north and gleba at south)
   + for masks use code like "a > b" instead "if(a > b, 1, 0)"

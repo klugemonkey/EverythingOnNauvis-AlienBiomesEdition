@@ -1,6 +1,7 @@
 # Everything on Nauvis
 
-Adds all the main recources and terrains from other planets to Nauvis.
+If you do not want to deal with space logistics this mod might be interesting for you.
+This mod adds all the main recources and terrains from other planets to Nauvis and removes the other planets.
 
 ## Features
 

@@ -1,17 +1,19 @@
 local data_util = require("data-util")
 
-
 -- Returns new noise expression with name "name" to "eon_name"
 function duplicate_noise_expression(name, type)
-  local expression = {
-    type = "noise-expression",
-    name = data_util.generate_eon_name(name),
-    expression = data.raw[type][name].autoplace.probability_expression
-  }
-  if data.raw[type][name].autoplace.local_expressions then
-    expression.local_expressions = data.raw[type][name].autoplace.local_expressions
+  if data_util.has_expression(type, name) then
+    local expression = {
+      type = "noise-expression",
+      name = data_util.generate_eon_name(name),
+      expression = data.raw[type][name].autoplace.probability_expression
+    }
+    if data.raw[type][name].autoplace.local_expressions then
+      expression.local_expressions = data.raw[type][name].autoplace.local_expressions
+    end
+    return expression
   end
-  return expression
+  return
 end
 
 -- Returns new noise function with name "name" to "default_name"
@@ -53,22 +55,166 @@ data:extend({
   duplicate_noise_expression("red-desert-2", "tile"),
   duplicate_noise_expression("red-desert-3", "tile"),
   duplicate_noise_expression("water", "tile"),
-  duplicate_noise_expression("deepwater", "tile"),
+  duplicate_noise_expression("deepwater", "tile")
+})
 
+if mods["alien-biomes"] then
+  log("found alien-biomes mod")
+  data:extend({
+    -- Alien Biomes decoratives
+    duplicate_noise_expression("rock-huge-volcanic", "simple-entity"),
+    duplicate_noise_expression("rock-huge-tan", "simple-entity"),
+    duplicate_noise_expression("rock-huge-dustyrose", "simple-entity"),
+    duplicate_noise_expression("rock-huge-cream", "simple-entity"),
+    duplicate_noise_expression("rock-huge-brown", "simple-entity"),
+    duplicate_noise_expression("rock-huge-beige", "simple-entity"),
+    duplicate_noise_expression("rock-huge-red", "simple-entity"),
+    duplicate_noise_expression("rock-huge-violet", "simple-entity"),
+    duplicate_noise_expression("rock-huge-purple", "simple-entity"),
+    duplicate_noise_expression("rock-huge-aubergine", "simple-entity"),
+    duplicate_noise_expression("rock-huge-black", "simple-entity"),
+    duplicate_noise_expression("rock-huge-grey", "simple-entity"),
+    duplicate_noise_expression("rock-huge-white", "simple-entity"),
+
+    duplicate_noise_expression("rock-big-volcanic", "simple-entity"),
+    duplicate_noise_expression("rock-big-tan", "simple-entity"),
+    duplicate_noise_expression("rock-big-dustyrose", "simple-entity"),
+    duplicate_noise_expression("rock-big-cream", "simple-entity"),
+    duplicate_noise_expression("rock-big-brown", "simple-entity"),
+    duplicate_noise_expression("rock-big-beige", "simple-entity"),
+    duplicate_noise_expression("rock-big-red", "simple-entity"),
+    duplicate_noise_expression("rock-big-violet", "simple-entity"),
+    duplicate_noise_expression("rock-big-purple", "simple-entity"),
+    duplicate_noise_expression("rock-big-aubergine", "simple-entity"),
+    duplicate_noise_expression("rock-big-black", "simple-entity"),
+    duplicate_noise_expression("rock-big-grey", "simple-entity"),
+    duplicate_noise_expression("rock-big-white", "simple-entity"),
+    
+    duplicate_noise_expression("rock-medium-volcanic", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-tan", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-dustyrose", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-cream", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-brown", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-beige", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-red", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-violet", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-purple", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-aubergine", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-black", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-grey", "optimized-decorative"),
+    duplicate_noise_expression("rock-medium-white", "optimized-decorative"),
+    
+    duplicate_noise_expression("rock-small-volcanic", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-tan", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-dustyrose", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-cream", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-brown", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-beige", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-red", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-violet", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-purple", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-aubergine", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-black", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-grey", "optimized-decorative"),
+    duplicate_noise_expression("rock-small-white", "optimized-decorative"),
+    
+    duplicate_noise_expression("rock-tiny-volcanic", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-tan", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-dustyrose", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-cream", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-brown", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-beige", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-red", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-violet", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-purple", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-aubergine", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-black", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-grey", "optimized-decorative"),
+    duplicate_noise_expression("rock-tiny-white", "optimized-decorative"),
+
+    duplicate_noise_expression("sand-rock-big-tan", "simple-entity"),
+    duplicate_noise_expression("sand-rock-big-red", "simple-entity"),
+    duplicate_noise_expression("sand-rock-big-purple", "simple-entity"),
+    duplicate_noise_expression("sand-rock-big-black", "simple-entity"),
+    duplicate_noise_expression("sand-rock-big-white", "simple-entity"),
+
+    duplicate_noise_expression("sand-rock-medium-tan", "optimized-decorative"),
+    duplicate_noise_expression("sand-rock-medium-red", "optimized-decorative"),
+    duplicate_noise_expression("sand-rock-medium-purple", "optimized-decorative"),
+    duplicate_noise_expression("sand-rock-medium-black", "optimized-decorative"),
+    duplicate_noise_expression("sand-rock-medium-white", "optimized-decorative"),
+    
+    duplicate_noise_expression("sand-rock-small-tan", "optimized-decorative"),
+    duplicate_noise_expression("sand-rock-small-red", "optimized-decorative"),
+    duplicate_noise_expression("sand-rock-small-purple", "optimized-decorative"),
+    duplicate_noise_expression("sand-rock-small-black", "optimized-decorative"),
+    duplicate_noise_expression("sand-rock-small-white", "optimized-decorative"),
+
+    duplicate_noise_expression("stone-decal-volcanic", "optimized-decorative"),
+    duplicate_noise_expression("stone-decal-tan", "optimized-decorative"),
+    duplicate_noise_expression("stone-decal-red", "optimized-decorative"),
+    duplicate_noise_expression("stone-decal-purple", "optimized-decorative"),
+    duplicate_noise_expression("stone-decal-black", "optimized-decorative"),
+    duplicate_noise_expression("stone-decal-white", "optimized-decorative"),
+
+    duplicate_noise_expression("sand-decal-volcanic", "optimized-decorative"),
+    duplicate_noise_expression("sand-decal-tan", "optimized-decorative"),
+    duplicate_noise_expression("sand-decal-red", "optimized-decorative"),
+    duplicate_noise_expression("sand-decal-purple", "optimized-decorative"),
+    duplicate_noise_expression("sand-decal-black", "optimized-decorative"),
+    duplicate_noise_expression("sand-decal-white", "optimized-decorative"),
+
+    duplicate_noise_expression("cane-single", "optimized-decorative"),
+    duplicate_noise_expression("cane-cluster", "optimized-decorative")
+
+    -- END: Alien Biomes
+  })
+end
+
+if not mods["alien-biomes"] then
+  log("alien-biomes mod not found")
+  data:extend({
+    -- Nauvis decoratives
+    duplicate_noise_expression("huge-rock", "simple-entity"),
+    duplicate_noise_expression("big-rock", "simple-entity"),
+    duplicate_noise_expression("big-sand-rock", "simple-entity"),
+    duplicate_noise_expression("medium-rock", "optimized-decorative"),
+    duplicate_noise_expression("medium-sand-rock", "optimized-decorative"),
+    duplicate_noise_expression("small-rock", "optimized-decorative"),
+    duplicate_noise_expression("small-sand-rock", "optimized-decorative"),
+    duplicate_noise_expression("tiny-rock", "optimized-decorative"),
+
+    duplicate_noise_expression("red-desert-decal", "optimized-decorative"),
+    duplicate_noise_expression("sand-dune-decal", "optimized-decorative"),
+    duplicate_noise_expression("brown-small-grass", "optimized-decorative"),
+    duplicate_noise_expression("red-asterisk-mini", "optimized-decorative"),
+    duplicate_noise_expression("red-pita-mini", "optimized-decorative"),
+
+    duplicate_noise_expression("water-cane", "tree"),
+  })
+end
+
+data:extend({
   -- Nauvis decoratives
-  duplicate_noise_expression("big-rock", "simple-entity"),
-  duplicate_noise_expression("big-sand-rock", "simple-entity"),
+  duplicate_noise_expression("cracked-mud-decal", "optimized-decorative"),
+  duplicate_noise_expression("dark-mud-decal", "optimized-decorative"),
+  duplicate_noise_expression("light-mud-decal", "optimized-decorative"),
+  duplicate_noise_expression("wetland-decal", "optimized-decorative"),
+  duplicate_noise_expression("puddle-decal", "optimized-decorative"),
+  duplicate_noise_expression("lichen-decal", "optimized-decorative"),
+  duplicate_noise_expression("light-mud-decal", "optimized-decorative"),
+  duplicate_noise_expression("shroom-decal", "optimized-decorative"),
+
   duplicate_noise_expression("brown-asterisk", "optimized-decorative"),
   duplicate_noise_expression("brown-asterisk-mini", "optimized-decorative"),
-  duplicate_noise_expression("brown-carpet-grass", "optimized-decorative"),
   duplicate_noise_expression("brown-fluff", "optimized-decorative"),
   duplicate_noise_expression("brown-fluff-dry", "optimized-decorative"),
   duplicate_noise_expression("brown-hairy-grass", "optimized-decorative"),
-  duplicate_noise_expression("cracked-mud-decal", "optimized-decorative"),
-  duplicate_noise_expression("dark-mud-decal", "optimized-decorative"),
-  --   duplicate_noise_expression("enemy-decal", "optimized-decorative"),
+  duplicate_noise_expression("brown-carpet-grass", "optimized-decorative"),
+
   duplicate_noise_expression("garballo", "optimized-decorative"),
   duplicate_noise_expression("garballo-mini-dry", "optimized-decorative"),
+  
   duplicate_noise_expression("green-asterisk", "optimized-decorative"),
   duplicate_noise_expression("green-asterisk-mini", "optimized-decorative"),
   duplicate_noise_expression("green-bush-mini", "optimized-decorative"),
@@ -79,26 +225,13 @@ data:extend({
   duplicate_noise_expression("green-pita", "optimized-decorative"),
   duplicate_noise_expression("green-pita-mini", "optimized-decorative"),
   duplicate_noise_expression("green-small-grass", "optimized-decorative"),
-  duplicate_noise_expression("huge-rock", "simple-entity"),
-  duplicate_noise_expression("lichen-decal", "optimized-decorative"),
-  duplicate_noise_expression("light-mud-decal", "optimized-decorative"),
-  duplicate_noise_expression("medium-rock", "optimized-decorative"),
-  duplicate_noise_expression("medium-sand-rock", "optimized-decorative"),
-  --   duplicate_noise_expression("muddy-stump", "optimized-decorative"),
-  --   duplicate_noise_expression("nuclear-ground-patch", "optimized-decorative"),
-  duplicate_noise_expression("red-asterisk", "optimized-decorative"),
+
   duplicate_noise_expression("red-croton", "optimized-decorative"),
-  duplicate_noise_expression("red-desert-bush", "optimized-decorative"),
-  duplicate_noise_expression("red-desert-decal", "optimized-decorative"),
   duplicate_noise_expression("red-pita", "optimized-decorative"),
-  duplicate_noise_expression("sand-decal", "optimized-decorative"),
-  duplicate_noise_expression("sand-dune-decal", "optimized-decorative"),
-  duplicate_noise_expression("shroom-decal", "optimized-decorative"),
-  duplicate_noise_expression("small-rock", "optimized-decorative"),
-  duplicate_noise_expression("small-sand-rock", "optimized-decorative"),
-  duplicate_noise_expression("tiny-rock", "optimized-decorative"),
+  duplicate_noise_expression("red-asterisk", "optimized-decorative"),
+  duplicate_noise_expression("red-desert-bush", "optimized-decorative"),
+
   duplicate_noise_expression("white-desert-bush", "optimized-decorative"),
-  --   duplicate_noise_expression("worms-decal", "optimized-decorative"),
   -- END: Nauvis
 
   -- START: Aquilo
@@ -262,7 +395,6 @@ data:extend({
   duplicate_noise_expression("stingfrond", "tree"),
   duplicate_noise_expression("boompuff", "tree"),
   duplicate_noise_expression("sunnycomb", "tree"),
-  duplicate_noise_expression("water-cane", "tree"),
   -- END: Gleba
 
   -- START: Vulcanus
@@ -315,20 +447,20 @@ data:extend({
   duplicate_noise_expression("vulcanus-lava-fire", "optimized-decorative"),
   -- END: Vulcanus
 
+  -- MARK: Noise expressions
+  duplicate_noise_function("water_base"),  
+
   -- START: Everything on nauvis
   duplicate_noise_expression("calcite", "resource"),
   duplicate_noise_expression("tungsten-ore", "resource"),
-  duplicate_noise_expression("holmium-ore", "resource"),
+  duplicate_noise_expression("holmium-ore", "resource")
   -- END: Everything on nauvis
-
-  -- MARK: Noise expressions
-  duplicate_noise_function("water_base")
 })
 
 if not mods["Spaghetorio"] then
   data:extend({
     duplicate_noise_expression("honeycomb-fungus", "optimized-decorative"),
     duplicate_noise_expression("honeycomb-fungus-1x1", "optimized-decorative"),
-    duplicate_noise_expression("honeycomb-fungus-decayed", "optimized-decorative"),
+    duplicate_noise_expression("honeycomb-fungus-decayed", "optimized-decorative")
   })
 end

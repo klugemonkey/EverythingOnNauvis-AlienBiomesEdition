@@ -3,59 +3,84 @@
 --------------------------------------------------------------------------------
 local data_util = require("data-util")
 
-
 local terrain = {}
 
 function terrain.mask_nauvis_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_nauvis_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_nauvis_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_off_nauvis_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_nauvis_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_nauvis_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_resource_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_resource_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_resource_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_aquilo_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_aquilo_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_aquilo_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_off_aquilo_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_aquilo_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_aquilo_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_ammonia_ocean(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_ammonia_ocean(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_ammonia_ocean(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_off_ammonia_ocean(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_ammonia_ocean(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_ammonia_ocean(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_gleba_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_gleba_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_gleba_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_off_gleba_territory(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_gleba_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_gleba_territory(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_vulcano_coverage(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_vulcano_coverage(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_vulcano_coverage(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_off_vulcano_coverage(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_vulcano_coverage(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_vulcano_coverage(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_vulcano_terrain(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_vulcano_terrain(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_vulcano_terrain(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 function terrain.mask_off_vulcano_terrain(decorative, decorative_type)
-  data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_vulcano_terrain(" .. data_util.generate_eon_name(decorative) .. ")"
+  if data_util.has_expression(decorative_type, decorative) then 
+    data.raw[decorative_type][decorative].autoplace.probability_expression = "eon_mask_off_vulcano_terrain(" .. data_util.generate_eon_name(decorative) .. ")"
+  end
 end
 
 data:extend({
@@ -81,18 +106,128 @@ data.raw.tile["deepwater"].autoplace.probability_expression = "eon_updated_deepw
 -- data.raw["noise-expression"]["trees_forest_path_cutout"].expression = "mask_off_vulcano_terrain(min(nauvis_bridge_paths, nauvis_hills_paths, forest_paths))"
 data.raw["noise-expression"]["trees_forest_path_cutout_faded"].expression = "eon_mask_nauvis_territory(trees_forest_path_cutout * 0.3 + tree_small_noise * 0.1)"
 
+if mods["alien-biomes"] then
+    -- Remove Alien Biomes decoratives from eon_vulcano_coverage
+    terrain.mask_nauvis_territory("rock-huge-tan", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-dustyrose", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-cream", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-brown", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-beige", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-red", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-violet", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-purple", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-aubergine", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-black", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-grey", "simple-entity")
+    terrain.mask_nauvis_territory("rock-huge-white", "simple-entity")
+
+    terrain.mask_nauvis_territory("rock-big-tan", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-dustyrose", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-cream", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-brown", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-beige", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-red", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-violet", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-purple", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-aubergine", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-black", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-grey", "simple-entity")
+    terrain.mask_nauvis_territory("rock-big-white", "simple-entity")
+    
+    terrain.mask_nauvis_territory("rock-medium-tan", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-dustyrose", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-cream", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-brown", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-beige", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-red", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-violet", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-purple", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-aubergine", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-black", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-grey", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-medium-white", "optimized-decorative")
+    
+    terrain.mask_nauvis_territory("rock-small-tan", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-dustyrose", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-cream", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-brown", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-beige", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-red", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-violet", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-purple", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-aubergine", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-black", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-grey", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-small-white", "optimized-decorative")
+    
+    terrain.mask_nauvis_territory("rock-tiny-tan", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-dustyrose", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-cream", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-brown", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-beige", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-red", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-violet", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-purple", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-aubergine", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-black", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-grey", "optimized-decorative")
+    terrain.mask_nauvis_territory("rock-tiny-white", "optimized-decorative")
+
+    terrain.mask_nauvis_territory("sand-rock-big-tan", "simple-entity")
+    terrain.mask_nauvis_territory("sand-rock-big-red", "simple-entity")
+    terrain.mask_nauvis_territory("sand-rock-big-purple", "simple-entity")
+    terrain.mask_nauvis_territory("sand-rock-big-black", "simple-entity")
+    terrain.mask_nauvis_territory("sand-rock-big-white", "simple-entity")
+
+    terrain.mask_nauvis_territory("sand-rock-medium-tan", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-rock-medium-red", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-rock-medium-purple", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-rock-medium-black", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-rock-medium-white", "optimized-decorative")
+    
+    terrain.mask_nauvis_territory("sand-rock-small-tan", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-rock-small-red", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-rock-small-purple", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-rock-small-black", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-rock-small-white", "optimized-decorative")
+
+    terrain.mask_nauvis_territory("stone-decal-tan", "optimized-decorative")
+    terrain.mask_nauvis_territory("stone-decal-red", "optimized-decorative")
+    terrain.mask_nauvis_territory("stone-decal-purple", "optimized-decorative")
+    terrain.mask_nauvis_territory("stone-decal-black", "optimized-decorative")
+    terrain.mask_nauvis_territory("stone-decal-white", "optimized-decorative")
+
+    terrain.mask_nauvis_territory("sand-decal-tan", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-decal-red", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-decal-purple", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-decal-black", "optimized-decorative")
+    terrain.mask_nauvis_territory("sand-decal-white", "optimized-decorative")
+
+    terrain.mask_nauvis_territory("cane-single", "optimized-decorative")
+    terrain.mask_nauvis_territory("cane-cluster", "optimized-decorative")
+end
+
+if not mods["alien-biomes"] then
+  -- Remove nauvis decoratives from eon_vulcanus_terrain
+  terrain.mask_nauvis_territory("small-rock", "optimized-decorative")
+  terrain.mask_nauvis_territory("small-sand-rock", "optimized-decorative")
+  terrain.mask_nauvis_territory("tiny-rock", "optimized-decorative")
+  terrain.mask_nauvis_territory("big-rock", "simple-entity")
+  terrain.mask_nauvis_territory("big-sand-rock", "simple-entity")
+  terrain.mask_nauvis_territory("huge-rock", "simple-entity")
+  terrain.mask_nauvis_territory("medium-rock", "optimized-decorative")
+  terrain.mask_nauvis_territory("medium-sand-rock", "optimized-decorative")
+  terrain.mask_nauvis_territory("sand-decal", "optimized-decorative")
+  terrain.mask_nauvis_territory("sand-dune-decal", "optimized-decorative")
+  terrain.mask_nauvis_territory("red-desert-decal", "optimized-decorative")
+end
+
 -- Remove nauvis decoratives from eon_vulcano_coverage
 terrain.mask_nauvis_territory("cracked-mud-decal", "optimized-decorative")
 terrain.mask_nauvis_territory("dark-mud-decal", "optimized-decorative")
 terrain.mask_nauvis_territory("lichen-decal", "optimized-decorative")
 terrain.mask_nauvis_territory("light-mud-decal", "optimized-decorative")
-terrain.mask_nauvis_territory("small-rock", "optimized-decorative")
-terrain.mask_nauvis_territory("small-sand-rock", "optimized-decorative")
-terrain.mask_nauvis_territory("tiny-rock", "optimized-decorative")
 
--- Remove nauvis decoratives from eon_vulcanus_terrain
-terrain.mask_nauvis_territory("big-rock", "simple-entity")
-terrain.mask_nauvis_territory("big-sand-rock", "simple-entity")
 terrain.mask_nauvis_territory("brown-asterisk", "optimized-decorative")
 terrain.mask_nauvis_territory("brown-asterisk-mini", "optimized-decorative")
 terrain.mask_nauvis_territory("brown-carpet-grass", "optimized-decorative")
@@ -111,16 +246,10 @@ terrain.mask_nauvis_territory("green-hairy-grass", "optimized-decorative")
 terrain.mask_nauvis_territory("green-pita", "optimized-decorative")
 terrain.mask_nauvis_territory("green-pita-mini", "optimized-decorative")
 terrain.mask_nauvis_territory("green-small-grass", "optimized-decorative")
-terrain.mask_nauvis_territory("huge-rock", "simple-entity")
-terrain.mask_nauvis_territory("medium-rock", "optimized-decorative")
-terrain.mask_nauvis_territory("medium-sand-rock", "optimized-decorative")
 terrain.mask_nauvis_territory("red-asterisk", "optimized-decorative")
 terrain.mask_nauvis_territory("red-croton", "optimized-decorative")
 terrain.mask_nauvis_territory("red-desert-bush", "optimized-decorative")
-terrain.mask_nauvis_territory("red-desert-decal", "optimized-decorative")
 terrain.mask_nauvis_territory("red-pita", "optimized-decorative")
-terrain.mask_nauvis_territory("sand-decal", "optimized-decorative")
-terrain.mask_nauvis_territory("sand-dune-decal", "optimized-decorative")
 terrain.mask_nauvis_territory("white-desert-bush", "optimized-decorative")
 
 -- Remove nauvis tiles from gleba territory
@@ -749,7 +878,10 @@ terrain.mask_gleba_territory("lickmaw", "tree")
 terrain.mask_gleba_territory("stingfrond", "tree")
 terrain.mask_gleba_territory("boompuff", "tree")
 terrain.mask_gleba_territory("sunnycomb", "tree")
-terrain.mask_gleba_territory("water-cane", "tree")
+
+if not mods["alien-biomes"] then 
+  terrain.mask_gleba_territory("water-cane", "tree")
+end
 
 if not mods["Spaghetorio"] then
   terrain.mask_gleba_territory("honeycomb-fungus", "optimized-decorative")
